@@ -1,0 +1,107 @@
+id: F06_mart_country_revenue_yearly
+kind: feature
+category: new_mart
+difficulty: medium
+title: Yearly revenue share by country
+trigger: ticket
+ticket: |
+  Add a model `mart_country_revenue_yearly` in models/marts/analytics (gold schema): one row
+  per country (gold.dim_country.country_name) and calendar year of invoice_ts.
+
+  Columns:
+  - country_name
+  - revenue_year (integer)
+  - net_revenue: sum of line_revenue over sale and cancellation lines of merchandise
+    products, as decimal(18, 2)
+  - share_of_year: net_revenue divided by the total net_revenue of all countries in that
+    year, as a double rounded to 4 decimals
+
+  Include only country-years with at least one merchandise sale or cancellation line.
+  Acceptance: a uniqueness test on (country_name, revenue_year), not_null tests on both,
+  a model description, `dbt build` passes.
+reference_fix:
+  - op: write
+    path: models/marts/analytics/mart_country_revenue_yearly.sql
+    content: |
+      -- Gold: net merchandise revenue per country and year, with the country's share.
+
+      with lines as (
+
+          select
+              dim_country.country_name,
+              cast(extract(year from fct.invoice_ts) as integer) as revenue_year,
+              fct.line_revenue
+          from {{ ref('fct_order_lines') }} as fct
+          inner join {{ ref('dim_product') }} as dim_product
+              on fct.product_key = dim_product.product_key
+          inner join {{ ref('dim_country') }} as dim_country
+              on fct.country_key = dim_country.country_key
+          where dim_product.is_merchandise
+              and fct.line_type in ('sale', 'cancellation')
+
+      ),
+
+      yearly as (
+
+          select country_name, revenue_year, sum(line_revenue) as net_revenue
+          from lines
+          group by country_name, revenue_year
+
+      )
+
+      select
+          country_name,
+          revenue_year,
+          cast(net_revenue as decimal(18, 2)) as net_revenue,
+          round(cast(net_revenue / sum(net_revenue) over (partition by revenue_year) as double), 4)
+              as share_of_year
+      from yearly
+  - op: append
+    path: models/marts/analytics/_analytics__models.yml
+    content: |2
+
+        - name: mart_country_revenue_yearly
+          description: Net merchandise revenue per country and year, with the share of the year.
+          data_tests:
+            - dbt_utils.unique_combination_of_columns:
+                arguments:
+                  combination_of_columns: [country_name, revenue_year]
+          columns:
+            - name: country_name
+              data_tests: [not_null]
+            - name: revenue_year
+              data_tests: [not_null]
+hidden:
+  assertions:
+    - name: matches_spec
+      sql: |
+        with yearly as (
+            select c.country_name, cast(extract(year from f.invoice_ts) as integer) as revenue_year,
+                   sum(f.line_revenue) as net
+            from gold.fct_order_lines as f
+            join gold.dim_product as p on f.product_key = p.product_key
+            join gold.dim_country as c on f.country_key = c.country_key
+            where p.is_merchandise and f.line_type in ('sale', 'cancellation')
+            group by 1, 2
+        ),
+        expected as (
+            select country_name, revenue_year, cast(net as decimal(18, 2)) as net_revenue,
+                   round(cast(net / sum(net) over (partition by revenue_year) as double), 4) as share
+            from yearly
+        ),
+        actual as (
+            select country_name, cast(revenue_year as integer), cast(net_revenue as decimal(18, 2)),
+                   round(cast(share_of_year as double), 4)
+            from gold.mart_country_revenue_yearly
+        )
+        select count(*) from (
+            (select * from expected except all select * from actual)
+            union all
+            (select * from actual except all select * from expected)
+        )
+      expect: {value: 0}
+  manifest:
+    - model: mart_country_revenue_yearly
+      has_description: true
+      min_tests: 3
+affected_tables: [gold.mart_country_revenue_yearly]

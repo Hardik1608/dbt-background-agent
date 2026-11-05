@@ -1,0 +1,34 @@
+id: F10_exposure_finance_dashboard
+kind: feature
+category: lineage
+difficulty: easy
+title: Declare the finance dashboard as an exposure
+trigger: ticket
+ticket: |
+  Declare the finance team's monthly revenue dashboard as a dbt exposure so lineage shows
+  what it depends on. Create models/marts/analytics/_exposures.yml with an exposure named
+  `finance_monthly_revenue_dashboard` of type dashboard, maturity high, owned by
+  "Finance Analytics" (finance-analytics@example.com), that depends on
+  ref('mart_revenue_monthly') and ref('fct_orders').
+reference_fix:
+  - op: write
+    path: models/marts/analytics/_exposures.yml
+    content: |
+      version: 2
+
+      exposures:
+        - name: finance_monthly_revenue_dashboard
+          label: Finance monthly revenue dashboard
+          type: dashboard
+          maturity: high
+          description: Monthly revenue KPIs used by the finance team.
+          owner:
+            name: Finance Analytics
+            email: finance-analytics@example.com
+          depends_on:
+            - ref('mart_revenue_monthly')
+            - ref('fct_orders')
+hidden:
+  exposures:
+    - name: finance_monthly_revenue_dashboard
+      depends_on: [mart_revenue_monthly, fct_orders]

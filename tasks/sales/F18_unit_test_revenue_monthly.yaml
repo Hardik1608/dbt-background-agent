@@ -1,0 +1,58 @@
+id: F18_unit_test_revenue_monthly
+kind: feature
+category: new_test
+difficulty: hard
+title: Unit test for the revenue definitions
+trigger: ticket
+ticket: |
+  Add a dbt unit test for mart_revenue_monthly (in models/marts/analytics/_analytics__models.yml)
+  that pins the revenue definitions. Given a few fct_order_lines rows in one month - a
+  merchandise sale, a merchandise cancellation and a non-merchandise line - it must check that
+  net_merchandise_revenue equals gross_merchandise_sales plus cancelled_merchandise, and that
+  non_merchandise_amount contains only the non-merchandise line. The test must pass.
+reference_fix:
+  - op: append
+    path: models/marts/analytics/_analytics__models.yml
+    content: |
+
+      unit_tests:
+        - name: net_revenue_includes_cancellations
+          description: Net = gross + cancellations; non-merchandise lines are kept apart.
+          model: mart_revenue_monthly
+          given:
+            - input: ref('fct_order_lines')
+              rows:
+                - {invoice_id: "1", customer_id: "A", invoice_ts: "2011-03-05 10:00:00", line_type: "sale", line_revenue: 100, product_key: "p1", date_key: 20110305}
+                - {invoice_id: "C2", customer_id: "A", invoice_ts: "2011-03-07 10:00:00", line_type: "cancellation", line_revenue: -30, product_key: "p1", date_key: 20110307}
+                - {invoice_id: "1", customer_id: "A", invoice_ts: "2011-03-05 10:00:00", line_type: "sale", line_revenue: 18, product_key: "p_post", date_key: 20110305}
+            - input: ref('dim_product')
+              rows:
+                - {product_key: "p1", is_merchandise: true}
+                - {product_key: "p_post", is_merchandise: false}
+            - input: ref('dim_date')
+              rows:
+                - {date_key: 20110305, first_day_of_month: "2011-03-01"}
+                - {date_key: 20110307, first_day_of_month: "2011-03-01"}
+          expect:
+            rows:
+              - {revenue_month: "2011-03-01", gross_merchandise_sales: 100, cancelled_merchandise: -30, net_merchandise_revenue: 70, non_merchandise_amount: 18}
+hidden:
+  manifest:
+    - model: mart_revenue_monthly
+      min_unit_tests: 1
+  mutation_tests:
+    - name: net_formula_break_is_caught
+      code:
+        - op: replace
+          path: models/marts/analytics/mart_revenue_monthly.sql
+          old: "line_type in ('sale', 'cancellation') and is_merchandise"
+          new: "line_type in ('sale') and is_merchandise"
+      command: ["test", "--select", "test_type:unit"]
+    - name: non_merchandise_break_is_caught
+      code:
+        - op: replace
+          path: models/marts/analytics/mart_revenue_monthly.sql
+          old: "        sum(case when not is_merchandise\n"
+          new: "        sum(case when is_merchandise\n"
+      command: ["test", "--select", "test_type:unit"]
+notes: Graded by mutation testing - the formulas are broken on purpose and the unit test must fail.

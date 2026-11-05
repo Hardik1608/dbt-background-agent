@@ -1,0 +1,10 @@
+# Sandbox profile: one DuckDB file inside the working directory.
+# (Adapted from the source project's profiles.yml, which also documents Snowflake and
+#  BigQuery targets - see fixtures/sales_warehouse/original_config/profiles.yml.)
+sales_analytics:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: "{{ env_var('DUCKDB_PATH', 'warehouse.duckdb') }}"
+      threads: "{{ env_var('DBT_THREADS', '4') | int }}"

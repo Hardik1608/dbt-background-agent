@@ -1,0 +1,27 @@
+id: B23_contract_type_double
+kind: breakage
+category: type_change
+difficulty: medium
+title: Model contract fails on the order-line fact
+trigger: ci_failure
+mutation:
+  - op: replace
+    path: models/staging/stg_bronze__online_retail_lines.sql
+    old: "cast(price as decimal(12, 3))               as unit_price,"
+    new: "cast(price as double)                       as unit_price,"
+reference_fix:
+  - op: replace
+    path: models/staging/stg_bronze__online_retail_lines.sql
+    old: "cast(price as double)                       as unit_price,"
+    new: "cast(price as decimal(12, 3))               as unit_price,"
+hidden:
+  assertions:
+    - name: money_stays_decimal
+      sql: >-
+        select data_type like 'DECIMAL%' from information_schema.columns
+        where table_schema = 'gold' and table_name = 'fct_order_lines' and column_name = 'unit_price'
+      expect: {value: true}
+    - name: revenue_preserved
+      sql: select sum(line_revenue) from gold.fct_order_lines
+      expect: {from: base}
+notes: A "simplification" turned money into a float; the enforced contract catches it.

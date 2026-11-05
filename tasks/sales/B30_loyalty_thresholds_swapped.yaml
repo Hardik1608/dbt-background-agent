@@ -1,0 +1,26 @@
+id: B30_loyalty_thresholds_swapped
+kind: breakage
+category: data_bug
+difficulty: medium
+title: No gold customers since the last deploy
+trigger: ticket
+ticket: |
+  Since Monday's deploy there are no "gold" customers in silver.int_customer_state and the
+  number of "platinum" customers tripled. The agreed tier boundaries, in GBP of cumulative net
+  merchandise spend, are: silver from 1,000, gold from 5,000, platinum from 20,000.
+mutation:
+  - op: replace
+    path: dbt_project.yml
+    old: "    gold: 5000\n    platinum: 20000\n"
+    new: "    gold: 20000\n    platinum: 5000\n"
+reference_fix:
+  - op: replace
+    path: dbt_project.yml
+    old: "    gold: 20000\n    platinum: 5000\n"
+    new: "    gold: 5000\n    platinum: 20000\n"
+hidden:
+  assertions:
+    - name: tiers_restored
+      sql: select loyalty_tier, count(*) from silver.int_customer_state group by 1 order by 1
+      expect: {from: base}
+notes: The tier rule is a project variable; the unit test only covers the silver boundary.

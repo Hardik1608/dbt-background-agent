@@ -1,0 +1,107 @@
+id: F16_mart_top_products_by_country
+kind: feature
+category: new_mart
+difficulty: medium
+title: Top three products per country
+trigger: ticket
+ticket: |
+  Add a model `mart_top_products_by_country` in models/marts/analytics (gold schema): for each
+  country (gold.dim_country.country_name), its top 3 merchandise products by all-time net
+  revenue = sum of line_revenue over sale and cancellation lines, excluding quantity-outlier
+  lines (fct_order_lines.is_quantity_outlier).
+
+  Columns: country_name, product_rank (1 to 3, integer), stock_code, net_revenue
+  (decimal(18, 2)). Rank by net revenue descending; break ties by stock_code ascending.
+  Countries with fewer than 3 products get fewer rows.
+
+  Acceptance: a uniqueness test on (country_name, product_rank), a model description,
+  `dbt build` passes.
+reference_fix:
+  - op: write
+    path: models/marts/analytics/mart_top_products_by_country.sql
+    content: |
+      -- Gold: the three best-selling merchandise products per country (all time).
+
+      with totals as (
+
+          select
+              dim_country.country_name,
+              dim_product.stock_code,
+              sum(fct.line_revenue) as net_revenue
+          from {{ ref('fct_order_lines') }} as fct
+          inner join {{ ref('dim_product') }} as dim_product
+              on fct.product_key = dim_product.product_key
+          inner join {{ ref('dim_country') }} as dim_country
+              on fct.country_key = dim_country.country_key
+          where dim_product.is_merchandise
+              and not fct.is_quantity_outlier
+              and fct.line_type in ('sale', 'cancellation')
+          group by dim_country.country_name, dim_product.stock_code
+
+      ),
+
+      ranked as (
+
+          select
+              *,
+              row_number() over (
+                  partition by country_name order by net_revenue desc, stock_code asc
+              ) as product_rank
+          from totals
+
+      )
+
+      select
+          country_name,
+          cast(product_rank as integer)       as product_rank,
+          stock_code,
+          cast(net_revenue as decimal(18, 2)) as net_revenue
+      from ranked
+      where product_rank <= 3
+  - op: append
+    path: models/marts/analytics/_analytics__models.yml
+    content: |2
+
+        - name: mart_top_products_by_country
+          description: Top three merchandise products per country by all-time net revenue.
+          data_tests:
+            - dbt_utils.unique_combination_of_columns:
+                arguments:
+                  combination_of_columns: [country_name, product_rank]
+hidden:
+  assertions:
+    - name: matches_spec
+      sql: |
+        with totals as (
+            select c.country_name, p.stock_code, sum(f.line_revenue) as net
+            from gold.fct_order_lines as f
+            join gold.dim_product as p on f.product_key = p.product_key
+            join gold.dim_country as c on f.country_key = c.country_key
+            where p.is_merchandise and not f.is_quantity_outlier
+              and f.line_type in ('sale', 'cancellation')
+            group by 1, 2
+        ),
+        expected as (
+            select country_name, cast(rn as integer) as product_rank, stock_code,
+                   cast(net as decimal(18, 2)) as net_revenue
+            from (select *, row_number() over (partition by country_name
+                                               order by net desc, stock_code asc) as rn
+                  from totals)
+            where rn <= 3
+        ),
+        actual as (
+            select country_name, cast(product_rank as integer), stock_code,
+                   cast(net_revenue as decimal(18, 2))
+            from gold.mart_top_products_by_country
+        )
+        select count(*) from (
+            (select * from expected except all select * from actual)
+            union all
+            (select * from actual except all select * from expected)
+        )
+      expect: {value: 0}
+  manifest:
+    - model: mart_top_products_by_country
+      has_description: true
+      min_tests: 1
+affected_tables: [gold.mart_top_products_by_country]

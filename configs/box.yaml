@@ -1,0 +1,7 @@
+# GPU box (shared): sandboxes capped at 1.5 GB (the rule allows up to 2 GB; RAM is tight, and
+# a container may only start when MemAvailable >= cap + 1024 MB). One sandbox at a time.
+sandbox:
+  kind: docker
+  image: dbt-agent-sandbox:0.1
+  memory: 1536m
+  cpus: "2"

@@ -1,0 +1,22 @@
+id: B19_macro_renamed
+kind: breakage
+category: code_regression
+difficulty: easy
+title: Compilation fails after a macro clean-up
+trigger: ci_failure
+mutation:
+  - op: replace
+    path: macros/business_rules.sql
+    old: "{% macro date_key(date_expr) -%}"
+    new: "{% macro to_date_key(date_expr) -%}"
+reference_fix:
+  - op: replace
+    path: macros/business_rules.sql
+    old: "{% macro to_date_key(date_expr) -%}"
+    new: "{% macro date_key(date_expr) -%}"
+hidden:
+  assertions:
+    - name: lines_preserved
+      sql: select count(*) from gold.fct_order_lines
+      expect: {from: base}
+notes: Renaming the macro back or updating its two callers both fix it.

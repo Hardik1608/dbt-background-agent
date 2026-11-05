@@ -1,0 +1,43 @@
+id: B14_dim_product_canonical_regression
+kind: breakage
+category: duplicate_keys
+difficulty: medium
+title: Uniqueness tests fail on the product dimension
+trigger: ci_failure
+mutation:
+  - op: replace
+    path: models/marts/core/dim_product.sql
+    old: "    where rn = 1\n"
+    new: "    where rn <= 2\n"
+  - op: sql
+    sql: >-
+      insert into bronze.online_retail_lines
+      select cast(cast(invoice as bigint) + 900000 as varchar), stock_code,
+             description || ' - NEW PACK', quantity, invoice_date, price, customer_id, country,
+             _source_sheet, _source_row_number + 900000, '2011-12-packs',
+             'online_retail_2011-12_packs.parquet', timestamp '2012-01-02 06:00:00'
+      from bronze.online_retail_lines
+      where _batch_id = '2011-11' and try_cast(invoice as bigint) is not null
+        and quantity > 0 and price > 0
+        and stock_code in (
+          select stock_code from bronze.online_retail_lines where _batch_id = '2011-11'
+          group by stock_code order by count(*) desc, stock_code limit 5)
+reference_fix:
+  - op: replace
+    path: models/marts/core/dim_product.sql
+    old: "    where rn <= 2\n"
+    new: "    where rn = 1\n"
+grading:
+  commands: [["build", "--select", "+fct_order_lines", "--full-refresh", "--indirect-selection", "cautious"], ["build"]]
+hidden:
+  assertions:
+    - name: one_row_per_stock_code
+      sql: select count(*) - count(distinct stock_code) from gold.dim_product
+      expect: {value: 0}
+    - name: lines_after_fix
+      sql: select count(*) from gold.fct_order_lines
+      expect: {from: reference}
+notes: >-
+  New packaging descriptions give five products a second description; a recent edit let two
+  descriptions per stock code through. Deploying the fix includes a full refresh of the fact
+  (its rows were fanned out by the failed run).

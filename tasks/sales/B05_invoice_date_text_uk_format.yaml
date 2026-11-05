@@ -1,0 +1,31 @@
+id: B05_invoice_date_text_uk_format
+kind: breakage
+category: type_change
+difficulty: medium
+title: Build fails converting invoice dates
+trigger: ci_failure
+mutation:
+  - op: sql
+    sql: >-
+      alter table bronze.online_retail_lines alter invoice_date set data type varchar
+      using strftime(invoice_date, '%d/%m/%Y %H:%M')
+reference_fix:
+  - op: replace
+    path: models/staging/stg_bronze__online_retail_lines.sql
+    old: "cast(invoice_date as timestamp)             as line_ts,"
+    new: "strptime(invoice_date, '%d/%m/%Y %H:%M')    as line_ts,"
+hidden:
+  assertions:
+    - name: first_invoice_preserved
+      sql: select cast(min(invoice_ts) as varchar) from gold.fct_order_lines
+      expect: {from: base}
+    - name: last_invoice_preserved
+      sql: select cast(max(invoice_ts) as varchar) from gold.fct_order_lines
+      expect: {from: base}
+    - name: invoices_preserved
+      sql: select count(distinct invoice_id) from gold.fct_order_lines
+      expect: {from: base}
+    - name: daily_revenue_preserved
+      sql: select count(distinct date_key), sum(line_revenue) from gold.fct_order_lines
+      expect: {from: base}
+notes: Upstream now ships invoice_date as UK-formatted text (DD/MM/YYYY HH:MM).

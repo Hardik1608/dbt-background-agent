@@ -1,0 +1,51 @@
+id: F05_fct_orders_days_since_previous
+kind: feature
+category: new_column
+difficulty: hard
+title: Days since the customer's previous order
+trigger: ticket
+ticket: |
+  Add `days_since_previous_order` (integer) to gold.fct_orders. For a sale invoice
+  (invoice_type = 'sale') of a known customer (customer_id not null) it is the number of
+  calendar days between the date of this invoice's invoice_ts and the date of the same
+  customer's previous sale invoice, ordering a customer's sale invoices by invoice_ts and then
+  invoice_id. It is NULL for a customer's first sale invoice, for guest checkouts and for
+  invoices that are not sales. Document the column; keep everything else as it is.
+reference_fix:
+  - op: replace
+    path: models/marts/core/fct_orders.sql
+    old: ")\n\nselect\n    invoice_id,\n"
+    new: "),\n\norders as (\n\nselect\n    invoice_id,\n"
+  - op: replace
+    path: models/marts/core/fct_orders.sql
+    old: "from lines\ngroup by invoice_id\n"
+    new: "from lines\ngroup by invoice_id\n\n),\n\nsale_gaps as (\n\n    select\n        invoice_id,\n        cast(date_diff(\n            'day',\n            lag(cast(invoice_ts as date)) over (\n                partition by customer_id order by invoice_ts, invoice_id\n            ),\n            cast(invoice_ts as date)\n        ) as integer)                                                  as days_since_previous_order\n    from orders\n    where invoice_type = 'sale' and customer_id is not null\n\n)\n\nselect\n    orders.*,\n    sale_gaps.days_since_previous_order\nfrom orders\nleft join sale_gaps\n    on orders.invoice_id = sale_gaps.invoice_id\n"
+  - op: replace
+    path: models/marts/core/_core__models.yml
+    old: "                values: [sale, cancellation, bad_debt_adjustment, stock_write_off]\n\n  # ------------------------------------------------------------------ dimensions\n"
+    new: "                values: [sale, cancellation, bad_debt_adjustment, stock_write_off]\n      - name: days_since_previous_order\n        description: Days since the customer's previous sale invoice (NULL for the first one, guests and non-sales).\n\n  # ------------------------------------------------------------------ dimensions\n"
+hidden:
+  assertions:
+    - name: matches_spec
+      sql: |
+        with sales as (
+            select invoice_id,
+                   date_diff('day',
+                       lag(cast(invoice_ts as date)) over (partition by customer_id order by invoice_ts, invoice_id),
+                       cast(invoice_ts as date)) as gap
+            from gold.fct_orders where invoice_type = 'sale' and customer_id is not null
+        )
+        select count(*) from gold.fct_orders as o
+        left join sales as s on o.invoice_id = s.invoice_id
+        where cast(o.days_since_previous_order as bigint) is distinct from cast(s.gap as bigint)
+      expect: {value: 0}
+    - name: has_values
+      sql: select count(*) > 1000 from gold.fct_orders where days_since_previous_order is not null
+      expect: {value: true}
+    - name: orders_preserved
+      sql: select count(*) from gold.fct_orders
+      expect: {from: base}
+  manifest:
+    - model: fct_orders
+      columns: [days_since_previous_order]
+      documented_columns: [days_since_previous_order]

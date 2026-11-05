@@ -1,0 +1,37 @@
+version: 2
+
+models:
+  - name: stg_bronze__online_retail_lines
+    description: >
+      Silver staging view, 1:1 with bronze. Renames to business names, trims/upper-cases
+      codes, casts money to DECIMAL, and adds data-quality flags and a content hash.
+      No rows are removed here.
+    columns:
+      - name: invoice_id
+        data_tests:
+          - not_null
+      - name: stock_code
+        data_tests:
+          - not_null
+      - name: line_ts
+        data_tests:
+          - not_null
+      - name: country_name
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('country_reference')
+                field: country_name
+              config:
+                severity: warn   # a new country should be mapped, not block the load
+      - name: line_type
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [sale, cancellation, bad_debt_adjustment, stock_write_off]
+      - name: line_hash
+        description: Hash of all business columns; equal hashes = exact duplicate lines.
+        data_tests:
+          - not_null

@@ -1,0 +1,132 @@
+id: F17_fct_orders_incremental
+kind: feature
+category: incremental
+difficulty: hard
+title: Make the order fact incremental
+trigger: ticket
+ticket: |
+  gold.fct_orders is rebuilt in full on every run. Make it incremental:
+  - materialized incremental, unique_key invoice_id (delete+insert on DuckDB);
+  - add a column `_ingested_at` = the latest fct_order_lines._ingested_at of the invoice's
+    lines, and use it as the watermark: an incremental run must re-aggregate every invoice
+    that has at least one line loaded after the last run (including invoices that already
+    existed and received an extra line);
+  - the result must stay identical to a full rebuild. Document the new column.
+  The deployment runs `dbt build --full-refresh --select fct_orders` once.
+reference_fix:
+  - op: write
+    path: models/marts/core/fct_orders.sql
+    content: |
+      -- Gold: order (invoice) fact - an aggregate of fct_order_lines at invoice grain.
+      -- Incremental: an invoice is re-aggregated in full whenever any of its lines was
+      -- loaded after the last run (watermark: max line _ingested_at).
+
+      {{
+          config(
+              materialized='incremental',
+              unique_key='invoice_id',
+              incremental_strategy=('delete+insert' if target.type == 'duckdb' else 'merge'),
+              on_schema_change='append_new_columns'
+          )
+      }}
+
+      with changed_invoices as (
+
+          select distinct invoice_id
+          from {{ ref('fct_order_lines') }}
+          {% if is_incremental() %}
+          where _ingested_at > (
+              select coalesce(max(_ingested_at), {{ scd_start_of_time() }}) from {{ this }}
+          )
+          {% endif %}
+
+      ),
+
+      lines as (
+
+          select
+              fct_order_lines.*,
+              dim_product.is_merchandise
+          from {{ ref('fct_order_lines') }} as fct_order_lines
+          inner join {{ ref('dim_product') }} as dim_product
+              on fct_order_lines.product_key = dim_product.product_key
+          where fct_order_lines.invoice_id in (select invoice_id from changed_invoices)
+
+      )
+
+      select
+          invoice_id,
+          -- all lines of an invoice share invoice_ts and customer -> one customer version
+          min(customer_sk)                                                as customer_sk,
+          min(customer_id)                                                as customer_id,
+          min(country_key)                                                as country_key,
+          min(date_key)                                                   as date_key,
+          min(invoice_ts)                                                 as invoice_ts,
+          case
+              when invoice_id like 'C%' then 'cancellation'
+              when invoice_id like 'A%' then 'bad_debt_adjustment'
+              when max(quantity) < 0 then 'stock_write_off'
+              else 'sale'
+          end                                                             as invoice_type,
+          cast(count(*) as integer)                                       as n_lines,
+          cast(count(distinct product_key) as integer)                    as n_distinct_products,
+          cast(sum(quantity) as bigint)                                   as total_units,
+          cast(sum(line_revenue) as decimal(18, 3))                       as invoice_revenue,
+          cast(sum(
+              case when is_merchandise then line_revenue else 0 end
+          ) as decimal(18, 3))                                            as merchandise_revenue,
+          max(case when is_quantity_outlier then 1 else 0 end) = 1        as has_quantity_outlier,
+          max(_ingested_at)                                               as _ingested_at
+      from lines
+      group by invoice_id
+  - op: replace
+    path: models/marts/core/_core__models.yml
+    old: "                values: [sale, cancellation, bad_debt_adjustment, stock_write_off]\n\n  # ------------------------------------------------------------------ dimensions\n"
+    new: "                values: [sale, cancellation, bad_debt_adjustment, stock_write_off]\n      - name: _ingested_at\n        description: Latest load time of the invoice's lines (incremental watermark).\n\n  # ------------------------------------------------------------------ dimensions\n"
+grading:
+  steps:
+    - dbt: ["build", "--select", "fct_orders", "--full-refresh"]
+    - dbt: ["build"]
+    - sql: >-
+        insert into bronze.online_retail_lines
+        select invoice, 'POST', 'POSTAGE', 1, invoice_date, 18.0, customer_id, country,
+               _source_sheet, _source_row_number + 900000, '2011-12-late',
+               'online_retail_2011-12_late.parquet', timestamp '2012-01-03 00:00:00'
+        from bronze.online_retail_lines
+        where invoice = (select min(invoice) from bronze.online_retail_lines
+                         where _batch_id = '2011-11' and try_cast(invoice as bigint) is not null)
+        limit 1
+    - sql: >-
+        insert into bronze.online_retail_lines
+        select cast(cast(invoice as bigint) + 900000 as varchar), stock_code, description,
+               quantity, invoice_date + interval 3 day, price, customer_id, country,
+               _source_sheet, _source_row_number + 900000, '2011-12-late',
+               'online_retail_2011-12_late.parquet', timestamp '2012-01-03 00:00:00'
+        from bronze.online_retail_lines
+        where invoice = (select max(invoice) from bronze.online_retail_lines
+                         where _batch_id = '2011-11' and try_cast(invoice as bigint) is not null)
+    - dbt: ["build"]
+    - sql: create table main.fct_orders_after_incremental as select * from gold.fct_orders
+    - dbt: ["build", "--select", "fct_orders", "--full-refresh"]
+hidden:
+  assertions:
+    - name: incremental_equals_full_refresh
+      sql: |
+        select count(*) from (
+            (select * from main.fct_orders_after_incremental except all select * from gold.fct_orders)
+            union all
+            (select * from gold.fct_orders except all select * from main.fct_orders_after_incremental)
+        )
+      expect: {value: 0}
+    - name: late_lines_counted
+      sql: select sum(n_lines) from gold.fct_orders
+      expect: {from: reference}
+  manifest:
+    - model: fct_orders
+      materialized: incremental
+      columns: [_ingested_at]
+      documented_columns: [_ingested_at]
+affected_tables: [gold.fct_orders]
+notes: >-
+  Graded by replaying a late delivery that adds a line to an existing invoice and a new
+  invoice, then comparing the incremental result with a full refresh.

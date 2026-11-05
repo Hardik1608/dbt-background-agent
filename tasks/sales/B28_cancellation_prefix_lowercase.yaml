@@ -1,0 +1,37 @@
+id: B28_cancellation_prefix_lowercase
+kind: breakage
+category: data_bug
+difficulty: medium
+title: New cancellations are counted as stock write-offs
+trigger: ticket
+ticket: |
+  In the newest delivery, cancellations are counted as stock write-offs: fct_order_lines has
+  no cancellation lines dated after 2011-12-09 and the stock_write_off count jumped.
+  Upstream now sends the cancellation prefix in lowercase ("c123456"); that will not change
+  back. Make the warehouse classify these lines correctly, for all data.
+mutation:
+  - op: sql
+    sql: >-
+      insert into bronze.online_retail_lines
+      select 'c' || cast(cast(substr(invoice, 2) as bigint) + 900000 as varchar), stock_code,
+             description, quantity, invoice_date + interval 2 day, price, customer_id, country,
+             _source_sheet, _source_row_number + 900000, '2011-12-c',
+             'online_retail_2011-12_c.parquet', timestamp '2012-01-02 06:00:00'
+      from bronze.online_retail_lines
+      where _batch_id = '2011-11' and invoice like 'C%'
+reference_fix:
+  - op: replace
+    path: models/staging/stg_bronze__online_retail_lines.sql
+    old: "trim(invoice)                               as invoice_id,"
+    new: "upper(trim(invoice))                        as invoice_id,"
+grading:
+  commands: [["build", "--select", "+fct_order_lines", "--full-refresh", "--indirect-selection", "cautious"], ["build"]]
+hidden:
+  assertions:
+    - name: cancellations_after_fix
+      sql: select count(*) from gold.fct_order_lines where line_type = 'cancellation'
+      expect: {from: reference}
+    - name: write_offs_unchanged
+      sql: select count(*) from gold.fct_order_lines where line_type = 'stock_write_off'
+      expect: {from: base}
+notes: The classification lives in staging; normalising the prefix there fixes every layer.

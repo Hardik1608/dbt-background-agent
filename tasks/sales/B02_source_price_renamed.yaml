@@ -1,0 +1,27 @@
+id: B02_source_price_renamed
+kind: breakage
+category: renamed_column
+difficulty: easy
+title: Build fails after the price column was renamed upstream
+trigger: ci_failure
+mutation:
+  - op: sql
+    sql: alter table bronze.online_retail_lines rename column price to unit_price
+reference_fix:
+  - op: replace
+    path: models/staging/stg_bronze__online_retail_lines.sql
+    old: "cast(price as decimal(12, 3))               as unit_price,"
+    new: "cast(unit_price as decimal(12, 3))          as unit_price,"
+  - op: replace
+    path: models/staging/_bronze__sources.yml
+    old: "          - name: price\n"
+    new: "          - name: unit_price\n"
+hidden:
+  assertions:
+    - name: revenue_preserved
+      sql: select sum(line_revenue) from gold.fct_order_lines
+      expect: {from: base}
+    - name: lines_preserved
+      sql: select count(*) from gold.fct_order_lines
+      expect: {from: base}
+notes: Two places need the new name - the staging select and the source test on the column.

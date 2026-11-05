@@ -1,0 +1,13 @@
+stock_code,product_category,note
+POST,postage,Postage charged on (mostly non-UK) orders
+DOT,postage,Dotcom postage
+C2,postage,Carriage
+M,manual_adjustment,Manual price line keyed by staff
+ADJUST,manual_adjustment,Manual adjustment
+ADJUST2,manual_adjustment,Manual adjustment
+D,discount,Discount (usually on C-invoices)
+S,samples,Samples given away / written off
+BANK CHARGES,fee,Bank charges
+AMAZONFEE,fee,Marketplace fee
+CRUK,fee,Charity commission
+B,bad_debt,Adjust bad debt (A-invoices)

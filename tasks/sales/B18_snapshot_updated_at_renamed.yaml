@@ -1,0 +1,41 @@
+id: B18_snapshot_updated_at_renamed
+kind: breakage
+category: code_regression
+difficulty: medium
+title: Snapshot fails after a model refactor
+trigger: ci_failure
+mutation:
+  - op: replace
+    path: models/intermediate/int_customer_state.sql
+    old: "        min(islands.invoice_ts)             as state_effective_at\n"
+    new: "        min(islands.invoice_ts)             as state_started_at\n"
+  - op: replace
+    path: models/intermediate/int_customer_state.sql
+    old: "    current_state.state_effective_at,\n"
+    new: "    current_state.state_started_at,\n"
+  - op: replace
+    path: models/intermediate/_intermediate__models.yml
+    old: "      - name: state_effective_at\n"
+    new: "      - name: state_started_at\n"
+  - op: replace
+    path: models/intermediate/_intermediate__models.yml
+    old: "state_effective_at: \"2010-04-01 10:00:00\""
+    new: "state_started_at: \"2010-04-01 10:00:00\""
+  - op: replace
+    path: models/intermediate/_intermediate__models.yml
+    old: "state_effective_at: \"2010-02-10 09:00:00\""
+    new: "state_started_at: \"2010-02-10 09:00:00\""
+reference_fix:
+  - op: replace
+    path: snapshots/snap_customer_state.yml
+    old: "      updated_at: state_effective_at\n"
+    new: "      updated_at: state_started_at\n"
+hidden:
+  assertions:
+    - name: customers_preserved
+      sql: select count(distinct customer_id) from gold.dim_customer where customer_sk <> '-1'
+      expect: {from: base}
+affected_tables: [snapshots.snap_customer_state, silver.int_customer_state]
+notes: >-
+  A teammate renamed state_effective_at to state_started_at (model, docs, unit test) but not in
+  the snapshot config. Pointing the snapshot at the new name, or reverting the rename, both work.

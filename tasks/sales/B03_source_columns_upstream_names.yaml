@@ -1,0 +1,52 @@
+id: B03_source_columns_upstream_names
+kind: breakage
+category: renamed_column
+difficulty: hard
+title: Build fails after the EL connector upgrade
+trigger: ci_failure
+ticket: |
+  Context from the data platform team: the EL connector was upgraded last night and now
+  lands the source system's original column names in bronze.online_retail_lines.
+mutation:
+  - op: sql
+    sql: alter table bronze.online_retail_lines rename column stock_code to "StockCode"
+  - op: sql
+    sql: alter table bronze.online_retail_lines rename column invoice_date to "InvoiceDate"
+  - op: sql
+    sql: alter table bronze.online_retail_lines rename column customer_id to "Customer ID"
+reference_fix:
+  - op: replace
+    path: models/staging/stg_bronze__online_retail_lines.sql
+    old: "upper(trim(stock_code))                     as stock_code,"
+    new: "upper(trim(\"StockCode\"))                   as stock_code,"
+  - op: replace
+    path: models/staging/stg_bronze__online_retail_lines.sql
+    old: "cast(invoice_date as timestamp)             as line_ts,"
+    new: "cast(\"InvoiceDate\" as timestamp)            as line_ts,"
+  - op: replace
+    path: models/staging/stg_bronze__online_retail_lines.sql
+    old: "nullif(trim(customer_id), '')               as customer_id,"
+    new: "nullif(trim(\"Customer ID\"), '')             as customer_id,"
+  - op: replace
+    path: models/staging/_bronze__sources.yml
+    old: "          - name: stock_code\n"
+    new: "          - name: StockCode\n"
+  - op: replace
+    path: models/staging/_bronze__sources.yml
+    old: "          - name: invoice_date\n"
+    new: "          - name: InvoiceDate\n"
+hidden:
+  assertions:
+    - name: lines_preserved
+      sql: select count(*) from gold.fct_order_lines
+      expect: {from: base}
+    - name: revenue_preserved
+      sql: select sum(line_revenue) from gold.fct_order_lines
+      expect: {from: base}
+    - name: customers_preserved
+      sql: select count(distinct customer_id) from gold.fct_order_lines where customer_id is not null
+      expect: {from: base}
+    - name: products_preserved
+      sql: select count(*) from gold.dim_product
+      expect: {from: base}
+notes: Only three names actually break (DuckDB identifiers are case-insensitive); one has a space.

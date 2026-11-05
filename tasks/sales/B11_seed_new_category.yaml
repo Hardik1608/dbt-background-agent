@@ -1,0 +1,32 @@
+id: B11_seed_new_category
+kind: breakage
+category: reference_data
+difficulty: easy
+title: Seed test fails after a reference data change
+trigger: ci_failure
+ticket: |
+  Context: Operations split "carriage" out of "postage" in seeds/non_product_stock_codes.csv.
+  This is an intended business change; the new category stays.
+mutation:
+  - op: replace
+    path: seeds/non_product_stock_codes.csv
+    old: "C2,postage,Carriage\n"
+    new: "C2,carriage,Carriage\n"
+reference_fix:
+  - op: replace
+    path: seeds/_seeds.yml
+    old: "values: [postage, manual_adjustment, discount, samples, fee, bad_debt]"
+    new: "values: [postage, carriage, manual_adjustment, discount, samples, fee, bad_debt]"
+  - op: replace
+    path: models/intermediate/_intermediate__models.yml
+    old: "values: [merchandise, postage, manual_adjustment, discount, samples, fee,"
+    new: "values: [merchandise, postage, carriage, manual_adjustment, discount, samples, fee,"
+hidden:
+  assertions:
+    - name: category_kept
+      sql: select count(*) from reference.non_product_stock_codes where product_category = 'carriage'
+      expect: {value: 1}
+    - name: lines_preserved
+      sql: select count(*) from gold.fct_order_lines
+      expect: {from: base}
+notes: The test encodes the business rule; the rule changed, so the accepted values must change.

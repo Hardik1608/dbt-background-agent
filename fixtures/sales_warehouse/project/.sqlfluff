@@ -1,0 +1,40 @@
+[sqlfluff]
+dialect = duckdb
+templater = dbt
+max_line_length = 120
+# keep the formatting conventions used in this repo (aligned aliases, CTE blank lines)
+exclude_rules = LT01, LT02, LT05, LT08, LT09, LT14, ST06, ST09, AM04, RF03, RF04
+large_file_skip_byte_limit = 50000
+
+[sqlfluff:templater:dbt]
+project_dir = .
+profiles_dir = .
+profile = sales_analytics
+target = dev
+
+[sqlfluff:indentation]
+tab_space_size = 4
+
+[sqlfluff:rules:capitalisation.keywords]
+capitalisation_policy = lower
+
+[sqlfluff:rules:capitalisation.identifiers]
+extended_capitalisation_policy = lower
+
+[sqlfluff:rules:capitalisation.functions]
+extended_capitalisation_policy = lower
+
+[sqlfluff:rules:capitalisation.literals]
+capitalisation_policy = lower
+
+[sqlfluff:rules:capitalisation.types]
+extended_capitalisation_policy = lower
+
+[sqlfluff:rules:aliasing.table]
+aliasing = explicit
+
+[sqlfluff:rules:aliasing.column]
+aliasing = explicit
+
+[sqlfluff:rules:ambiguous.column_references]
+group_by_and_order_by_style = explicit

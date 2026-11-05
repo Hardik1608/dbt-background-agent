@@ -1,0 +1,86 @@
+id: B10_seed_yn_flags
+kind: breakage
+category: type_change
+difficulty: medium
+title: Seed load fails after a reference data delivery
+trigger: ci_failure
+ticket: |
+  Context: the reference data team now delivers the domestic-market flag in
+  seeds/country_reference.csv as text: "domestic" or "export". The file is theirs; keep it
+  exactly as delivered.
+mutation:
+  - op: write
+    path: seeds/country_reference.csv
+    content: |
+      country_name,iso_alpha2,region,is_domestic_market
+      United Kingdom,GB,UK & Ireland,domestic
+      EIRE,IE,UK & Ireland,export
+      Channel Islands,,UK & Ireland,export
+      Germany,DE,Western Europe,export
+      France,FR,Western Europe,export
+      Netherlands,NL,Western Europe,export
+      Belgium,BE,Western Europe,export
+      Switzerland,CH,Western Europe,export
+      Austria,AT,Western Europe,export
+      Spain,ES,Southern Europe,export
+      Portugal,PT,Southern Europe,export
+      Italy,IT,Southern Europe,export
+      Greece,GR,Southern Europe,export
+      Cyprus,CY,Southern Europe,export
+      Malta,MT,Southern Europe,export
+      Norway,NO,Nordics,export
+      Sweden,SE,Nordics,export
+      Finland,FI,Nordics,export
+      Denmark,DK,Nordics,export
+      Iceland,IS,Nordics,export
+      Poland,PL,Central & Eastern Europe,export
+      Czech Republic,CZ,Central & Eastern Europe,export
+      Lithuania,LT,Central & Eastern Europe,export
+      European Community,,Europe (unspecified),export
+      USA,US,Americas,export
+      Canada,CA,Americas,export
+      Brazil,BR,Americas,export
+      Bermuda,BM,Americas,export
+      West Indies,,Americas,export
+      Australia,AU,Asia Pacific,export
+      Japan,JP,Asia Pacific,export
+      Hong Kong,HK,Asia Pacific,export
+      Singapore,SG,Asia Pacific,export
+      Korea,KR,Asia Pacific,export
+      Thailand,TH,Asia Pacific,export
+      United Arab Emirates,AE,Middle East,export
+      Israel,IL,Middle East,export
+      Bahrain,BH,Middle East,export
+      Saudi Arabia,SA,Middle East,export
+      Lebanon,LB,Middle East,export
+      RSA,ZA,Africa,export
+      Nigeria,NG,Africa,export
+      Unspecified,,Unknown,export
+reference_fix:
+  - op: replace
+    path: seeds/_seeds.yml
+    old: "        is_domestic_market: boolean\n"
+    new: "        is_domestic_market: varchar\n"
+  - op: replace
+    path: models/marts/core/dim_country.sql
+    old: "coalesce(reference.is_domestic_market, false)               as is_domestic_market,"
+    new: "coalesce(reference.is_domestic_market = 'domestic', false)  as is_domestic_market,"
+grading:
+  commands: [["build", "--select", "country_reference", "--full-refresh", "--indirect-selection", "cautious"], ["build"]]
+hidden:
+  assertions:
+    - name: file_kept_as_delivered
+      sql: select count(*) from reference.country_reference where is_domestic_market = 'domestic'
+      expect: {value: 1}
+    - name: flag_is_boolean
+      sql: >-
+        select data_type from information_schema.columns
+        where table_schema = 'gold' and table_name = 'dim_country' and column_name = 'is_domestic_market'
+      expect: {value: BOOLEAN}
+    - name: one_domestic_market
+      sql: select string_agg(country_name, ',') from gold.dim_country where is_domestic_market
+      expect: {value: United Kingdom}
+notes: >-
+  Seed column type and the dimension's boolean both need adapting; the CSV must stay as
+  delivered. A seed's column types only change with a full refresh of the seed, which the
+  deployment (grading) runs.

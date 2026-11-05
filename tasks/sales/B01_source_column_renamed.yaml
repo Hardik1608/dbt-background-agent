@@ -1,0 +1,27 @@
+id: B01_source_column_renamed
+kind: breakage
+category: renamed_column
+difficulty: easy
+title: Nightly build fails after the extract changed
+trigger: ci_failure
+mutation:
+  - op: sql
+    sql: alter table bronze.online_retail_lines rename column customer_id to customer_ref
+reference_fix:
+  - op: replace
+    path: models/staging/stg_bronze__online_retail_lines.sql
+    old: "nullif(trim(customer_id), '')               as customer_id,"
+    new: "nullif(trim(customer_ref), '')              as customer_id,"
+  - op: replace
+    path: models/staging/_bronze__sources.yml
+    old: "          - name: customer_id\n"
+    new: "          - name: customer_ref\n"
+hidden:
+  assertions:
+    - name: known_customers_preserved
+      sql: select count(distinct customer_id) from gold.fct_order_lines where customer_id is not null
+      expect: {from: base}
+    - name: guest_lines_unchanged
+      sql: select count(*) from gold.fct_order_lines where customer_sk = '-1'
+      expect: {from: base}
+notes: The upstream connector renamed customer_id to customer_ref in bronze.

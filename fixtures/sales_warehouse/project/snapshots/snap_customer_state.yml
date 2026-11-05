@@ -1,0 +1,26 @@
+version: 2
+
+snapshots:
+  - name: snap_customer_state
+    description: >
+      SCD Type 2 history of customer country and loyalty tier. Timestamp strategy on
+      state_effective_at (business time), so a new version starts when the change
+      actually happened, not when the batch was loaded. History is only as granular as
+      the snapshot cadence: run it after every batch load (the Airflow DAG and the
+      `replay` command do). Current rows get valid_to = 9999-12-31 instead of NULL so
+      point-in-time joins can use a simple half-open range.
+    relation: ref('int_customer_state')
+    config:
+      unique_key: customer_id
+      strategy: timestamp
+      updated_at: state_effective_at
+      dbt_valid_to_current: "cast('9999-12-31 00:00:00' as timestamp)"
+      hard_deletes: ignore
+    columns:
+      - name: customer_id
+        data_tests:
+          - not_null
+      - name: dbt_scd_id
+        data_tests:
+          - unique
+          - not_null

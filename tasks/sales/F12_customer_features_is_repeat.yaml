@@ -1,0 +1,34 @@
+id: F12_customer_features_is_repeat
+kind: feature
+category: new_column
+difficulty: medium
+title: Repeat-customer flag in the ML features
+trigger: ticket
+ticket: |
+  Add `is_repeat_customer` (integer, 1 or 0) to gold.customer_features: 1 when
+  frequency_orders >= 2 at the cutoff, else 0. customer_features has an enforced contract:
+  update it (data_type integer) and document the column.
+reference_fix:
+  - op: replace
+    path: models/marts/ml/customer_features.sql
+    old: "    cast(rfm_monetary_score as integer)                     as rfm_monetary_score\nfrom scored\n"
+    new: "    cast(rfm_monetary_score as integer)                     as rfm_monetary_score,\n    cast(case when frequency_orders >= 2 then 1 else 0 end as integer)\n                                                            as is_repeat_customer\nfrom scored\n"
+  - op: replace
+    path: models/marts/ml/_ml__models.yml
+    old: "      - name: rfm_monetary_score\n        data_type: integer\n\n  - name: customer_churn_labels\n"
+    new: "      - name: rfm_monetary_score\n        data_type: integer\n      - name: is_repeat_customer\n        description: 1 when the customer has at least two orders before the cutoff, else 0.\n        data_type: integer\n\n  - name: customer_churn_labels\n"
+hidden:
+  assertions:
+    - name: matches_rule
+      sql: >-
+        select count(*) from gold.customer_features
+        where is_repeat_customer is distinct from (case when frequency_orders >= 2 then 1 else 0 end)
+      expect: {value: 0}
+    - name: rows_preserved
+      sql: select count(*) from gold.customer_features
+      expect: {from: base}
+  manifest:
+    - model: customer_features
+      columns: [is_repeat_customer]
+      documented_columns: [is_repeat_customer]
+notes: The enforced contract makes a SQL-only change fail the build.

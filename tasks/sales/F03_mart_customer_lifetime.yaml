@@ -1,0 +1,123 @@
+id: F03_mart_customer_lifetime
+kind: feature
+category: new_mart
+difficulty: medium
+title: Customer lifetime mart
+trigger: ticket
+ticket: |
+  Add a model `mart_customer_lifetime` in models/marts/analytics (gold schema): one row per
+  known customer (exclude guest checkouts, i.e. customer_id is null) that has at least one
+  sale line in gold.fct_order_lines.
+
+  Columns:
+  - customer_id
+  - first_order_at, last_order_at: earliest / latest invoice_ts over the customer's sale lines
+  - n_orders: number of distinct invoices with a sale line
+  - lifetime_net_revenue: sum of line_revenue over sale and cancellation lines of merchandise
+    products (dim_product.is_merchandise), as decimal(18, 2)
+  - current_loyalty_tier: loyalty_tier of the customer's current version in gold.dim_customer
+    (is_current = true)
+
+  Acceptance: unique and not_null tests on customer_id, a model description, `dbt build` passes.
+reference_fix:
+  - op: write
+    path: models/marts/analytics/mart_customer_lifetime.sql
+    content: |
+      -- Gold: one row per known customer with lifetime order and revenue totals.
+
+      with lines as (
+
+          select
+              fct.customer_id,
+              fct.invoice_id,
+              fct.invoice_ts,
+              fct.line_type,
+              fct.line_revenue,
+              dim_product.is_merchandise
+          from {{ ref('fct_order_lines') }} as fct
+          inner join {{ ref('dim_product') }} as dim_product
+              on fct.product_key = dim_product.product_key
+          where fct.customer_id is not null
+
+      ),
+
+      per_customer as (
+
+          select
+              customer_id,
+              min(case when line_type = 'sale' then invoice_ts end)            as first_order_at,
+              max(case when line_type = 'sale' then invoice_ts end)            as last_order_at,
+              count(distinct case when line_type = 'sale' then invoice_id end) as n_orders,
+              cast(sum(case when is_merchandise and line_type in ('sale', 'cancellation')
+                            then line_revenue else 0 end) as decimal(18, 2))   as lifetime_net_revenue
+          from lines
+          group by customer_id
+
+      ),
+
+      current_tier as (
+
+          select customer_id, loyalty_tier
+          from {{ ref('dim_customer') }}
+          where is_current and customer_sk <> '-1'
+
+      )
+
+      select
+          per_customer.customer_id,
+          per_customer.first_order_at,
+          per_customer.last_order_at,
+          per_customer.n_orders,
+          per_customer.lifetime_net_revenue,
+          current_tier.loyalty_tier as current_loyalty_tier
+      from per_customer
+      left join current_tier
+          on per_customer.customer_id = current_tier.customer_id
+      where per_customer.n_orders > 0
+  - op: append
+    path: models/marts/analytics/_analytics__models.yml
+    content: |2
+
+        - name: mart_customer_lifetime
+          description: Lifetime orders and net merchandise revenue per known customer.
+          columns:
+            - name: customer_id
+              data_tests: [unique, not_null]
+hidden:
+  assertions:
+    - name: matches_spec
+      sql: |
+        with lines as (
+            select f.customer_id, f.invoice_id, f.invoice_ts, f.line_type, f.line_revenue, p.is_merchandise
+            from gold.fct_order_lines as f join gold.dim_product as p on f.product_key = p.product_key
+            where f.customer_id is not null
+        ),
+        expected as (
+            select l.customer_id,
+                   min(case when l.line_type = 'sale' then l.invoice_ts end) as first_order_at,
+                   max(case when l.line_type = 'sale' then l.invoice_ts end) as last_order_at,
+                   cast(count(distinct case when l.line_type = 'sale' then l.invoice_id end) as bigint) as n_orders,
+                   cast(sum(case when l.is_merchandise and l.line_type in ('sale', 'cancellation')
+                                 then l.line_revenue else 0 end) as decimal(18, 2)) as lifetime_net_revenue,
+                   max(c.loyalty_tier) as current_loyalty_tier
+            from lines as l
+            left join gold.dim_customer as c on l.customer_id = c.customer_id and c.is_current
+            group by l.customer_id
+            having count(distinct case when l.line_type = 'sale' then l.invoice_id end) > 0
+        ),
+        actual as (
+            select customer_id, first_order_at, last_order_at, cast(n_orders as bigint),
+                   cast(lifetime_net_revenue as decimal(18, 2)), current_loyalty_tier
+            from gold.mart_customer_lifetime
+        )
+        select count(*) from (
+            (select * from expected except all select * from actual)
+            union all
+            (select * from actual except all select * from expected)
+        )
+      expect: {value: 0}
+  manifest:
+    - model: mart_customer_lifetime
+      has_description: true
+      min_tests: 2
+affected_tables: [gold.mart_customer_lifetime]

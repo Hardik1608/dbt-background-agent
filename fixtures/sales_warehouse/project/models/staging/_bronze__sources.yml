@@ -1,0 +1,51 @@
+version: 2
+
+sources:
+  - name: bronze
+    description: >
+      Bronze layer: invoice lines exactly as landed by the Python loader
+      (src/sales_analytics/ingestion/load_bronze.py), append-only, plus ingestion metadata.
+    schema: bronze
+    config:
+      # Freshness is measured on *ingestion* time, not business time: the business data
+      # is historical (2009-2011) but a healthy pipeline lands a batch at least daily.
+      loaded_at_field: _ingested_at
+      freshness:
+        warn_after: { count: 26, period: hour }
+        error_after: { count: 48, period: hour }
+    tables:
+      - name: online_retail_lines
+        description: One row per landed invoice line (duplicates and cancellations included).
+        columns:
+          - name: invoice
+            description: Invoice number; prefix C = cancellation, A = bad-debt adjustment.
+            data_tests:
+              - not_null
+          - name: stock_code
+            data_tests:
+              - not_null
+          - name: description
+            description: Free text; nullable in the source (4,382 nulls in the real data).
+          - name: quantity
+            data_tests:
+              - not_null
+          - name: invoice_date
+            data_tests:
+              - not_null
+          - name: price
+            data_tests:
+              - not_null
+          - name: customer_id
+            description: Nullable - guest checkouts have no customer (22.8% of real lines).
+          - name: country
+            data_tests:
+              - not_null
+          - name: _batch_id
+            description: Monthly landing batch (YYYY-MM) the row arrived in.
+            data_tests:
+              - not_null
+          - name: _source_file
+          - name: _ingested_at
+            description: UTC load timestamp, strictly increasing per batch (incremental watermark).
+            data_tests:
+              - not_null

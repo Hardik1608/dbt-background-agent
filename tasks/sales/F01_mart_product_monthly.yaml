@@ -1,0 +1,109 @@
+id: F01_mart_product_monthly
+kind: feature
+category: new_mart
+difficulty: medium
+title: Monthly product performance mart
+trigger: ticket
+ticket: |
+  Merchandising wants monthly numbers per product. Add a new model `mart_product_monthly`
+  in models/marts/analytics (it builds into the gold schema like the other marts).
+
+  Grain: one row per merchandise product and calendar month in which the product has at
+  least one sale or cancellation line.
+
+  Columns:
+  - product_key (from dim_product)
+  - stock_code
+  - revenue_month: date, the first day of the month of invoice_ts
+  - units_sold: sum of quantity over sale lines
+  - net_revenue: sum of line_revenue over sale and cancellation lines, as decimal(18, 2)
+  - n_orders: number of distinct invoices with a sale line for that product in that month
+
+  Use only merchandise products (dim_product.is_merchandise) and lines that are not
+  quantity outliers (fct_order_lines.is_quantity_outlier = false).
+
+  Acceptance: the model is documented (description), has a uniqueness test on
+  (product_key, revenue_month) and not_null tests on product_key and revenue_month, and
+  `dbt build` passes.
+reference_fix:
+  - op: write
+    path: models/marts/analytics/mart_product_monthly.sql
+    content: |
+      -- Gold: monthly performance per merchandise product.
+
+      with lines as (
+
+          select
+              fct.product_key,
+              dim_product.stock_code,
+              cast({{ dbt.date_trunc('month', 'fct.invoice_ts') }} as date) as revenue_month,
+              fct.invoice_id,
+              fct.line_type,
+              fct.quantity,
+              fct.line_revenue
+          from {{ ref('fct_order_lines') }} as fct
+          inner join {{ ref('dim_product') }} as dim_product
+              on fct.product_key = dim_product.product_key
+          where dim_product.is_merchandise
+              and not fct.is_quantity_outlier
+              and fct.line_type in ('sale', 'cancellation')
+
+      )
+
+      select
+          product_key,
+          stock_code,
+          revenue_month,
+          sum(case when line_type = 'sale' then quantity else 0 end)               as units_sold,
+          cast(sum(line_revenue) as decimal(18, 2))                                as net_revenue,
+          count(distinct case when line_type = 'sale' then invoice_id end)         as n_orders
+      from lines
+      group by product_key, stock_code, revenue_month
+  - op: append
+    path: models/marts/analytics/_analytics__models.yml
+    content: |2
+
+        - name: mart_product_monthly
+          description: Monthly units, net revenue and orders per merchandise product.
+          data_tests:
+            - dbt_utils.unique_combination_of_columns:
+                arguments:
+                  combination_of_columns: [product_key, revenue_month]
+          columns:
+            - name: product_key
+              data_tests: [not_null]
+            - name: revenue_month
+              data_tests: [not_null]
+hidden:
+  assertions:
+    - name: matches_spec
+      sql: |
+        with expected as (
+            select f.product_key, p.stock_code,
+                   cast(date_trunc('month', f.invoice_ts) as date) as revenue_month,
+                   cast(sum(case when f.line_type = 'sale' then f.quantity else 0 end) as bigint) as units_sold,
+                   cast(sum(f.line_revenue) as decimal(18, 2)) as net_revenue,
+                   cast(count(distinct case when f.line_type = 'sale' then f.invoice_id end) as bigint) as n_orders
+            from gold.fct_order_lines as f
+            join gold.dim_product as p on f.product_key = p.product_key
+            where p.is_merchandise and not f.is_quantity_outlier
+              and f.line_type in ('sale', 'cancellation')
+            group by 1, 2, 3
+        ),
+        actual as (
+            select product_key, stock_code, cast(revenue_month as date), cast(units_sold as bigint),
+                   cast(net_revenue as decimal(18, 2)), cast(n_orders as bigint)
+            from gold.mart_product_monthly
+        )
+        select count(*) from (
+            (select * from expected except all select * from actual)
+            union all
+            (select * from actual except all select * from expected)
+        )
+      expect: {value: 0}
+  manifest:
+    - model: mart_product_monthly
+      has_description: true
+      min_tests: 3
+      columns: [product_key, stock_code, revenue_month, units_sold, net_revenue, n_orders]
+affected_tables: [gold.mart_product_monthly]

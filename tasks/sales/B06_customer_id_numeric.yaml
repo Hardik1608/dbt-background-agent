@@ -1,0 +1,28 @@
+id: B06_customer_id_numeric
+kind: breakage
+category: type_change
+difficulty: medium
+title: Build fails in staging after the extract changed
+trigger: ci_failure
+mutation:
+  - op: sql
+    sql: >-
+      alter table bronze.online_retail_lines alter customer_id set data type double
+      using cast(customer_id as double)
+reference_fix:
+  - op: replace
+    path: models/staging/stg_bronze__online_retail_lines.sql
+    old: "nullif(trim(customer_id), '')               as customer_id,"
+    new: "cast(cast(customer_id as bigint) as varchar) as customer_id,"
+hidden:
+  assertions:
+    - name: customers_preserved
+      sql: select count(distinct customer_id) from gold.fct_order_lines where customer_id is not null
+      expect: {from: base}
+    - name: ids_have_no_decimals
+      sql: select count(*) from gold.dim_customer where customer_id like '%.%'
+      expect: {value: 0}
+    - name: guest_lines_preserved
+      sql: select count(*) from gold.fct_order_lines where customer_sk = '-1'
+      expect: {from: base}
+notes: A careless fix (cast to varchar) turns 12345 into '12345.0' and breaks every customer key.

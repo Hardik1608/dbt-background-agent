@@ -1,0 +1,104 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  PYTHON_VERSION: "3.11"
+  PIP_DISABLE_PIP_VERSION_CHECK: "1"
+  DBT_SEND_ANONYMOUS_USAGE_STATS: "False"
+
+jobs:
+  lint:
+    name: Lint (ruff)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - run: pip install "ruff==0.16.10"
+      - run: ruff check .
+      - run: ruff format --check .
+
+  test:
+    name: Unit + dbt integration tests (no Docker, no network at test time, no keys)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: requirements*.txt
+      - run: pip install -r requirements-dev.txt && pip install -e . --no-deps
+      - run: pytest -m "not docker and not llm" --durations=10
+
+  smoke:
+    name: Fake-LLM smoke test (oracle agent, whole pipeline, local sandbox)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: requirements*.txt
+      - run: pip install -r requirements-dev.txt && pip install -e . --no-deps
+      - name: Build the sales base fixture (dbt deps needs network here, never in a sandbox)
+        run: python -m dbt_agent fixture build
+      - name: Two tasks through harness, checklist, verifier, grader and PR packaging
+        run: |
+          python -m dbt_agent bench sales --llm oracle --reviewer none --sandbox local \
+            --tasks B19 F07 --run-name ci_smoke --report runs/ci_smoke
+          python - <<'PY'
+          import json
+          summary = json.load(open("runs/ci_smoke.json"))["summary"]
+          assert summary["resolve_rate"] == 1.0, summary
+          print("smoke ok:", summary["resolved_runs"], "of", summary["runs"])
+          PY
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: smoke-run
+          path: |
+            runs/ci_smoke.*
+            runs/ci_smoke/*/pr/PR.md
+            runs/ci_smoke/*/events.jsonl
+
+  docker:
+    name: Docker sandbox isolation tests (Linux)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: requirements*.txt
+      - run: pip install -r requirements-dev.txt && pip install -e . --no-deps
+      - name: Build the sandbox image
+        run: docker build -f docker/sandbox.Dockerfile -t dbt-agent-sandbox:0.1 .
+      - name: Isolation, egress and escape tests
+        run: pytest -m docker tests/docker -v
+
+  audit:
+    name: Dependency audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - run: pip install "pip-audit==2.10.1"
+      - run: pip-audit -r requirements.txt -r requirements-dbt.txt

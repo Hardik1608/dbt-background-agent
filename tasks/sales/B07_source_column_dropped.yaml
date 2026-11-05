@@ -1,0 +1,27 @@
+id: B07_source_column_dropped
+kind: breakage
+category: schema_drift
+difficulty: medium
+title: Build fails after a column disappeared from bronze
+trigger: ci_failure
+mutation:
+  - op: sql
+    sql: alter table bronze.online_retail_lines drop column _source_sheet
+reference_fix:
+  - op: replace
+    path: models/staging/stg_bronze__online_retail_lines.sql
+    old: "        _source_sheet,\n"
+    new: ""
+  - op: replace
+    path: models/intermediate/int_order_lines__deduplicated.sql
+    old: "order by _ingested_at, _source_sheet, _source_row_number"
+    new: "order by _ingested_at, _source_row_number"
+hidden:
+  assertions:
+    - name: lines_preserved
+      sql: select count(*) from gold.fct_order_lines
+      expect: {from: base}
+    - name: duplicates_still_removed
+      sql: select count(*) from silver.int_order_lines__deduplicated
+      expect: {from: base}
+notes: Lineage column _source_sheet was dropped by the loader; dedup ordering used it.

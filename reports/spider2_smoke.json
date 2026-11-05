@@ -1,0 +1,123 @@
+{
+  "summary": {
+    "benchmark": "Spider 2.0-DBT",
+    "tasks_total": 68,
+    "runs": 2,
+    "official": {
+      "official_passed": 1,
+      "official_evaluated": 2,
+      "official_ratio": 0.5,
+      "passed_instances": [
+        "playbook001"
+      ],
+      "per_instance": {
+        "atp_tour001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "atp_tour.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00,  3.29it/s]\n100%|██████████| 1/1 [00:00<00:00,  3.29it/s]\n"
+        },
+        "playbook001": {
+          "passed": true,
+          "id_printed": true,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "playbook.duckdb"
+          ],
+          "had_result": true,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 46.04it/s]\n"
+        }
+      },
+      "eval_errors": []
+    },
+    "score_over_all_68": 0.0147,
+    "status_counts": {
+      "budget_exhausted": 2
+    },
+    "tokens_total": 880662,
+    "mean_tokens_per_resolved": 447960,
+    "mean_agent_seconds_per_resolved": 488.1,
+    "escape_attempts": 0,
+    "egress_attempts": 0,
+    "runs_with_all_gold_tables": 1,
+    "public_data_issues": {
+      "no_gold_database": [
+        "airbnb002",
+        "biketheft001",
+        "google_ads001",
+        "gitcoin001"
+      ],
+      "gold_name_not_in_archive": [
+        "xero_new001",
+        "social_media001",
+        "xero_new002"
+      ]
+    },
+    "evaluated_at": "2026-10-14T19:43:12.726836Z",
+    "model": "local-agent (Qwen3.5-9B int4)"
+  },
+  "runs": [
+    {
+      "instance_id": "atp_tour001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 50,
+      "tool_calls": 50,
+      "prompt_tokens": 429737,
+      "completion_tokens": 2965,
+      "agent_seconds": 260.57,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "patch_files": [],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "dim_player",
+          "dim_tournament",
+          "rpt_match_summary"
+        ],
+        "copied": false
+      },
+      "total_seconds": 264.5
+    },
+    {
+      "instance_id": "playbook001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 50,
+      "tool_calls": 52,
+      "prompt_tokens": 438111,
+      "completion_tokens": 9849,
+      "agent_seconds": 488.14,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "patch_files": [
+        "models/cpa_and_roas.sql"
+      ],
+      "collected": {
+        "tables_found": [
+          "attribution_touches"
+        ],
+        "tables_missing": [],
+        "copied": true
+      },
+      "total_seconds": 491.0
+    }
+  ]
+}

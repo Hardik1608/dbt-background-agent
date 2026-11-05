@@ -1,0 +1,46 @@
+id: B15_fact_scd_join_fanout
+kind: breakage
+category: duplicate_keys
+difficulty: hard
+title: Fact uniqueness and point-in-time tests fail after new data
+trigger: ci_failure
+mutation:
+  - op: replace
+    path: models/marts/core/fct_order_lines.sql
+    old: "    and lines.invoice_ts >= customers.valid_from\n    and lines.invoice_ts < customers.valid_to\n"
+    new: "    and lines.invoice_ts >= customers.valid_from\n"
+  - op: sql
+    sql: >-
+      insert into bronze.online_retail_lines
+      select cast(cast(invoice as bigint) + 900000 as varchar), stock_code, description,
+             quantity, invoice_date + interval 3 day, price, customer_id, country,
+             _source_sheet, _source_row_number + 900000, '2011-12-late',
+             'online_retail_2011-12_late.parquet', timestamp '2012-01-02 06:00:00'
+      from bronze.online_retail_lines
+      where _batch_id = '2011-11' and try_cast(invoice as bigint) is not null
+        and customer_id in (
+          select customer_id from gold.dim_customer where version_number > 1)
+reference_fix:
+  - op: replace
+    path: models/marts/core/fct_order_lines.sql
+    old: "    and lines.invoice_ts >= customers.valid_from\n"
+    new: "    and lines.invoice_ts >= customers.valid_from\n    and lines.invoice_ts < customers.valid_to\n"
+grading:
+  commands: [["build", "--select", "+fct_order_lines", "--full-refresh", "--indirect-selection", "cautious"], ["build"]]
+hidden:
+  assertions:
+    - name: one_row_per_line
+      sql: select count(*) - count(distinct order_line_id) from gold.fct_order_lines
+      expect: {value: 0}
+    - name: lines_after_fix
+      sql: select count(*) from gold.fct_order_lines
+      expect: {from: reference}
+    - name: point_in_time_versions
+      sql: >-
+        select count(*) from gold.fct_order_lines as f
+        join gold.dim_customer as d on f.customer_sk = d.customer_sk
+        where f.invoice_ts < d.valid_from or f.invoice_ts >= d.valid_to
+      expect: {value: 0}
+notes: >-
+  The SCD2 range join lost its upper bound; it only shows when new lines arrive for customers
+  with several versions. Deploying the fix includes a full refresh of the fact.

@@ -1,0 +1,1014 @@
+{
+  "summary": {
+    "tasks": 50,
+    "valid": 50,
+    "fail_before": 50,
+    "pass_with_reference": 50,
+    "stability_checked": 0,
+    "stable": 0,
+    "invalid": []
+  },
+  "tasks": [
+    {
+      "task_id": "B01_source_column_renamed",
+      "kind": "breakage",
+      "category": "renamed_column",
+      "key": "bf0e52a4a22f23e8",
+      "validated_at": "2026-10-14T16:24:21.313187Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "build_passes"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 26,
+      "start_trigger_exit_code": 1,
+      "stability": null,
+      "seconds": 8.4
+    },
+    {
+      "task_id": "B02_source_price_renamed",
+      "kind": "breakage",
+      "category": "renamed_column",
+      "key": "47f4fb3d6a57bb71",
+      "validated_at": "2026-10-14T16:24:29.287547Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "build_passes"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 26,
+      "start_trigger_exit_code": 1,
+      "stability": null,
+      "seconds": 8.0
+    },
+    {
+      "task_id": "B03_source_columns_upstream_names",
+      "kind": "breakage",
+      "category": "renamed_column",
+      "key": "0cdaebe3a9947733",
+      "validated_at": "2026-10-14T16:24:37.528976Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "build_passes"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 44,
+      "start_trigger_exit_code": 1,
+      "stability": null,
+      "seconds": 8.2
+    },
+    {
+      "task_id": "B04_quantity_text_thousands",
+      "kind": "breakage",
+      "category": "type_change",
+      "key": "bc997b80001b7345",
+      "validated_at": "2026-10-14T16:24:45.377549Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "build_passes"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 13,
+      "start_trigger_exit_code": 1,
+      "stability": null,
+      "seconds": 7.8
+    },
+    {
+      "task_id": "B05_invoice_date_text_uk_format",
+      "kind": "breakage",
+      "category": "type_change",
+      "key": "681f0f3480a7b171",
+      "validated_at": "2026-10-14T16:24:53.434051Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "build_passes"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 13,
+      "start_trigger_exit_code": 1,
+      "stability": null,
+      "seconds": 8.1
+    },
+    {
+      "task_id": "B06_customer_id_numeric",
+      "kind": "breakage",
+      "category": "type_change",
+      "key": "d74a19e4b6353604",
+      "validated_at": "2026-10-14T16:25:01.196876Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "build_passes"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 13,
+      "start_trigger_exit_code": 1,
+      "stability": null,
+      "seconds": 7.8
+    },
+    {
+      "task_id": "B07_source_column_dropped",
+      "kind": "breakage",
+      "category": "schema_drift",
+      "key": "644c6bc05395f402",
+      "validated_at": "2026-10-14T16:25:08.773847Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "build_passes"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 25,
+      "start_trigger_exit_code": 1,
+      "stability": null,
+      "seconds": 7.6
+    },
+    {
+      "task_id": "B08_bronze_schema_moved",
+      "kind": "breakage",
+      "category": "schema_drift",
+      "key": "56c62bdaebea3b12",
+      "validated_at": "2026-10-14T16:25:16.412633Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "build_passes"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 13,
+      "start_trigger_exit_code": 1,
+      "stability": null,
+      "seconds": 7.6
+    },
+    {
+      "task_id": "B09_seed_duplicate_country",
+      "kind": "breakage",
+      "category": "duplicate_keys",
+      "key": "2027077793950b5d",
+      "validated_at": "2026-10-14T16:25:25.169806Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "build_passes"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 9,
+      "start_trigger_exit_code": 1,
+      "stability": null,
+      "seconds": 8.8
+    },
+    {
+      "task_id": "B10_seed_yn_flags",
+      "kind": "breakage",
+      "category": "type_change",
+      "key": "ae88af97d0a6d511",
+      "validated_at": "2026-10-14T16:58:55.176798Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "build_passes",
+        "assert:file_kept_as_delivered"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 102,
+      "start_trigger_exit_code": 1,
+      "stability": null,
+      "seconds": 13.5
+    },
+    {
+      "task_id": "B11_seed_new_category",
+      "kind": "breakage",
+      "category": "reference_data",
+      "key": "00dc01475ffc7f77",
+      "validated_at": "2026-10-14T16:25:48.276304Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "build_passes"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 102,
+      "start_trigger_exit_code": 1,
+      "stability": null,
+      "seconds": 7.8
+    },
+    {
+      "task_id": "B12_intermediate_column_renamed",
+      "kind": "breakage",
+      "category": "renamed_column",
+      "key": "bc594d328dfdb7db",
+      "validated_at": "2026-10-14T16:26:03.433886Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "build_passes"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 13,
+      "start_trigger_exit_code": 1,
+      "stability": null,
+      "seconds": 15.2
+    },
+    {
+      "task_id": "B13_redelivered_batch_dedup_regression",
+      "kind": "breakage",
+      "category": "duplicate_keys",
+      "key": "e72aaec27ab2e1e2",
+      "validated_at": "2026-10-14T16:26:11.428659Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "build_passes"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 13,
+      "start_trigger_exit_code": 1,
+      "stability": null,
+      "seconds": 8.0
+    },
+    {
+      "task_id": "B14_dim_product_canonical_regression",
+      "kind": "breakage",
+      "category": "duplicate_keys",
+      "key": "cb932b9ee4576490",
+      "validated_at": "2026-10-14T16:59:09.804645Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "build_passes",
+        "assert:lines_after_fix"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 13,
+      "start_trigger_exit_code": 1,
+      "stability": null,
+      "seconds": 14.6
+    },
+    {
+      "task_id": "B15_fact_scd_join_fanout",
+      "kind": "breakage",
+      "category": "duplicate_keys",
+      "key": "db1300c23ff4e33e",
+      "validated_at": "2026-10-14T16:59:25.143353Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "build_passes",
+        "assert:lines_after_fix",
+        "assert:point_in_time_versions"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 12,
+      "start_trigger_exit_code": 1,
+      "stability": null,
+      "seconds": 15.3
+    },
+    {
+      "task_id": "B16_watermark_on_business_time",
+      "kind": "breakage",
+      "category": "late_data",
+      "key": "7916584a9825b70f",
+      "validated_at": "2026-10-14T16:26:53.036903Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "build_passes",
+        "assert:late_lines_loaded",
+        "assert:lines_after_fix"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 15,
+      "start_trigger_exit_code": 1,
+      "stability": null,
+      "seconds": 16.2
+    },
+    {
+      "task_id": "B17_data_beyond_calendar",
+      "kind": "breakage",
+      "category": "late_data",
+      "key": "7860eccfd0d92215",
+      "validated_at": "2026-10-14T16:27:02.187577Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "build_passes",
+        "assert:every_fact_day_in_calendar"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 13,
+      "start_trigger_exit_code": 1,
+      "stability": null,
+      "seconds": 9.1
+    },
+    {
+      "task_id": "B18_snapshot_updated_at_renamed",
+      "kind": "breakage",
+      "category": "code_regression",
+      "key": "fbcab6b5201a759d",
+      "validated_at": "2026-10-14T16:27:10.347906Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "build_passes"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 13,
+      "start_trigger_exit_code": 1,
+      "stability": null,
+      "seconds": 8.2
+    },
+    {
+      "task_id": "B19_macro_renamed",
+      "kind": "breakage",
+      "category": "code_regression",
+      "key": "7c509cc9f941d678",
+      "validated_at": "2026-10-14T16:27:18.813148Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "build_passes"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 13,
+      "start_trigger_exit_code": 1,
+      "stability": null,
+      "seconds": 8.5
+    },
+    {
+      "task_id": "B20_deprecated_dbt_utils_macro",
+      "kind": "breakage",
+      "category": "code_regression",
+      "key": "d8b790f60d4a333e",
+      "validated_at": "2026-10-14T16:27:26.868333Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "build_passes"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 13,
+      "start_trigger_exit_code": 2,
+      "stability": null,
+      "seconds": 8.1
+    },
+    {
+      "task_id": "B21_ambiguous_column_after_join",
+      "kind": "breakage",
+      "category": "code_regression",
+      "key": "eead6662c4aa6cdc",
+      "validated_at": "2026-10-14T16:27:43.698049Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "build_passes",
+        "assert:tier_column_kept_and_correct"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 15,
+      "start_trigger_exit_code": 1,
+      "stability": null,
+      "seconds": 16.8
+    },
+    {
+      "task_id": "B22_unknown_member_removed",
+      "kind": "breakage",
+      "category": "code_regression",
+      "key": "e9f808553e63f0d8",
+      "validated_at": "2026-10-14T16:27:59.793707Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "build_passes",
+        "assert:unknown_member_present"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 13,
+      "start_trigger_exit_code": 1,
+      "stability": null,
+      "seconds": 16.1
+    },
+    {
+      "task_id": "B23_contract_type_double",
+      "kind": "breakage",
+      "category": "type_change",
+      "key": "cc0143391d10fd0c",
+      "validated_at": "2026-10-14T16:28:15.706446Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "build_passes"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 13,
+      "start_trigger_exit_code": 1,
+      "stability": null,
+      "seconds": 15.9
+    },
+    {
+      "task_id": "B24_decimal_overflow_adjustment",
+      "kind": "breakage",
+      "category": "type_change",
+      "key": "958c83ebb7708aec",
+      "validated_at": "2026-10-14T16:59:38.531883Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "build_passes",
+        "assert:adjustment_loaded",
+        "assert:revenue_after_fix"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 26,
+      "start_trigger_exit_code": 1,
+      "stability": null,
+      "seconds": 13.4
+    },
+    {
+      "task_id": "B25_unit_test_logic_regression",
+      "kind": "breakage",
+      "category": "code_regression",
+      "key": "5bc688d2f453525c",
+      "validated_at": "2026-10-14T16:28:49.370651Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "build_passes"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 14,
+      "start_trigger_exit_code": 1,
+      "stability": null,
+      "seconds": 15.5
+    },
+    {
+      "task_id": "B26_source_nulls_policy",
+      "kind": "breakage",
+      "category": "data_quality_policy",
+      "key": "e9fd339e1a6d3658",
+      "validated_at": "2026-10-14T16:29:03.987729Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "build_passes",
+        "assert:unknown_lines_kept",
+        "assert:revenue_after_fix",
+        "test_present:not_null(stock_code)"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 28,
+      "start_trigger_exit_code": 1,
+      "stability": null,
+      "seconds": 14.6
+    },
+    {
+      "task_id": "B27_country_name_variant",
+      "kind": "breakage",
+      "category": "data_bug",
+      "key": "a2ab99db61b12472",
+      "validated_at": "2026-10-14T16:59:54.326801Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "assert:no_variant_country",
+        "assert:irish_revenue_after_fix",
+        "assert:other_countries_untouched",
+        "no_collateral_changes"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 13,
+      "start_trigger_exit_code": 0,
+      "stability": null,
+      "seconds": 15.8
+    },
+    {
+      "task_id": "B28_cancellation_prefix_lowercase",
+      "kind": "breakage",
+      "category": "data_bug",
+      "key": "c31a80162dbc021d",
+      "validated_at": "2026-10-14T17:00:09.728651Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "assert:cancellations_after_fix",
+        "assert:write_offs_unchanged",
+        "no_collateral_changes"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 13,
+      "start_trigger_exit_code": 0,
+      "stability": null,
+      "seconds": 15.4
+    },
+    {
+      "task_id": "B29_net_revenue_regression",
+      "kind": "breakage",
+      "category": "data_bug",
+      "key": "66bfcc83d37ddf17",
+      "validated_at": "2026-10-14T16:30:03.386150Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "assert:net_is_gross_plus_cancelled",
+        "assert:net_total_restored",
+        "no_collateral_changes"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 13,
+      "start_trigger_exit_code": 0,
+      "stability": null,
+      "seconds": 17.1
+    },
+    {
+      "task_id": "B30_loyalty_thresholds_swapped",
+      "kind": "breakage",
+      "category": "data_bug",
+      "key": "4a901dd591f32d33",
+      "validated_at": "2026-10-14T16:30:21.249882Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "assert:tiers_restored",
+        "no_collateral_changes"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 15,
+      "start_trigger_exit_code": 0,
+      "stability": null,
+      "seconds": 17.9
+    },
+    {
+      "task_id": "F01_mart_product_monthly",
+      "kind": "feature",
+      "category": "new_mart",
+      "key": "52c772369eadc3c5",
+      "validated_at": "2026-10-14T16:30:30.569917Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "assert:matches_spec",
+        "manifest:mart_product_monthly"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 56,
+      "start_trigger_exit_code": 0,
+      "stability": null,
+      "seconds": 9.3
+    },
+    {
+      "task_id": "F02_fct_orders_is_weekend",
+      "kind": "feature",
+      "category": "new_column",
+      "key": "f8dc163edcf43362",
+      "validated_at": "2026-10-14T16:30:48.214579Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "assert:flag_matches_calendar",
+        "assert:has_weekend_orders",
+        "manifest:fct_orders",
+        "no_collateral_changes"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 42,
+      "start_trigger_exit_code": 0,
+      "stability": null,
+      "seconds": 17.6
+    },
+    {
+      "task_id": "F03_mart_customer_lifetime",
+      "kind": "feature",
+      "category": "new_mart",
+      "key": "13c81123ca74a6b9",
+      "validated_at": "2026-10-14T16:31:05.218987Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "assert:matches_spec",
+        "manifest:mart_customer_lifetime"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 71,
+      "start_trigger_exit_code": 0,
+      "stability": null,
+      "seconds": 17.0
+    },
+    {
+      "task_id": "F04_revenue_monthly_avg_products",
+      "kind": "feature",
+      "category": "new_column",
+      "key": "54b919c5499f48cc",
+      "validated_at": "2026-10-14T16:31:22.577647Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "assert:matches_spec",
+        "manifest:mart_revenue_monthly",
+        "no_collateral_changes"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 214,
+      "start_trigger_exit_code": 0,
+      "stability": null,
+      "seconds": 17.4
+    },
+    {
+      "task_id": "F05_fct_orders_days_since_previous",
+      "kind": "feature",
+      "category": "new_column",
+      "key": "51993f55ade1267b",
+      "validated_at": "2026-10-14T16:31:40.147596Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "assert:matches_spec",
+        "assert:has_values",
+        "manifest:fct_orders",
+        "no_collateral_changes"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 57,
+      "start_trigger_exit_code": 0,
+      "stability": null,
+      "seconds": 17.6
+    },
+    {
+      "task_id": "F06_mart_country_revenue_yearly",
+      "kind": "feature",
+      "category": "new_mart",
+      "key": "851ecbe2d0217be3",
+      "validated_at": "2026-10-14T16:31:57.281703Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "assert:matches_spec",
+        "manifest:mart_country_revenue_yearly"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 59,
+      "start_trigger_exit_code": 0,
+      "stability": null,
+      "seconds": 17.1
+    },
+    {
+      "task_id": "F07_test_orders_have_lines",
+      "kind": "feature",
+      "category": "new_test",
+      "key": "a21591e526bde509",
+      "validated_at": "2026-10-14T16:32:21.291403Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "mutation:orphan_order_is_caught"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 13,
+      "start_trigger_exit_code": 0,
+      "stability": null,
+      "seconds": 24.0
+    },
+    {
+      "task_id": "F08_test_quantity_nonzero",
+      "kind": "feature",
+      "category": "new_test",
+      "key": "b42ef7e2912ad9db",
+      "validated_at": "2026-10-14T16:32:45.659608Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "mutation:zero_quantity_is_caught"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 15,
+      "start_trigger_exit_code": 0,
+      "stability": null,
+      "seconds": 24.4
+    },
+    {
+      "task_id": "F09_document_fct_orders",
+      "kind": "feature",
+      "category": "documentation",
+      "key": "85cd6ca372eba8ee",
+      "validated_at": "2026-10-14T16:33:02.245598Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "manifest:fct_orders"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 49,
+      "start_trigger_exit_code": 0,
+      "stability": null,
+      "seconds": 16.6
+    },
+    {
+      "task_id": "F10_exposure_finance_dashboard",
+      "kind": "feature",
+      "category": "lineage",
+      "key": "9f2e6c448bba9b45",
+      "validated_at": "2026-10-14T16:33:18.985172Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "exposure:finance_monthly_revenue_dashboard"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 20,
+      "start_trigger_exit_code": 0,
+      "stability": null,
+      "seconds": 16.7
+    },
+    {
+      "task_id": "F11_rename_line_revenue",
+      "kind": "feature",
+      "category": "migration",
+      "key": "b51b69aa90d1819b",
+      "validated_at": "2026-10-14T17:00:23.430465Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "assert:new_name_present",
+        "assert:old_name_gone",
+        "assert:values_kept"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 1173,
+      "start_trigger_exit_code": 0,
+      "stability": null,
+      "seconds": 13.7
+    },
+    {
+      "task_id": "F12_customer_features_is_repeat",
+      "kind": "feature",
+      "category": "new_column",
+      "key": "79f02077688a9281",
+      "validated_at": "2026-10-14T16:33:57.952677Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "assert:matches_rule",
+        "manifest:customer_features",
+        "no_collateral_changes"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 839,
+      "start_trigger_exit_code": 0,
+      "stability": null,
+      "seconds": 17.3
+    },
+    {
+      "task_id": "F13_mart_cancellation_rate_monthly",
+      "kind": "feature",
+      "category": "new_mart",
+      "key": "f6e7f05a913023e7",
+      "validated_at": "2026-10-14T16:34:14.884795Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "assert:matches_spec",
+        "manifest:mart_cancellation_rate_monthly"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 45,
+      "start_trigger_exit_code": 0,
+      "stability": null,
+      "seconds": 16.9
+    },
+    {
+      "task_id": "F14_exchange_rates_source",
+      "kind": "feature",
+      "category": "new_source",
+      "key": "d2cde5124b180cfa",
+      "validated_at": "2026-10-14T16:34:32.589114Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "assert:matches_spec",
+        "manifest:stg_bronze__exchange_rates",
+        "manifest:mart_revenue_monthly_eur",
+        "test_present:not_null(gbp_rate)"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 57,
+      "start_trigger_exit_code": 0,
+      "stability": null,
+      "seconds": 17.7
+    },
+    {
+      "task_id": "F15_dim_product_n_customers",
+      "kind": "feature",
+      "category": "new_column",
+      "key": "acab350c723c331d",
+      "validated_at": "2026-10-14T16:34:49.840422Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "assert:matches_spec",
+        "manifest:dim_product",
+        "no_collateral_changes"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 39,
+      "start_trigger_exit_code": 0,
+      "stability": null,
+      "seconds": 17.2
+    },
+    {
+      "task_id": "F16_mart_top_products_by_country",
+      "kind": "feature",
+      "category": "new_mart",
+      "key": "ded5d03490557b87",
+      "validated_at": "2026-10-14T16:35:06.731017Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "assert:matches_spec",
+        "manifest:mart_top_products_by_country"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 59,
+      "start_trigger_exit_code": 0,
+      "stability": null,
+      "seconds": 16.9
+    },
+    {
+      "task_id": "F17_fct_orders_incremental",
+      "kind": "feature",
+      "category": "incremental",
+      "key": "492268c6c129d8a2",
+      "validated_at": "2026-10-14T16:35:39.380907Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "manifest:fct_orders"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 68,
+      "start_trigger_exit_code": 0,
+      "stability": null,
+      "seconds": 32.6
+    },
+    {
+      "task_id": "F18_unit_test_revenue_monthly",
+      "kind": "feature",
+      "category": "new_test",
+      "key": "9e32ee92f83099f4",
+      "validated_at": "2026-10-14T16:41:40.730516Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "manifest:mart_revenue_monthly",
+        "mutation:net_formula_break_is_caught",
+        "mutation:non_merchandise_break_is_caught"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 30,
+      "start_trigger_exit_code": 0,
+      "stability": null,
+      "seconds": 26.0
+    },
+    {
+      "task_id": "F19_customer_features_segment",
+      "kind": "feature",
+      "category": "new_column",
+      "key": "a9cd8421fe56ae35",
+      "validated_at": "2026-10-14T16:36:27.235258Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "assert:matches_rule",
+        "assert:all_segments_present",
+        "manifest:customer_features",
+        "no_collateral_changes",
+        "test_present:accepted_values(customer_segment)"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 847,
+      "start_trigger_exit_code": 0,
+      "stability": null,
+      "seconds": 17.4
+    },
+    {
+      "task_id": "F20_tests_fct_orders_integrity",
+      "kind": "feature",
+      "category": "new_test",
+      "key": "55fd3134095c8019",
+      "validated_at": "2026-10-14T16:36:58.833290Z",
+      "valid": true,
+      "fails_before": true,
+      "empty_failed_checks": [
+        "mutation:orphan_country_is_caught",
+        "mutation:empty_order_is_caught"
+      ],
+      "passes_with_reference": true,
+      "reference_failed_checks": [],
+      "reference_error": null,
+      "reference_patch_lines": 22,
+      "start_trigger_exit_code": 0,
+      "stability": null,
+      "seconds": 31.6
+    }
+  ]
+}

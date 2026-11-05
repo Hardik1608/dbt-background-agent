@@ -1,0 +1,24 @@
+id: B08_bronze_schema_moved
+kind: breakage
+category: schema_drift
+difficulty: easy
+title: Build fails because the source table cannot be found
+trigger: ci_failure
+mutation:
+  - op: sql
+    sql: create schema raw
+  - op: sql
+    sql: create table raw.online_retail_lines as select * from bronze.online_retail_lines
+  - op: sql
+    sql: drop table bronze.online_retail_lines
+reference_fix:
+  - op: replace
+    path: models/staging/_bronze__sources.yml
+    old: "    schema: bronze\n"
+    new: "    schema: raw\n"
+hidden:
+  assertions:
+    - name: lines_preserved
+      sql: select count(*) from gold.fct_order_lines
+      expect: {from: base}
+notes: The platform team moved landed tables to schema raw.

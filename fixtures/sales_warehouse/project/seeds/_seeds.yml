@@ -1,0 +1,42 @@
+version: 2
+
+seeds:
+  - name: non_product_stock_codes
+    description: >
+      Stock codes that are not merchandise (postage, fees, manual adjustments, discounts,
+      bad-debt write-offs). Derived from profiling the real data's non-numeric codes (61
+      codes do not start with a digit - analysis 00); some of those are real products
+      (DCGS...), so they are listed explicitly. Gift vouchers (GIFT*) and test products
+      (TEST*) are matched by pattern in int_order_lines__deduplicated.
+    config:
+      column_types:
+        stock_code: varchar
+        product_category: varchar
+        note: varchar
+    columns:
+      - name: stock_code
+        data_tests:
+          - unique
+          - not_null
+      - name: product_category
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [postage, manual_adjustment, discount, samples, fee, bad_debt]
+
+  - name: country_reference
+    description: Country names as they appear in the source, mapped to ISO codes and sales regions.
+    config:
+      column_types:
+        country_name: varchar
+        iso_alpha2: varchar
+        region: varchar
+        is_domestic_market: boolean
+    columns:
+      - name: country_name
+        data_tests:
+          - unique
+          - not_null
+      - name: region
+        data_tests:
+          - not_null

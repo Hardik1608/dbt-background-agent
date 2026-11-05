@@ -1,0 +1,31 @@
+id: F07_test_orders_have_lines
+kind: feature
+category: new_test
+difficulty: easy
+title: Test that every order has lines
+trigger: ticket
+ticket: |
+  Add a singular data test in tests/ that fails when an invoice in gold.fct_orders has no
+  line in gold.fct_order_lines (an orphan order). It must pass on the current data.
+reference_fix:
+  - op: write
+    path: tests/assert_every_order_has_lines.sql
+    content: |
+      -- Every order (invoice) in the aggregate fact must have at least one order line.
+
+      select orders.invoice_id
+      from {{ ref('fct_orders') }} as orders
+      left join {{ ref('fct_order_lines') }} as lines
+          on orders.invoice_id = lines.invoice_id
+      where lines.invoice_id is null
+hidden:
+  mutation_tests:
+    - name: orphan_order_is_caught
+      sql:
+        - >-
+          insert into gold.fct_orders by name
+          select * replace ('X000001' as invoice_id) from gold.fct_orders limit 1
+      command: ["test", "--select", "fct_orders"]
+      revert_sql:
+        - delete from gold.fct_orders where invoice_id = 'X000001'
+notes: Graded by mutation testing - an orphan order is injected and the new test must fail.

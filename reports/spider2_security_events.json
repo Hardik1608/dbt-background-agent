@@ -1,0 +1,14 @@
+{
+  "source": "runs/spider2_local_agent/*/events.jsonl (security events on tool results)",
+  "events_by_kind": {
+    "egress_reference": 4,
+    "blocked_command": 44,
+    "protected_path_blocked": 7,
+    "file_access_blocked": 3,
+    "write_attempt_blocked": 1
+  },
+  "blocked_commands": {
+    "run_dbt deps": 44
+  },
+  "runs_with_security_events": 36
+}

@@ -1,0 +1,15 @@
+# Spider 2.0-DBT: the agent completes unfinished projects; success = the right tables exist.
+# The checklist therefore runs `dbt run` on the whole project (projects may not parse at the
+# start, so there is no state:modified baseline), and budgets are larger than for the suite.
+agent:
+  checklist_command: run
+  checklist_select: ""
+  checklist_full_refresh: false
+  budgets:
+    max_turns: 80
+    max_wall_seconds: 1500
+    max_tool_calls: 200
+verify:
+  enabled: false
+reviewer:
+  enabled: false

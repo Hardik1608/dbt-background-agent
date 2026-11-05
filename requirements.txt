@@ -1,0 +1,4 @@
+# Harness (host side). Verified together on Python 3.11 (Windows 11 laptop, Ubuntu 22.04 box).
+httpx==0.28.1
+pydantic==2.13.5
+pyyaml==6.0.3

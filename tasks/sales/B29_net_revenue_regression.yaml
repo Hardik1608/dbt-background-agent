@@ -1,0 +1,31 @@
+id: B29_net_revenue_regression
+kind: breakage
+category: data_bug
+difficulty: easy
+title: Net revenue equals gross revenue in the monthly mart
+trigger: ticket
+ticket: |
+  Finance: since the last deploy, net_merchandise_revenue in gold.mart_revenue_monthly equals
+  gross_merchandise_sales in every month. By definition net merchandise revenue is gross
+  merchandise sales plus cancelled merchandise (cancellations are negative amounts).
+mutation:
+  - op: replace
+    path: models/marts/analytics/mart_revenue_monthly.sql
+    old: "        sum(case when line_type in ('sale', 'cancellation') and is_merchandise\n"
+    new: "        sum(case when line_type in ('sale') and is_merchandise\n"
+reference_fix:
+  - op: replace
+    path: models/marts/analytics/mart_revenue_monthly.sql
+    old: "        sum(case when line_type in ('sale') and is_merchandise\n"
+    new: "        sum(case when line_type in ('sale', 'cancellation') and is_merchandise\n"
+hidden:
+  assertions:
+    - name: net_is_gross_plus_cancelled
+      sql: >-
+        select count(*) from gold.mart_revenue_monthly
+        where net_merchandise_revenue <> gross_merchandise_sales + cancelled_merchandise
+      expect: {value: 0}
+    - name: net_total_restored
+      sql: select sum(net_merchandise_revenue) from gold.mart_revenue_monthly
+      expect: {from: base}
+notes: No test covers the net formula, so CI is green; the bug is only visible in the numbers.

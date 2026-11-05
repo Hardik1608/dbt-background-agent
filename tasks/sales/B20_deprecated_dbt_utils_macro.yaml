@@ -1,0 +1,22 @@
+id: B20_deprecated_dbt_utils_macro
+kind: breakage
+category: code_regression
+difficulty: easy
+title: Compilation error in the country dimension
+trigger: ci_failure
+mutation:
+  - op: replace
+    path: models/marts/core/dim_country.sql
+    old: "{{ dbt_utils.generate_surrogate_key(['country_name']) }}"
+    new: "{{ dbt_utils.surrogate_key(['country_name']) }}"
+reference_fix:
+  - op: replace
+    path: models/marts/core/dim_country.sql
+    old: "{{ dbt_utils.surrogate_key(['country_name']) }}"
+    new: "{{ dbt_utils.generate_surrogate_key(['country_name']) }}"
+hidden:
+  assertions:
+    - name: country_keys_preserved
+      sql: select count(*) from gold.fct_order_lines as f join gold.dim_country as c on f.country_key = c.country_key
+      expect: {from: base}
+notes: A copy-pasted snippet used the macro removed in dbt_utils 1.0.

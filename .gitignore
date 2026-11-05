@@ -1,0 +1,29 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+build/
+dist/
+
+# Run state, benchmark downloads and generated data (reproducible; can be large)
+runs/
+bench_data/
+fixtures/build/
+*.duckdb
+*.duckdb.wal
+target/
+logs/
+dbt_packages/
+.user.yml
+
+# Secrets: never commit keys or env files
+.env
+*.env
+local_llm.env
+*.pem
+*.key
+.api_key

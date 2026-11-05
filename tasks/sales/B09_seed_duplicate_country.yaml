@@ -1,0 +1,29 @@
+id: B09_seed_duplicate_country
+kind: breakage
+category: duplicate_keys
+difficulty: easy
+title: Build fails on a uniqueness test in reference data
+trigger: ci_failure
+mutation:
+  - op: append
+    path: seeds/country_reference.csv
+    content: "EIRE,IE,UK & Ireland,false\n"
+reference_fix:
+  - op: replace
+    path: seeds/country_reference.csv
+    old: "Unspecified,,Unknown,false\nEIRE,IE,UK & Ireland,false\n"
+    new: "Unspecified,,Unknown,false\n"
+hidden:
+  assertions:
+    - name: one_row_per_country
+      sql: select count(*) - count(distinct country_name) from gold.dim_country
+      expect: {value: 0}
+    - name: lines_preserved
+      sql: select count(*) from gold.fct_order_lines
+      expect: {from: base}
+    - name: irish_revenue_preserved
+      sql: >-
+        select sum(f.line_revenue) from gold.fct_order_lines as f
+        join gold.dim_country as c on f.country_key = c.country_key where c.country_name = 'EIRE'
+      expect: {from: base}
+notes: A copy-paste duplicate in the country seed fans out the country dimension.

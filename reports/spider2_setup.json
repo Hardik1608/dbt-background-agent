@@ -1,0 +1,31 @@
+{
+  "repo_commit": "cafb867313aab4e674652054198f383cf4018943",
+  "uncompressed_bytes": {
+    "DBT_start_db.zip": 1427685376,
+    "dbt_gold.zip": 2433232896
+  },
+  "archive_bytes": {
+    "DBT_start_db.zip": 377819033,
+    "dbt_gold.zip": 683874645
+  },
+  "archive_sha256": {
+    "DBT_start_db.zip": "143d0d4f6410f233a8969a27b4295695a4d7f3f7381143922bbc4486381c4375",
+    "dbt_gold.zip": "0e351c524f7b8619881171d2ede80be274e7bbbe329566ed2775d8b6cd443fdc"
+  },
+  "data_issues": {
+    "no_gold_database": [
+      "airbnb002",
+      "biketheft001",
+      "google_ads001",
+      "gitcoin001"
+    ],
+    "gold_name_not_in_archive": [
+      "xero_new001",
+      "social_media001",
+      "xero_new002"
+    ]
+  },
+  "tasks": 68,
+  "layout": "archives (extracted per task)",
+  "set_up_at": "2026-10-14T17:27:12.347497Z"
+}

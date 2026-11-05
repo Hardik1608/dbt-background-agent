@@ -1,0 +1,93 @@
+id: F13_mart_cancellation_rate_monthly
+kind: feature
+category: new_mart
+difficulty: medium
+title: Monthly cancellation rate mart
+trigger: ticket
+ticket: |
+  Add a model `mart_cancellation_rate_monthly` in models/marts/analytics (gold schema): one
+  row per month (revenue_month = first day of the month of invoice_ts, as a date) that has
+  merchandise sale or cancellation lines.
+
+  Columns:
+  - revenue_month
+  - gross_merchandise_sales: sum of line_revenue over merchandise sale lines, decimal(18, 2)
+  - cancelled_merchandise: absolute value of the sum of line_revenue over merchandise
+    cancellation lines, decimal(18, 2)
+  - cancellation_rate: cancelled_merchandise / gross_merchandise_sales, as a double rounded
+    to 4 decimals; NULL when gross_merchandise_sales is 0
+
+  Acceptance: unique and not_null tests on revenue_month, a model description, `dbt build`
+  passes.
+reference_fix:
+  - op: write
+    path: models/marts/analytics/mart_cancellation_rate_monthly.sql
+    content: |
+      -- Gold: share of merchandise sales that was cancelled, per month.
+
+      with monthly as (
+
+          select
+              cast({{ dbt.date_trunc('month', 'fct.invoice_ts') }} as date) as revenue_month,
+              sum(case when fct.line_type = 'sale' then fct.line_revenue else 0 end)
+                  as gross_sales,
+              abs(sum(case when fct.line_type = 'cancellation' then fct.line_revenue else 0 end))
+                  as cancelled
+          from {{ ref('fct_order_lines') }} as fct
+          inner join {{ ref('dim_product') }} as dim_product
+              on fct.product_key = dim_product.product_key
+          where dim_product.is_merchandise
+              and fct.line_type in ('sale', 'cancellation')
+          group by 1
+
+      )
+
+      select
+          revenue_month,
+          cast(gross_sales as decimal(18, 2)) as gross_merchandise_sales,
+          cast(cancelled as decimal(18, 2)) as cancelled_merchandise,
+          round(cast(cancelled / nullif(gross_sales, 0) as double), 4) as cancellation_rate
+      from monthly
+  - op: append
+    path: models/marts/analytics/_analytics__models.yml
+    content: |2
+
+        - name: mart_cancellation_rate_monthly
+          description: Monthly gross merchandise sales, cancellations and cancellation rate.
+          columns:
+            - name: revenue_month
+              data_tests: [unique, not_null]
+hidden:
+  assertions:
+    - name: matches_spec
+      sql: |
+        with m as (
+            select cast(date_trunc('month', f.invoice_ts) as date) as revenue_month,
+                   sum(case when f.line_type = 'sale' then f.line_revenue else 0 end) as g,
+                   abs(sum(case when f.line_type = 'cancellation' then f.line_revenue else 0 end)) as c
+            from gold.fct_order_lines as f join gold.dim_product as p on f.product_key = p.product_key
+            where p.is_merchandise and f.line_type in ('sale', 'cancellation')
+            group by 1
+        ),
+        expected as (
+            select revenue_month, cast(g as decimal(18, 2)), cast(c as decimal(18, 2)),
+                   round(cast(c / nullif(g, 0) as double), 4)
+            from m
+        ),
+        actual as (
+            select cast(revenue_month as date), cast(gross_merchandise_sales as decimal(18, 2)),
+                   cast(cancelled_merchandise as decimal(18, 2)),
+                   round(cast(cancellation_rate as double), 4)
+            from gold.mart_cancellation_rate_monthly
+        )
+        select count(*) from (
+            (select * from expected except all select * from actual)
+            union all
+            (select * from actual except all select * from expected)
+        )
+      expect: {value: 0}
+  manifest:
+    - model: mart_cancellation_rate_monthly
+      has_description: true
+      min_tests: 2
+affected_tables: [gold.mart_cancellation_rate_monthly]

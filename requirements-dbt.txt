@@ -1,0 +1,7 @@
+# dbt toolchain: installed in the sandbox image, and on the host for LocalSandbox tests and
+# fixture builds. Same versions as 05_sales-analytics-platform (dbt-core 1.12.5 there).
+dbt-core==1.12.5
+dbt-duckdb==1.11.0
+duckdb==1.5.6
+sqlfluff==4.4.0
+sqlfluff-templater-dbt==4.4.0

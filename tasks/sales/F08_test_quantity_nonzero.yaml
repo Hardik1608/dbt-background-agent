@@ -1,0 +1,28 @@
+id: F08_test_quantity_nonzero
+kind: feature
+category: new_test
+difficulty: easy
+title: Test that order lines never have zero quantity
+trigger: ticket
+ticket: |
+  Add a data test on gold.fct_order_lines that fails if any line has quantity = 0 (a generic
+  test in the model's YAML, e.g. dbt_utils.expression_is_true, or a singular test). It must
+  pass on the current data.
+reference_fix:
+  - op: replace
+    path: models/marts/core/_core__models.yml
+    old: "      - name: quantity\n        data_type: integer\n        constraints:\n          - type: not_null\n"
+    new: "      - name: quantity\n        data_type: integer\n        constraints:\n          - type: not_null\n        data_tests:\n          - dbt_utils.expression_is_true:\n              arguments:\n                expression: \"<> 0\"\n"
+hidden:
+  mutation_tests:
+    - name: zero_quantity_is_caught
+      sql:
+        - >-
+          update gold.fct_order_lines set quantity = 0
+          where order_line_id = (select min(order_line_id) from gold.fct_order_lines where quantity = 1)
+      command: ["test", "--select", "fct_order_lines", "--exclude", "test_type:unit"]
+      revert_sql:
+        - update gold.fct_order_lines set quantity = 1 where quantity = 0
+notes: >-
+  Graded by mutation testing: one line's quantity is set to 0 in place (row count and revenue
+  unchanged, so existing reconciliation tests still pass); only a test on quantity can fail.

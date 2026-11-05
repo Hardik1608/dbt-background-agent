@@ -1,0 +1,28 @@
+id: B12_intermediate_column_renamed
+kind: breakage
+category: renamed_column
+difficulty: medium
+title: Customer invoices model fails after a silver refactor
+trigger: ci_failure
+mutation:
+  - op: replace
+    path: models/intermediate/int_order_lines__deduplicated.sql
+    old: "    product_category = 'merchandise' as is_merchandise\n"
+    new: "    product_category = 'merchandise' as is_product\n"
+reference_fix:
+  - op: replace
+    path: models/intermediate/int_customer_invoices.sql
+    old: "            when is_merchandise\n"
+    new: "            when is_product\n"
+hidden:
+  assertions:
+    - name: tiers_preserved
+      sql: select loyalty_tier, count(*) from silver.int_customer_state group by 1 order by 1
+      expect: {from: base}
+    - name: spend_preserved
+      sql: select sum(net_merchandise_amount) from silver.int_customer_invoices
+      expect: {from: base}
+affected_tables: [silver.int_order_lines__deduplicated]
+notes: >-
+  A teammate renamed is_merchandise to is_product in silver but missed one consumer. Updating
+  the consumer or reverting the rename both work (the renamed table is not compared).

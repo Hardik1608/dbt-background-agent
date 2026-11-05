@@ -1,0 +1,26 @@
+id: F09_document_fct_orders
+kind: feature
+category: documentation
+difficulty: easy
+title: Document every column of the order fact
+trigger: ticket
+ticket: |
+  Data catalog clean-up: give every column of gold.fct_orders a non-empty description in its
+  YAML entry (all 13 columns: invoice_id, customer_sk, customer_id, country_key, date_key,
+  invoice_ts, invoice_type, n_lines, n_distinct_products, total_units, invoice_revenue,
+  merchandise_revenue, has_quantity_outlier). Keep the existing tests.
+reference_fix:
+  - op: replace
+    path: models/marts/core/_core__models.yml
+    old: "      - name: invoice_id\n        data_tests:\n          - unique\n          - not_null\n      - name: customer_sk\n        data_tests:\n          - not_null\n"
+    new: "      - name: invoice_id\n        description: Invoice number; one row per invoice.\n        data_tests:\n          - unique\n          - not_null\n      - name: customer_sk\n        description: SCD2 customer version valid at the invoice time; '-1' for guest checkouts.\n        data_tests:\n          - not_null\n"
+  - op: replace
+    path: models/marts/core/_core__models.yml
+    old: "      - name: invoice_type\n        data_tests:\n          - accepted_values:\n              arguments:\n                values: [sale, cancellation, bad_debt_adjustment, stock_write_off]\n\n  # ------------------------------------------------------------------ dimensions\n"
+    new: "      - name: invoice_type\n        description: sale, cancellation, bad_debt_adjustment or stock_write_off.\n        data_tests:\n          - accepted_values:\n              arguments:\n                values: [sale, cancellation, bad_debt_adjustment, stock_write_off]\n      - name: customer_id\n        description: Natural customer key (NULL for guest checkouts).\n      - name: country_key\n        description: Country of the invoice (dim_country).\n      - name: date_key\n        description: Invoice date as yyyymmdd (dim_date).\n      - name: invoice_ts\n        description: Invoice timestamp (shared by all lines of the invoice).\n      - name: n_lines\n        description: Number of order lines on the invoice.\n      - name: n_distinct_products\n        description: Number of distinct products on the invoice.\n      - name: total_units\n        description: Sum of quantities over all lines (negative for cancellations).\n      - name: invoice_revenue\n        description: Sum of line revenue over all lines, in GBP.\n      - name: merchandise_revenue\n        description: Sum of line revenue over merchandise lines only, in GBP.\n      - name: has_quantity_outlier\n        description: True when any line is a bulk-quantity outlier.\n\n  # ------------------------------------------------------------------ dimensions\n"
+hidden:
+  manifest:
+    - model: fct_orders
+      documented_columns: [invoice_id, customer_sk, customer_id, country_key, date_key, invoice_ts,
+                           invoice_type, n_lines, n_distinct_products, total_units,
+                           invoice_revenue, merchandise_revenue, has_quantity_outlier]

@@ -1,0 +1,14 @@
+# ADE-bench: tasks range from bug fixes to new models in ADE's own containers (dbt-core 1.10).
+# The checklist runs `dbt run` on the changed models (projects can carry pre-existing test
+# failures unrelated to the task; ADE's hidden tests are the judge).
+agent:
+  checklist_command: run
+  checklist_select: "state:modified+"
+  checklist_full_refresh: false
+  budgets:
+    max_turns: 60
+    max_wall_seconds: 810  # ADE's agent timeout is 900 s (its .env.example); we stop first
+verify:
+  enabled: false
+reviewer:
+  enabled: false

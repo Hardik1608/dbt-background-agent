@@ -1,0 +1,31 @@
+id: B04_quantity_text_thousands
+kind: breakage
+category: type_change
+difficulty: medium
+title: Build fails with a conversion error in the order lines
+trigger: ci_failure
+mutation:
+  - op: sql
+    sql: alter table bronze.online_retail_lines alter quantity set data type varchar
+  - op: sql
+    sql: >-
+      update bronze.online_retail_lines
+      set quantity = format('{:,}', cast(quantity as bigint))
+      where abs(cast(quantity as bigint)) >= 1000
+reference_fix:
+  - op: replace
+    path: models/staging/stg_bronze__online_retail_lines.sql
+    old: "cast(quantity as integer)                   as quantity,"
+    new: "cast(replace(trim(quantity), ',', '') as integer) as quantity,"
+hidden:
+  assertions:
+    - name: units_preserved
+      sql: select sum(quantity) from gold.fct_order_lines
+      expect: {from: base}
+    - name: outliers_preserved
+      sql: select count(*) from gold.fct_order_lines where is_quantity_outlier
+      expect: {from: base}
+    - name: lines_preserved
+      sql: select count(*) from gold.fct_order_lines
+      expect: {from: base}
+notes: Upstream now ships quantity as text with thousands separators for large values.

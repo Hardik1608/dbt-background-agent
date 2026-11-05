@@ -1,0 +1,42 @@
+diff --git a/models/marts/ml/_ml__models.yml b/models/marts/ml/_ml__models.yml
+index 3fd29be..bbb363b 100644
+--- a/models/marts/ml/_ml__models.yml
++++ b/models/marts/ml/_ml__models.yml
+@@ -82,6 +82,11 @@ models:
+         data_type: integer
+       - name: is_domestic
+         data_type: integer
++      - name: is_repeat_customer
++        description: >
++          1 when the customer has placed 2 or more orders by the cutoff, else 0.
++          Indicates repeat-purchase behavior at the point in time.
++        data_type: integer
+       - name: orders_same_window_last_year
+         description: >
+           Orders in [cutoff - 365d, cutoff - 275d), i.e. last year's equivalent of the label
+@@ -149,4 +154,4 @@ unit_tests:
+           - {customer_id: "X", invoice_id: "4", invoice_ts: "2010-03-05 15:00:00", line_type: "sale", quantity: 7, line_revenue: 999, product_key: "p_mug", country_key: "k_uk", is_quantity_outlier: false}
+     expect:
+       rows:
+-        - {customer_id: "X", cutoff_date: "2010-03-01", recency_days: 9, tenure_days: 50, frequency_orders: 2, monetary_gross: 150.0, monetary_net: 130.0, n_cancellations: 1, avg_days_between_orders: 41.0, n_distinct_products: 1, is_domestic: 1, orders_same_window_last_year: null, cutoff_month_of_year: 3}
++        - {customer_id: "X", cutoff_date: "2010-03-01", recency_days: 9, tenure_days: 50, frequency_orders: 2, monetary_gross: 150.0, monetary_net: 130.0, n_cancellations: 1, avg_days_between_orders: 41.0, n_distinct_products: 1, is_domestic: 1, orders_same_window_last_year: null, cutoff_month_of_year: 3, is_repeat_customer: 1}
+diff --git a/models/marts/ml/customer_features.sql b/models/marts/ml/customer_features.sql
+index 20af02f..420bf02 100644
+--- a/models/marts/ml/customer_features.sql
++++ b/models/marts/ml/customer_features.sql
+@@ -214,6 +214,7 @@ scored as (
+     -- across buckets arbitrarily, which makes features non-deterministic between builds.
+     select
+         *,
++        case when frequency_orders >= 2 then 1 else 0 end                    as is_repeat_customer,
+         ceil(cume_dist() over (partition by cutoff_date order by recency_days desc) * 5)
+                                                             as rfm_recency_score,
+         ceil(cume_dist() over (partition by cutoff_date order by frequency_orders) * 5)
+@@ -256,5 +257,6 @@ select
+                                                             as recency_to_cadence_ratio,
+     cast(rfm_recency_score as integer)                      as rfm_recency_score,
+     cast(rfm_frequency_score as integer)                    as rfm_frequency_score,
+-    cast(rfm_monetary_score as integer)                     as rfm_monetary_score
++    cast(rfm_monetary_score as integer)                     as rfm_monetary_score,
++    cast(is_repeat_customer as integer)                     as is_repeat_customer
+ from scored

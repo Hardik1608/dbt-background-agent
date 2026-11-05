@@ -1,0 +1,47 @@
+id: F19_customer_features_segment
+kind: feature
+category: new_column
+difficulty: medium
+title: RFM segment in the ML features
+trigger: ticket
+ticket: |
+  Add `customer_segment` (varchar) to gold.customer_features from the RFM scores:
+  - 'champion' when rfm_recency_score >= 4 and rfm_frequency_score >= 4 and
+    rfm_monetary_score >= 4;
+  - otherwise 'at_risk' when rfm_recency_score <= 2 and rfm_frequency_score >= 3;
+  - otherwise 'other'.
+  customer_features has an enforced contract: update it, document the column and add an
+  accepted_values test (champion, at_risk, other) on it.
+reference_fix:
+  - op: replace
+    path: models/marts/ml/customer_features.sql
+    old: "    cast(rfm_monetary_score as integer)                     as rfm_monetary_score\nfrom scored\n"
+    new: "    cast(rfm_monetary_score as integer)                     as rfm_monetary_score,\n    case\n        when rfm_recency_score >= 4 and rfm_frequency_score >= 4\n            and rfm_monetary_score >= 4 then 'champion'\n        when rfm_recency_score <= 2 and rfm_frequency_score >= 3 then 'at_risk'\n        else 'other'\n    end                                                     as customer_segment\nfrom scored\n"
+  - op: replace
+    path: models/marts/ml/_ml__models.yml
+    old: "      - name: rfm_monetary_score\n        data_type: integer\n\n  - name: customer_churn_labels\n"
+    new: "      - name: rfm_monetary_score\n        data_type: integer\n      - name: customer_segment\n        description: RFM segment - champion, at_risk or other.\n        data_type: varchar\n        data_tests:\n          - accepted_values:\n              arguments:\n                values: [champion, at_risk, other]\n\n  - name: customer_churn_labels\n"
+hidden:
+  assertions:
+    - name: matches_rule
+      sql: |
+        select count(*) from gold.customer_features
+        where customer_segment is distinct from (
+            case
+                when rfm_recency_score >= 4 and rfm_frequency_score >= 4 and rfm_monetary_score >= 4
+                    then 'champion'
+                when rfm_recency_score <= 2 and rfm_frequency_score >= 3 then 'at_risk'
+                else 'other'
+            end)
+      expect: {value: 0}
+    - name: all_segments_present
+      sql: select count(distinct customer_segment) from gold.customer_features
+      expect: {value: 3}
+  manifest:
+    - model: customer_features
+      columns: [customer_segment]
+      documented_columns: [customer_segment]
+  tests_present:
+    - test_name: accepted_values
+      column: customer_segment
+      target_contains: customer_features

@@ -1,0 +1,2751 @@
+{
+  "summary": {
+    "tasks": 60,
+    "graded": 60,
+    "resolved": 22,
+    "resolve_rate": 0.3667,
+    "resolved_tasks": [
+      "airbnb003",
+      "airbnb006",
+      "analytics_engineering001",
+      "analytics_engineering002",
+      "analytics_engineering003",
+      "analytics_engineering007",
+      "f1004",
+      "f1007",
+      "f1010",
+      "helixops_saas001",
+      "helixops_saas002",
+      "helixops_saas003",
+      "helixops_saas004",
+      "helixops_saas005",
+      "helixops_saas006",
+      "helixops_saas008",
+      "helixops_saas011",
+      "helixops_saas013",
+      "helixops_saas016",
+      "helixops_saas017",
+      "helixops_saas018",
+      "quickbooks002"
+    ],
+    "status_counts": {
+      "budget_exhausted": 28,
+      "completed": 28,
+      "loop_detected": 4
+    },
+    "escape_attempts": 1,
+    "egress_attempts": 8,
+    "network_isolated_trials": 60,
+    "mean_tokens_per_resolved": 226815
+  },
+  "runs": [
+    {
+      "task_id": "airbnb001",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "failed"
+      },
+      "input_tokens": 542497,
+      "output_tokens": 7926,
+      "seconds": 358.0,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__airbnb001__none/airbnb001/airbnb001.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__airbnb001__none",
+      "status": "budget_exhausted",
+      "turns": 60,
+      "prompt_tokens": 542497,
+      "completion_tokens": 7926,
+      "agent_seconds": 326.64,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 1,
+        "info": 0,
+        "by_kind": {
+          "protected_path_blocked": 1
+        }
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "airbnb001-base-1-of-1__client_default"
+        ],
+        "db_path": "airbnb.duckdb",
+        "restored_for_grading": [
+          "airbnb001-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "airbnb002",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "failed"
+      },
+      "input_tokens": 528628,
+      "output_tokens": 13064,
+      "seconds": 526.6,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__airbnb002__none/airbnb002/airbnb002.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__airbnb002__none",
+      "status": "loop_detected",
+      "turns": 58,
+      "prompt_tokens": 528628,
+      "completion_tokens": 13064,
+      "agent_seconds": 495.56,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "airbnb002-base-1-of-1__client_default"
+        ],
+        "db_path": "airbnb.duckdb",
+        "restored_for_grading": [
+          "airbnb002-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "airbnb003",
+      "resolved": true,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_src_hosts_equality": "passed",
+        "AUTO_src_hosts_existence": "passed",
+        "AUTO_src_listings_equality": "passed",
+        "AUTO_src_listings_existence": "passed",
+        "src_hosts_is_view": "passed",
+        "src_listing_is_view": "passed",
+        "src_reviews_is_view": "passed"
+      },
+      "input_tokens": 80428,
+      "output_tokens": 1744,
+      "seconds": 88.4,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__airbnb003__none/airbnb003/airbnb003.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 1/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 1/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__airbnb003__none",
+      "status": "completed",
+      "turns": 16,
+      "prompt_tokens": 80428,
+      "completion_tokens": 1744,
+      "agent_seconds": 50.65,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "airbnb003-base-1-of-1__client_default"
+        ],
+        "db_path": "airbnb.duckdb",
+        "restored_for_grading": [
+          "airbnb003-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "airbnb004",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "fct_reviews_is_incremental": "passed",
+        "review_id_is_unique": "failed"
+      },
+      "input_tokens": 511494,
+      "output_tokens": 8194,
+      "seconds": 522.2,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__airbnb004__none/airbnb004/airbnb004.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__airbnb004__none",
+      "status": "budget_exhausted",
+      "turns": 60,
+      "prompt_tokens": 511494,
+      "completion_tokens": 8194,
+      "agent_seconds": 486.15,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "airbnb004-base-1-of-1__client_default"
+        ],
+        "db_path": "airbnb.duckdb",
+        "restored_for_grading": [
+          "airbnb004-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "airbnb005",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_daily_agg_nps_reviews_existence": "passed",
+        "AUTO_listing_agg_nps_reviews_existence": "passed",
+        "daily_agg_nps_reviews_equality_with_tolerance": "failed",
+        "listing_agg_nps_reviews_equality_with_tolerance": "failed"
+      },
+      "input_tokens": 330692,
+      "output_tokens": 5066,
+      "seconds": 307.1,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__airbnb005__none/airbnb005/airbnb005.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__airbnb005__none",
+      "status": "completed",
+      "turns": 39,
+      "prompt_tokens": 330692,
+      "completion_tokens": 5066,
+      "agent_seconds": 271.46,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "airbnb005-base-1-of-1__client_default"
+        ],
+        "db_path": "airbnb.duckdb",
+        "restored_for_grading": [
+          "airbnb005-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "airbnb006",
+      "resolved": true,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_dim_hosts_equality": "passed",
+        "AUTO_dim_hosts_existence": "passed",
+        "AUTO_dim_listings_equality": "passed",
+        "AUTO_dim_listings_existence": "passed",
+        "dim_hosts_named_correctly": "passed",
+        "dim_listings_named_correctly": "passed",
+        "fct_reviews_named_correctly": "passed"
+      },
+      "input_tokens": 187704,
+      "output_tokens": 3035,
+      "seconds": 189.0,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__airbnb006__none/airbnb006/airbnb006.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 1/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 1/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__airbnb006__none",
+      "status": "completed",
+      "turns": 22,
+      "prompt_tokens": 187704,
+      "completion_tokens": 3035,
+      "agent_seconds": 153.52,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "airbnb006-base-1-of-1__client_default"
+        ],
+        "db_path": "airbnb.duckdb",
+        "restored_for_grading": [
+          "airbnb006-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "airbnb007",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_daily_agg_nps_reviews_existence": "failed",
+        "AUTO_dim_hosts_equality": "passed",
+        "AUTO_dim_hosts_existence": "passed",
+        "AUTO_dim_listings_equality": "failed",
+        "AUTO_dim_listings_existence": "passed",
+        "AUTO_dim_listings_hosts_equality": "failed",
+        "AUTO_dim_listings_hosts_existence": "failed",
+        "AUTO_listing_agg_nps_reviews_existence": "passed",
+        "daily_agg_nps_reviews_equality_with_tolerance": "failed",
+        "listing_agg_nps_reviews_equality_with_tolerance": "failed",
+        "models_are_materialized_correctly": "passed"
+      },
+      "input_tokens": 571213,
+      "output_tokens": 9060,
+      "seconds": 527.8,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__airbnb007__none/airbnb007/airbnb007.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__airbnb007__none",
+      "status": "budget_exhausted",
+      "turns": 60,
+      "prompt_tokens": 571213,
+      "completion_tokens": 9060,
+      "agent_seconds": 496.23,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "airbnb007-base-1-of-1__client_default"
+        ],
+        "db_path": "airbnb.duckdb",
+        "restored_for_grading": [
+          "airbnb007-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "airbnb008",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_mom_agg_reviews_equality": "failed",
+        "AUTO_mom_agg_reviews_existence": "failed",
+        "AUTO_monthly_agg_reviews_equality": "failed",
+        "AUTO_monthly_agg_reviews_existence": "failed"
+      },
+      "input_tokens": 504994,
+      "output_tokens": 6164,
+      "seconds": 362.0,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__airbnb008__none/airbnb008/airbnb008.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__airbnb008__none",
+      "status": "budget_exhausted",
+      "turns": 60,
+      "prompt_tokens": 504994,
+      "completion_tokens": 6164,
+      "agent_seconds": 329.91,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 1,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 1
+        }
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "airbnb008-base-1-of-1__client_default"
+        ],
+        "db_path": "airbnb.duckdb",
+        "restored_for_grading": [
+          "airbnb008-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "airbnb009",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "mom_agg_review_date_range": "failed"
+      },
+      "input_tokens": 489686,
+      "output_tokens": 13086,
+      "seconds": 651.8,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__airbnb009__none/airbnb009/airbnb009.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__airbnb009__none",
+      "status": "completed",
+      "turns": 52,
+      "prompt_tokens": 489686,
+      "completion_tokens": 13086,
+      "agent_seconds": 617.0,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "airbnb009-base-1-of-1__client_default"
+        ],
+        "db_path": "airbnb.duckdb",
+        "restored_for_grading": [
+          "airbnb009-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "airbnb010",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed"
+      },
+      "input_tokens": 513379,
+      "output_tokens": 4667,
+      "seconds": 693.2,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__airbnb010__none/airbnb010/airbnb010.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__airbnb010__none",
+      "status": "budget_exhausted",
+      "turns": 60,
+      "prompt_tokens": 513379,
+      "completion_tokens": 4667,
+      "agent_seconds": 216.31,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "airbnb010-base-1-of-1__client_default"
+        ],
+        "db_path": "airbnb.duckdb",
+        "restored_for_grading": [
+          "airbnb010-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "airbnb011",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed"
+      },
+      "input_tokens": 483699,
+      "output_tokens": 3936,
+      "seconds": 779.0,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__airbnb011__none/airbnb011/airbnb011.base.1-of-1/sessions/agent.log'. Using raw pane output.\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__airbnb011__none/airbnb011.hint/airbnb011.hint.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/2 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/2 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__airbnb011__none",
+      "status": "loop_detected",
+      "turns": 57,
+      "prompt_tokens": 483699,
+      "completion_tokens": 3936,
+      "agent_seconds": 229.38,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "airbnb011-base-1-of-1__client_default"
+        ],
+        "db_path": "airbnb.duckdb",
+        "restored_for_grading": [
+          "airbnb011-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "airbnb012",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "broken_models_caught": "failed",
+        "unit_tests_exist": "failed"
+      },
+      "input_tokens": 269456,
+      "output_tokens": 4027,
+      "seconds": 218.8,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__airbnb012__none/airbnb012/airbnb012.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__airbnb012__none",
+      "status": "completed",
+      "turns": 33,
+      "prompt_tokens": 269456,
+      "completion_tokens": 4027,
+      "agent_seconds": 174.34,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "airbnb012-base-1-of-1__client_default"
+        ],
+        "db_path": "airbnb.duckdb",
+        "restored_for_grading": [
+          "airbnb012-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "airbnb013",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "fct_reviews_equality": "failed"
+      },
+      "input_tokens": 512954,
+      "output_tokens": 6810,
+      "seconds": 462.0,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__airbnb013__none/airbnb013/airbnb013.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__airbnb013__none",
+      "status": "budget_exhausted",
+      "turns": 60,
+      "prompt_tokens": 512954,
+      "completion_tokens": 6810,
+      "agent_seconds": 415.61,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "airbnb013-base-1-of-1__client_default"
+        ],
+        "db_path": "airbnb.duckdb",
+        "restored_for_grading": [
+          "airbnb013-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "analytics_engineering001",
+      "resolved": true,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "columns_in_project_duckdb": "passed"
+      },
+      "input_tokens": 209976,
+      "output_tokens": 2614,
+      "seconds": 149.0,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__analytics_engineering001__none/analytics_engineering001/analytics_engineering001.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 1/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 1/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__analytics_engineering001__none",
+      "status": "loop_detected",
+      "turns": 27,
+      "prompt_tokens": 209976,
+      "completion_tokens": 2614,
+      "agent_seconds": 116.6,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "analytics_engineering001-base-1-of-1__client_default"
+        ],
+        "db_path": "analytics_engineering.duckdb",
+        "restored_for_grading": [
+          "analytics_engineering001-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "analytics_engineering002",
+      "resolved": true,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_obt_product_inventory_equality": "passed",
+        "AUTO_obt_product_inventory_existence": "passed"
+      },
+      "input_tokens": 16573,
+      "output_tokens": 461,
+      "seconds": 115.8,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__analytics_engineering002__none/analytics_engineering002/analytics_engineering002.base.1-of-1/sessions/agent.log'. Using raw pane output.\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__analytics_engineering002__none/analytics_engineering002.medium/analytics_engineering002.medium.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 2/2 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 2/2 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__analytics_engineering002__none",
+      "status": "completed",
+      "turns": 7,
+      "prompt_tokens": 20225,
+      "completion_tokens": 452,
+      "agent_seconds": 22.95,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "analytics_engineering002-medium-1-of-1__client_default"
+        ],
+        "db_path": "analytics_engineering.duckdb",
+        "restored_for_grading": [
+          "analytics_engineering002-medium-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "analytics_engineering003",
+      "resolved": true,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_dim_customer_equality": "passed",
+        "AUTO_dim_customer_existence": "passed"
+      },
+      "input_tokens": 193158,
+      "output_tokens": 2974,
+      "seconds": 162.4,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__analytics_engineering003__none/analytics_engineering003/analytics_engineering003.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 1/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 1/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__analytics_engineering003__none",
+      "status": "completed",
+      "turns": 30,
+      "prompt_tokens": 193158,
+      "completion_tokens": 2974,
+      "agent_seconds": 128.76,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "analytics_engineering003-base-1-of-1__client_default"
+        ],
+        "db_path": "analytics_engineering.duckdb",
+        "restored_for_grading": [
+          "analytics_engineering003-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "analytics_engineering004",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_obt_product_inventory_equality": "failed",
+        "AUTO_obt_product_inventory_existence": "passed"
+      },
+      "input_tokens": 72236,
+      "output_tokens": 1475,
+      "seconds": 96.8,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__analytics_engineering004__none/analytics_engineering004/analytics_engineering004.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__analytics_engineering004__none",
+      "status": "completed",
+      "turns": 13,
+      "prompt_tokens": 72236,
+      "completion_tokens": 1475,
+      "agent_seconds": 60.27,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "analytics_engineering004-base-1-of-1__client_default"
+        ],
+        "db_path": "analytics_engineering.duckdb",
+        "restored_for_grading": [
+          "analytics_engineering004-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "analytics_engineering005",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_fact_inventory_equality": "failed",
+        "AUTO_fact_inventory_existence": "passed",
+        "check_row_count": "passed"
+      },
+      "input_tokens": 166045,
+      "output_tokens": 2793,
+      "seconds": 157.0,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__analytics_engineering005__none/analytics_engineering005/analytics_engineering005.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__analytics_engineering005__none",
+      "status": "completed",
+      "turns": 28,
+      "prompt_tokens": 166045,
+      "completion_tokens": 2793,
+      "agent_seconds": 121.83,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "analytics_engineering005-base-1-of-1__client_default"
+        ],
+        "db_path": "analytics_engineering.duckdb",
+        "restored_for_grading": [
+          "analytics_engineering005-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "analytics_engineering006",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_dim_products_equality": "failed",
+        "AUTO_dim_products_existence": "passed",
+        "AUTO_fact_inventory_equality": "failed",
+        "AUTO_fact_inventory_existence": "passed",
+        "AUTO_obt_product_inventory_equality": "failed",
+        "AUTO_obt_product_inventory_existence": "passed",
+        "check_row_count": "passed"
+      },
+      "input_tokens": 391938,
+      "output_tokens": 4881,
+      "seconds": 800.0,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__analytics_engineering006__none/analytics_engineering006/analytics_engineering006.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__analytics_engineering006__none",
+      "status": "completed",
+      "turns": 46,
+      "prompt_tokens": 391938,
+      "completion_tokens": 4881,
+      "agent_seconds": 212.02,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "analytics_engineering006-base-1-of-1__client_default"
+        ],
+        "db_path": "analytics_engineering.duckdb",
+        "restored_for_grading": [
+          "analytics_engineering006-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "analytics_engineering007",
+      "resolved": true,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_dim_products_equality": "passed",
+        "AUTO_dim_products_existence": "passed",
+        "AUTO_fact_inventory_equality": "passed",
+        "AUTO_fact_inventory_existence": "passed",
+        "AUTO_fact_sales_equality": "passed",
+        "AUTO_fact_sales_existence": "passed",
+        "AUTO_obt_product_inventory_equality": "passed",
+        "AUTO_obt_product_inventory_existence": "passed",
+        "AUTO_obt_sales_overview_equality": "passed",
+        "AUTO_obt_sales_overview_existence": "passed"
+      },
+      "input_tokens": 423672,
+      "output_tokens": 4129,
+      "seconds": 429.4,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__analytics_engineering007__none/analytics_engineering007/analytics_engineering007.base.1-of-1/sessions/agent.log'. Using raw pane output.\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__analytics_engineering007__none/analytics_engineering007.medium/analytics_engineering007.medium.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 1/2 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 1/2 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__analytics_engineering007__none",
+      "status": "completed",
+      "turns": 34,
+      "prompt_tokens": 257254,
+      "completion_tokens": 3863,
+      "agent_seconds": 171.81,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "analytics_engineering007-medium-1-of-1__client_default"
+        ],
+        "db_path": "analytics_engineering.duckdb",
+        "restored_for_grading": [
+          "analytics_engineering007-medium-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "analytics_engineering008",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed"
+      },
+      "input_tokens": 393151,
+      "output_tokens": 4662,
+      "seconds": 212.6,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__analytics_engineering008__none/analytics_engineering008/analytics_engineering008.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__analytics_engineering008__none",
+      "status": "budget_exhausted",
+      "turns": 60,
+      "prompt_tokens": 393151,
+      "completion_tokens": 4662,
+      "agent_seconds": 191.56,
+      "security": {
+        "escape_attempts": 1,
+        "egress_attempts": 0,
+        "policy_blocks": 4,
+        "info": 0,
+        "by_kind": {
+          "path_escape_blocked": 1,
+          "protected_path_blocked": 4
+        }
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "analytics_engineering008-base-1-of-1__client_default"
+        ],
+        "db_path": "analytics_engineering.duckdb",
+        "restored_for_grading": [
+          "analytics_engineering008-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "asana001",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_asana__task_equality": "failed",
+        "AUTO_asana__task_existence": "failed"
+      },
+      "input_tokens": 495771,
+      "output_tokens": 5526,
+      "seconds": 408.5,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__asana001__none/asana001/asana001.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__asana001__none",
+      "status": "budget_exhausted",
+      "turns": 60,
+      "prompt_tokens": 495771,
+      "completion_tokens": 5526,
+      "agent_seconds": 367.5,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "asana001-base-1-of-1__client_default"
+        ],
+        "db_path": "asana.duckdb",
+        "restored_for_grading": [
+          "asana001-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "asana002",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_asana__task_equality": "failed",
+        "AUTO_asana__task_existence": "failed",
+        "task_source_schema": "failed"
+      },
+      "input_tokens": 546826,
+      "output_tokens": 5765,
+      "seconds": 422.5,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__asana002__none/asana002/asana002.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__asana002__none",
+      "status": "budget_exhausted",
+      "turns": 60,
+      "prompt_tokens": 546826,
+      "completion_tokens": 5765,
+      "agent_seconds": 372.41,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "asana002-base-1-of-1__client_default"
+        ],
+        "db_path": "asana.duckdb",
+        "restored_for_grading": [
+          "asana002-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "asana003",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_asana__project_equality": "passed",
+        "AUTO_asana__project_existence": "passed",
+        "AUTO_asana__tag_equality": "passed",
+        "AUTO_asana__tag_existence": "passed",
+        "AUTO_asana__task_equality": "passed",
+        "AUTO_asana__task_existence": "passed",
+        "AUTO_int_asana__project_task_metrics_equality": "passed",
+        "AUTO_int_asana__project_task_metrics_existence": "passed",
+        "AUTO_int_asana__project_user_equality": "passed",
+        "AUTO_int_asana__project_user_existence": "passed",
+        "AUTO_int_asana__task_followers_equality": "passed",
+        "AUTO_int_asana__task_followers_existence": "passed",
+        "AUTO_int_asana__task_story_equality": "passed",
+        "AUTO_int_asana__task_story_existence": "passed",
+        "AUTO_int_asana__task_tags_equality": "passed",
+        "AUTO_int_asana__task_tags_existence": "passed",
+        "check_model_sources": "failed"
+      },
+      "input_tokens": 528026,
+      "output_tokens": 14173,
+      "seconds": 726.7,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__asana003__none/asana003/asana003.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__asana003__none",
+      "status": "budget_exhausted",
+      "turns": 60,
+      "prompt_tokens": 528026,
+      "completion_tokens": 14173,
+      "agent_seconds": 683.75,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 1,
+        "info": 0,
+        "by_kind": {
+          "protected_path_blocked": 1
+        }
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "asana003-base-1-of-1__client_default"
+        ],
+        "db_path": "asana.duckdb",
+        "restored_for_grading": [
+          "asana003-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "asana004",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_asana__project_equality": "failed",
+        "AUTO_asana__project_existence": "passed",
+        "AUTO_int_asana__project_user_agg_equality": "failed",
+        "AUTO_int_asana__project_user_agg_existence": "passed",
+        "check_project_user_agg_references": "passed",
+        "check_task_references": "failed"
+      },
+      "input_tokens": 126220,
+      "output_tokens": 3031,
+      "seconds": 493.7,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__asana004__none/asana004/asana004.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__asana004__none",
+      "status": "completed",
+      "turns": 19,
+      "prompt_tokens": 126220,
+      "completion_tokens": 3031,
+      "agent_seconds": 141.22,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 1,
+        "by_kind": {
+          "egress_reference": 1
+        }
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "asana004-base-1-of-1__client_default"
+        ],
+        "db_path": "asana.duckdb",
+        "restored_for_grading": [
+          "asana004-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "asana005",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_asana__project_equality": "failed",
+        "AUTO_asana__project_existence": "failed",
+        "AUTO_asana__task_equality": "failed",
+        "AUTO_asana__task_existence": "failed",
+        "check_project_user_agg_references": "failed",
+        "check_task_references": "failed"
+      },
+      "input_tokens": 496610,
+      "output_tokens": 4589,
+      "seconds": 959.3,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__asana005__none/asana005/asana005.base.1-of-1/sessions/agent.log'. Using raw pane output.\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__asana005__none/asana005.hard/asana005.hard.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/2 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/2 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__asana005__none",
+      "status": "budget_exhausted",
+      "turns": 60,
+      "prompt_tokens": 596087,
+      "completion_tokens": 9423,
+      "agent_seconds": 561.94,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 1,
+        "by_kind": {
+          "egress_reference": 1
+        }
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "asana005-hard-1-of-1__client_default"
+        ],
+        "db_path": "asana.duckdb",
+        "restored_for_grading": [
+          "asana005-hard-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "f1001",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "failed"
+      },
+      "input_tokens": 520317,
+      "output_tokens": 6447,
+      "seconds": 329.3,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__f1001__none/f1001/f1001.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__f1001__none",
+      "status": "budget_exhausted",
+      "turns": 60,
+      "prompt_tokens": 520317,
+      "completion_tokens": 6447,
+      "agent_seconds": 299.64,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 1,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 1
+        }
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "f1001-base-1-of-1__client_default"
+        ],
+        "db_path": "f1.duckdb",
+        "restored_for_grading": [
+          "f1001-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "f1002",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_finishes_by_driver_equality": "passed",
+        "AUTO_finishes_by_driver_existence": "passed",
+        "AUTO_most_fastest_laps_equality": "passed",
+        "AUTO_most_fastest_laps_existence": "passed",
+        "AUTO_most_podiums_equality": "failed",
+        "AUTO_most_podiums_existence": "passed",
+        "AUTO_most_pole_positions_equality": "passed",
+        "AUTO_most_pole_positions_existence": "passed",
+        "finishes_by_driver_refs": "passed",
+        "other_model_references": "failed"
+      },
+      "input_tokens": 578046,
+      "output_tokens": 6001,
+      "seconds": 390.6,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__f1002__none/f1002/f1002.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__f1002__none",
+      "status": "budget_exhausted",
+      "turns": 60,
+      "prompt_tokens": 578046,
+      "completion_tokens": 6001,
+      "agent_seconds": 357.19,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 3,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 3
+        }
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "f1002-base-1-of-1__client_default"
+        ],
+        "db_path": "f1.duckdb",
+        "restored_for_grading": [
+          "f1002-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "f1003",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed"
+      },
+      "input_tokens": 624777,
+      "output_tokens": 10287,
+      "seconds": 874.1,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__f1003__none/f1003/f1003.base.1-of-1/sessions/agent.log'. Using raw pane output.\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__f1003__none/f1003.hard/f1003.hard.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/2 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/2 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__f1003__none",
+      "status": "budget_exhausted",
+      "turns": 60,
+      "prompt_tokens": 509849,
+      "completion_tokens": 3951,
+      "agent_seconds": 227.6,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 1,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 1
+        }
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "f1003-hard-1-of-1__client_default"
+        ],
+        "db_path": "f1.duckdb",
+        "restored_for_grading": [
+          "f1003-hard-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "f1004",
+      "resolved": true,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_finishes_by_driver_equality": "passed",
+        "AUTO_finishes_by_driver_existence": "passed"
+      },
+      "input_tokens": 519301,
+      "output_tokens": 5857,
+      "seconds": 688.2,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__f1004__none/f1004/f1004.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 1/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 1/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__f1004__none",
+      "status": "budget_exhausted",
+      "turns": 60,
+      "prompt_tokens": 519301,
+      "completion_tokens": 5857,
+      "agent_seconds": 339.48,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "f1004-base-1-of-1__client_default"
+        ],
+        "db_path": "f1.duckdb",
+        "restored_for_grading": [
+          "f1004-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "f1005",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_constructor_points_equality": "failed",
+        "AUTO_constructor_points_existence": "passed",
+        "AUTO_driver_points_equality": "passed",
+        "AUTO_driver_points_existence": "passed"
+      },
+      "input_tokens": 531743,
+      "output_tokens": 7168,
+      "seconds": 991.1,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__f1005__none/f1005/f1005.base.1-of-1/sessions/agent.log'. Using raw pane output.\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__f1005__none/f1005.medium/f1005.medium.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/2 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/2 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__f1005__none",
+      "status": "budget_exhausted",
+      "turns": 60,
+      "prompt_tokens": 531743,
+      "completion_tokens": 7168,
+      "agent_seconds": 404.48,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "f1005-base-1-of-1__client_default"
+        ],
+        "db_path": "f1.duckdb",
+        "restored_for_grading": [
+          "f1005-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "f1006",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_constructor_points_equality": "failed",
+        "AUTO_constructor_points_existence": "passed",
+        "AUTO_driver_points_equality": "failed",
+        "AUTO_driver_points_existence": "passed"
+      },
+      "input_tokens": 561365,
+      "output_tokens": 9748,
+      "seconds": 888.6,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__f1006__none/f1006/f1006.base.1-of-1/sessions/agent.log'. Using raw pane output.\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__f1006__none/f1006.hard/f1006.hard.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/2 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/2 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__f1006__none",
+      "status": "budget_exhausted",
+      "turns": 60,
+      "prompt_tokens": 561365,
+      "completion_tokens": 9748,
+      "agent_seconds": 483.9,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "f1006-base-1-of-1__client_default"
+        ],
+        "db_path": "f1.duckdb",
+        "restored_for_grading": [
+          "f1006-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "f1007",
+      "resolved": true,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_driver_wins_by_season_equality": "passed",
+        "AUTO_driver_wins_by_season_existence": "passed",
+        "AUTO_finishes_by_driver_equality": "passed",
+        "AUTO_finishes_by_driver_existence": "passed",
+        "AUTO_stg_f1_dataset__results_equality": "passed",
+        "AUTO_stg_f1_dataset__results_existence": "passed"
+      },
+      "input_tokens": 207466,
+      "output_tokens": 2612,
+      "seconds": 1096.1,
+      "returncode": 0,
+      "stderr_tail": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__f1007__none/f1007/f1007.base.1-of-1/sessions/agent.log'. Using raw pane output.\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__f1007__none/f1007.hard/f1007.hard.1-of-1/sessions/agent.log'. Using raw pane output.\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__f1007__none/f1007.medium/f1007.medium.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 1/3 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 1/3 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__f1007__none",
+      "status": "budget_exhausted",
+      "turns": 60,
+      "prompt_tokens": 555147,
+      "completion_tokens": 7859,
+      "agent_seconds": 400.24,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "f1007-medium-1-of-1__client_default"
+        ],
+        "db_path": "f1.duckdb",
+        "restored_for_grading": [
+          "f1007-medium-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "f1009",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "check_driver_ages": "failed"
+      },
+      "input_tokens": 461663,
+      "output_tokens": 4469,
+      "seconds": 511.4,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__f1009__none/f1009/f1009.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__f1009__none",
+      "status": "budget_exhausted",
+      "turns": 60,
+      "prompt_tokens": 461663,
+      "completion_tokens": 4469,
+      "agent_seconds": 161.16,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "f1009-base-1-of-1__client_default"
+        ],
+        "db_path": "f1.duckdb",
+        "restored_for_grading": [
+          "f1009-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "f1010",
+      "resolved": true,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_analysis__lap_times_equality": "passed",
+        "AUTO_analysis__lap_times_existence": "passed"
+      },
+      "input_tokens": 221958,
+      "output_tokens": 3026,
+      "seconds": 367.9,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__f1010__none/f1010/f1010.base.1-of-1/sessions/agent.log'. Using raw pane output.\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__f1010__none/f1010.medium/f1010.medium.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 2/2 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 2/2 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__f1010__none",
+      "status": "completed",
+      "turns": 42,
+      "prompt_tokens": 371340,
+      "completion_tokens": 6122,
+      "agent_seconds": 198.86,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "f1010-medium-1-of-1__client_default"
+        ],
+        "db_path": "f1.duckdb",
+        "restored_for_grading": [
+          "f1010-medium-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "f1011",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "check_option_a": "passed",
+        "check_option_b": "failed",
+        "check_option_c": "passed",
+        "check_option_d": "passed",
+        "check_option_e": "passed",
+        "check_option_f": "passed"
+      },
+      "input_tokens": 452749,
+      "output_tokens": 9113,
+      "seconds": 320.0,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__f1011__none/f1011/f1011.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__f1011__none",
+      "status": "completed",
+      "turns": 52,
+      "prompt_tokens": 452749,
+      "completion_tokens": 9113,
+      "agent_seconds": 289.22,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 1,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 1
+        }
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "f1011-base-1-of-1__client_default"
+        ],
+        "db_path": "f1.duckdb",
+        "restored_for_grading": [
+          "f1011-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "helixops_saas001",
+      "resolved": true,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_dim_accounts_equality": "passed",
+        "AUTO_dim_accounts_existence": "passed"
+      },
+      "input_tokens": 71796,
+      "output_tokens": 1348,
+      "seconds": 73.1,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas001__none/helixops_saas001/helixops_saas001.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 1/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 1/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas001__none",
+      "status": "completed",
+      "turns": 17,
+      "prompt_tokens": 71796,
+      "completion_tokens": 1348,
+      "agent_seconds": 41.38,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "helixops_saas001-base-1-of-1__client_default"
+        ],
+        "db_path": "helixops_saas.duckdb",
+        "restored_for_grading": [
+          "helixops_saas001-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "helixops_saas002",
+      "resolved": true,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_mart_account_360_existence": "passed",
+        "mart_account_360_equality_with_tolerance": "passed"
+      },
+      "input_tokens": 119573,
+      "output_tokens": 2979,
+      "seconds": 110.0,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas002__none/helixops_saas002/helixops_saas002.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 1/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 1/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas002__none",
+      "status": "completed",
+      "turns": 18,
+      "prompt_tokens": 119573,
+      "completion_tokens": 2979,
+      "agent_seconds": 78.54,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "helixops_saas002-base-1-of-1__client_default"
+        ],
+        "db_path": "helixops_saas.duckdb",
+        "restored_for_grading": [
+          "helixops_saas002-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "helixops_saas003",
+      "resolved": true,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_int_account_daily_usage_existence": "passed",
+        "int_account_daily_usage_equality_with_tolerance": "passed"
+      },
+      "input_tokens": 263311,
+      "output_tokens": 3817,
+      "seconds": 144.9,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas003__none/helixops_saas003/helixops_saas003.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 1/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 1/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas003__none",
+      "status": "completed",
+      "turns": 34,
+      "prompt_tokens": 263311,
+      "completion_tokens": 3817,
+      "agent_seconds": 113.57,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "helixops_saas003-base-1-of-1__client_default"
+        ],
+        "db_path": "helixops_saas.duckdb",
+        "restored_for_grading": [
+          "helixops_saas003-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "helixops_saas004",
+      "resolved": true,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_int_workspace_roster_equality": "passed",
+        "AUTO_int_workspace_roster_existence": "passed"
+      },
+      "input_tokens": 57198,
+      "output_tokens": 1215,
+      "seconds": 148.2,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas004__none/helixops_saas004/helixops_saas004.base.1-of-1/sessions/agent.log'. Using raw pane output.\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas004__none/helixops_saas004.no_hint/helixops_saas004.no_hint.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 2/2 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 2/2 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas004__none",
+      "status": "completed",
+      "turns": 16,
+      "prompt_tokens": 78679,
+      "completion_tokens": 1812,
+      "agent_seconds": 49.73,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "helixops_saas004-no_hint-1-of-1__client_default"
+        ],
+        "db_path": "helixops_saas.duckdb",
+        "restored_for_grading": [
+          "helixops_saas004-no_hint-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "helixops_saas005",
+      "resolved": true,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_int_account_users_equality": "passed",
+        "AUTO_int_account_users_existence": "passed"
+      },
+      "input_tokens": 31799,
+      "output_tokens": 1206,
+      "seconds": 66.3,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas005__none/helixops_saas005/helixops_saas005.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 1/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 1/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas005__none",
+      "status": "completed",
+      "turns": 9,
+      "prompt_tokens": 31799,
+      "completion_tokens": 1206,
+      "agent_seconds": 34.95,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "helixops_saas005-base-1-of-1__client_default"
+        ],
+        "db_path": "helixops_saas.duckdb",
+        "restored_for_grading": [
+          "helixops_saas005-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "helixops_saas006",
+      "resolved": true,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_mart_account_360_existence": "passed",
+        "mart_account_360_equality_with_tolerance": "passed",
+        "net_mrr_not_null": "passed"
+      },
+      "input_tokens": 177411,
+      "output_tokens": 2787,
+      "seconds": 116.6,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas006__none/helixops_saas006/helixops_saas006.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 1/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 1/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas006__none",
+      "status": "completed",
+      "turns": 23,
+      "prompt_tokens": 177411,
+      "completion_tokens": 2787,
+      "agent_seconds": 82.44,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "helixops_saas006-base-1-of-1__client_default"
+        ],
+        "db_path": "helixops_saas.duckdb",
+        "restored_for_grading": [
+          "helixops_saas006-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "helixops_saas007",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_int_account_billing_snapshot_equality": "failed",
+        "AUTO_int_account_billing_snapshot_existence": "passed",
+        "AUTO_mart_account_360_existence": "passed",
+        "AUTO_mart_account_health_existence": "passed",
+        "geo_segment_not_null": "passed",
+        "mart_account_360_equality_with_tolerance": "passed",
+        "mart_account_health_equality_with_tolerance": "passed"
+      },
+      "input_tokens": 170372,
+      "output_tokens": 4283,
+      "seconds": 245.1,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas007__none/helixops_saas007/helixops_saas007.base.1-of-1/sessions/agent.log'. Using raw pane output.\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas007__none/helixops_saas007.no_location_hint/helixops_saas007.no_location_hint.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/2 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/2 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas007__none",
+      "status": "completed",
+      "turns": 22,
+      "prompt_tokens": 170372,
+      "completion_tokens": 4283,
+      "agent_seconds": 121.32,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "helixops_saas007-base-1-of-1__client_default"
+        ],
+        "db_path": "helixops_saas.duckdb",
+        "restored_for_grading": [
+          "helixops_saas007-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "helixops_saas008",
+      "resolved": true,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_dim_accounts_equality": "passed",
+        "AUTO_dim_accounts_existence": "passed",
+        "AUTO_int_account_users_equality": "passed",
+        "AUTO_int_account_users_existence": "passed",
+        "AUTO_mart_account_360_existence": "passed",
+        "AUTO_mart_account_health_existence": "passed",
+        "AUTO_stg_accounts_equality": "passed",
+        "AUTO_stg_accounts_existence": "passed",
+        "mart_account_360_equality_with_tolerance": "passed",
+        "mart_account_health_equality_with_tolerance": "passed"
+      },
+      "input_tokens": 88329,
+      "output_tokens": 2017,
+      "seconds": 86.5,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas008__none/helixops_saas008/helixops_saas008.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 1/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 1/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas008__none",
+      "status": "completed",
+      "turns": 15,
+      "prompt_tokens": 88329,
+      "completion_tokens": 2017,
+      "agent_seconds": 53.99,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "helixops_saas008-base-1-of-1__client_default"
+        ],
+        "db_path": "helixops_saas.duckdb",
+        "restored_for_grading": [
+          "helixops_saas008-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "helixops_saas009",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "dim_accounts_versioned": "failed"
+      },
+      "input_tokens": 286935,
+      "output_tokens": 3645,
+      "seconds": 148.4,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas009__none/helixops_saas009/helixops_saas009.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas009__none",
+      "status": "completed",
+      "turns": 40,
+      "prompt_tokens": 286935,
+      "completion_tokens": 3645,
+      "agent_seconds": 116.55,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "helixops_saas009-base-1-of-1__client_default"
+        ],
+        "db_path": "helixops_saas.duckdb",
+        "restored_for_grading": [
+          "helixops_saas009-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "helixops_saas010",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_int_account_workspaces_equality": "passed",
+        "AUTO_int_account_workspaces_existence": "passed",
+        "AUTO_int_support_sla_equality": "failed",
+        "AUTO_int_support_sla_existence": "passed",
+        "AUTO_int_workspace_daily_metrics_equality": "passed",
+        "AUTO_int_workspace_daily_metrics_existence": "passed",
+        "AUTO_int_workspace_roster_equality": "failed",
+        "AUTO_int_workspace_roster_existence": "passed",
+        "AUTO_stg_workspaces_equality": "passed",
+        "AUTO_stg_workspaces_existence": "passed"
+      },
+      "input_tokens": 527281,
+      "output_tokens": 6713,
+      "seconds": 250.1,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas010__none/helixops_saas010/helixops_saas010.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas010__none",
+      "status": "budget_exhausted",
+      "turns": 60,
+      "prompt_tokens": 527281,
+      "completion_tokens": 6713,
+      "agent_seconds": 217.84,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "helixops_saas010-base-1-of-1__client_default"
+        ],
+        "db_path": "helixops_saas.duckdb",
+        "restored_for_grading": [
+          "helixops_saas010-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "helixops_saas011",
+      "resolved": true,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_dim_accounts_equality": "passed",
+        "AUTO_dim_accounts_existence": "passed"
+      },
+      "input_tokens": 204511,
+      "output_tokens": 2805,
+      "seconds": 334.6,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas011__none/helixops_saas011/helixops_saas011.base.1-of-1/sessions/agent.log'. Using raw pane output.\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas011__none/helixops_saas011.hard/helixops_saas011.hard.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 1/2 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 1/2 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas011__none",
+      "status": "completed",
+      "turns": 28,
+      "prompt_tokens": 204511,
+      "completion_tokens": 2805,
+      "agent_seconds": 78.42,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "helixops_saas011-base-1-of-1__client_default"
+        ],
+        "db_path": "helixops_saas.duckdb",
+        "restored_for_grading": [
+          "helixops_saas011-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "helixops_saas012",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_fct_monthly_revenue_equality": "passed",
+        "AUTO_fct_monthly_revenue_existence": "passed",
+        "int_monthly_revenue_prep_removed": "failed"
+      },
+      "input_tokens": 44947,
+      "output_tokens": 2114,
+      "seconds": 509.7,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas012__none/helixops_saas012/helixops_saas012.base.1-of-1/sessions/agent.log'. Using raw pane output.\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas012__none/helixops_saas012.hard/helixops_saas012.hard.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/2 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/2 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas012__none",
+      "status": "completed",
+      "turns": 10,
+      "prompt_tokens": 44947,
+      "completion_tokens": 2114,
+      "agent_seconds": 54.98,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "helixops_saas012-base-1-of-1__client_default"
+        ],
+        "db_path": "helixops_saas.duckdb",
+        "restored_for_grading": [
+          "helixops_saas012-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "helixops_saas013",
+      "resolved": true,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_fct_monthly_revenue_equality": "passed",
+        "AUTO_fct_monthly_revenue_existence": "passed",
+        "AUTO_int_invoice_finance_equality": "passed",
+        "AUTO_int_invoice_finance_existence": "passed",
+        "AUTO_stg_invoice_line_items_equality": "passed",
+        "AUTO_stg_invoice_line_items_existence": "passed"
+      },
+      "input_tokens": 148696,
+      "output_tokens": 2954,
+      "seconds": 109.4,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas013__none/helixops_saas013/helixops_saas013.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 1/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 1/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas013__none",
+      "status": "completed",
+      "turns": 24,
+      "prompt_tokens": 148696,
+      "completion_tokens": 2954,
+      "agent_seconds": 77.66,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "helixops_saas013-base-1-of-1__client_default"
+        ],
+        "db_path": "helixops_saas.duckdb",
+        "restored_for_grading": [
+          "helixops_saas013-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "helixops_saas015",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_fct_support_tickets_equality": "failed",
+        "AUTO_fct_support_tickets_existence": "passed",
+        "response_sla_minutes_not_null": "passed"
+      },
+      "input_tokens": 562240,
+      "output_tokens": 6343,
+      "seconds": 438.9,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas015__none/helixops_saas015/helixops_saas015.base.1-of-1/sessions/agent.log'. Using raw pane output.\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas015__none/helixops_saas015.low/helixops_saas015.low.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/2 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/2 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas015__none",
+      "status": "budget_exhausted",
+      "turns": 60,
+      "prompt_tokens": 562240,
+      "completion_tokens": 6343,
+      "agent_seconds": 266.71,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "helixops_saas015-base-1-of-1__client_default"
+        ],
+        "db_path": "helixops_saas.duckdb",
+        "restored_for_grading": [
+          "helixops_saas015-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "helixops_saas016",
+      "resolved": true,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_fct_support_tickets_equality": "passed",
+        "AUTO_fct_support_tickets_existence": "passed"
+      },
+      "input_tokens": 161927,
+      "output_tokens": 3698,
+      "seconds": 140.8,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas016__none/helixops_saas016/helixops_saas016.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 1/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 1/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas016__none",
+      "status": "completed",
+      "turns": 23,
+      "prompt_tokens": 161927,
+      "completion_tokens": 3698,
+      "agent_seconds": 106.79,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "helixops_saas016-base-1-of-1__client_default"
+        ],
+        "db_path": "helixops_saas.duckdb",
+        "restored_for_grading": [
+          "helixops_saas016-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "helixops_saas017",
+      "resolved": true,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_int_workspace_roster_equality": "passed",
+        "AUTO_int_workspace_roster_existence": "passed",
+        "department_exists": "passed"
+      },
+      "input_tokens": 528964,
+      "output_tokens": 20309,
+      "seconds": 635.1,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas017__none/helixops_saas017/helixops_saas017.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 1/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 1/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas017__none",
+      "status": "budget_exhausted",
+      "turns": 60,
+      "prompt_tokens": 528964,
+      "completion_tokens": 20309,
+      "agent_seconds": 606.21,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "helixops_saas017-base-1-of-1__client_default"
+        ],
+        "db_path": "helixops_saas.duckdb",
+        "restored_for_grading": [
+          "helixops_saas017-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "helixops_saas018",
+      "resolved": true,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_mart_account_360_existence": "passed",
+        "mart_account_360_equality_with_tolerance": "passed",
+        "net_mrr_not_null": "passed"
+      },
+      "input_tokens": 139484,
+      "output_tokens": 2507,
+      "seconds": 101.8,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas018__none/helixops_saas018/helixops_saas018.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 1/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 1/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__helixops_saas018__none",
+      "status": "completed",
+      "turns": 20,
+      "prompt_tokens": 139484,
+      "completion_tokens": 2507,
+      "agent_seconds": 67.54,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "helixops_saas018-base-1-of-1__client_default"
+        ],
+        "db_path": "helixops_saas.duckdb",
+        "restored_for_grading": [
+          "helixops_saas018-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "intercom001",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed"
+      },
+      "input_tokens": 498700,
+      "output_tokens": 5157,
+      "seconds": 194.7,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__intercom001__none/intercom001/intercom001.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__intercom001__none",
+      "status": "budget_exhausted",
+      "turns": 60,
+      "prompt_tokens": 498700,
+      "completion_tokens": 5157,
+      "agent_seconds": 157.6,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "intercom001-base-1-of-1__client_default"
+        ],
+        "db_path": "intercom.duckdb",
+        "restored_for_grading": [
+          "intercom001-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "intercom002",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_intercom__conversation_metrics_equality": "failed",
+        "AUTO_intercom__conversation_metrics_existence": "passed",
+        "AUTO_intercom__threads_equality": "failed",
+        "AUTO_intercom__threads_existence": "passed"
+      },
+      "input_tokens": 517237,
+      "output_tokens": 5968,
+      "seconds": 243.3,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__intercom002__none/intercom002/intercom002.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__intercom002__none",
+      "status": "budget_exhausted",
+      "turns": 60,
+      "prompt_tokens": 517237,
+      "completion_tokens": 5968,
+      "agent_seconds": 202.24,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "intercom002-base-1-of-1__client_default"
+        ],
+        "db_path": "intercom.duckdb",
+        "restored_for_grading": [
+          "intercom002-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "intercom003",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed"
+      },
+      "input_tokens": 463491,
+      "output_tokens": 4829,
+      "seconds": 194.1,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__intercom003__none/intercom003/intercom003.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__intercom003__none",
+      "status": "budget_exhausted",
+      "turns": 60,
+      "prompt_tokens": 463491,
+      "completion_tokens": 4829,
+      "agent_seconds": 155.8,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "intercom003-base-1-of-1__client_default"
+        ],
+        "db_path": "intercom.duckdb",
+        "restored_for_grading": [
+          "intercom003-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "quickbooks001",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_int_quickbooks__invoice_join_equality": "failed",
+        "AUTO_int_quickbooks__invoice_join_existence": "failed",
+        "AUTO_int_quickbooks__refund_receipt_transactions_equality": "failed",
+        "AUTO_int_quickbooks__refund_receipt_transactions_existence": "failed",
+        "AUTO_int_quickbooks__sales_receipt_transactions_equality": "failed",
+        "AUTO_int_quickbooks__sales_receipt_transactions_existence": "failed",
+        "AUTO_stg_quickbooks__estimate_equality": "failed",
+        "AUTO_stg_quickbooks__estimate_existence": "failed",
+        "AUTO_stg_quickbooks__refund_receipt_equality": "failed",
+        "AUTO_stg_quickbooks__refund_receipt_existence": "failed",
+        "AUTO_stg_quickbooks__sales_receipt_equality": "failed",
+        "AUTO_stg_quickbooks__sales_receipt_existence": "failed"
+      },
+      "input_tokens": 309767,
+      "output_tokens": 2785,
+      "seconds": 191.4,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__quickbooks001__none/quickbooks001/quickbooks001.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__quickbooks001__none",
+      "status": "loop_detected",
+      "turns": 41,
+      "prompt_tokens": 309767,
+      "completion_tokens": 2785,
+      "agent_seconds": 136.35,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "quickbooks001-base-1-of-1__client_default"
+        ],
+        "db_path": "quickbooks.duckdb",
+        "restored_for_grading": [
+          "quickbooks001-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "quickbooks002",
+      "resolved": true,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_int_quickbooks__expenses_union_equality": "passed",
+        "AUTO_int_quickbooks__expenses_union_existence": "passed",
+        "AUTO_int_quickbooks__sales_union_equality": "passed",
+        "AUTO_int_quickbooks__sales_union_existence": "passed",
+        "AUTO_quickbooks__ap_ar_enhanced_equality": "passed",
+        "AUTO_quickbooks__ap_ar_enhanced_existence": "passed",
+        "check_if_models_use_department_var": "passed",
+        "check_if_project_has_department_var": "passed"
+      },
+      "input_tokens": 492393,
+      "output_tokens": 5769,
+      "seconds": 564.8,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__quickbooks002__none/quickbooks002/quickbooks002.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 1/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 1/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__quickbooks002__none",
+      "status": "budget_exhausted",
+      "turns": 60,
+      "prompt_tokens": 492393,
+      "completion_tokens": 5769,
+      "agent_seconds": 211.2,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 1,
+        "policy_blocks": 1,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 1,
+          "protected_path_blocked": 1
+        }
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "quickbooks002-base-1-of-1__client_default"
+        ],
+        "db_path": "quickbooks.duckdb",
+        "restored_for_grading": [
+          "quickbooks002-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "quickbooks003",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_int_quickbooks__expenses_union_equality": "passed",
+        "AUTO_int_quickbooks__expenses_union_existence": "passed",
+        "AUTO_int_quickbooks__invoice_join_equality": "failed",
+        "AUTO_int_quickbooks__invoice_join_existence": "failed",
+        "AUTO_int_quickbooks__refund_receipt_transactions_equality": "failed",
+        "AUTO_int_quickbooks__refund_receipt_transactions_existence": "failed",
+        "AUTO_int_quickbooks__sales_receipt_transactions_equality": "failed",
+        "AUTO_int_quickbooks__sales_receipt_transactions_existence": "failed",
+        "AUTO_int_quickbooks__sales_union_equality": "failed",
+        "AUTO_int_quickbooks__sales_union_existence": "failed",
+        "AUTO_quickbooks__ap_ar_enhanced_equality": "failed",
+        "AUTO_quickbooks__ap_ar_enhanced_existence": "passed",
+        "check_if_models_use_department_var": "passed",
+        "check_if_project_has_department_var": "passed"
+      },
+      "input_tokens": 523514,
+      "output_tokens": 6539,
+      "seconds": 328.3,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__quickbooks003__none/quickbooks003/quickbooks003.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__quickbooks003__none",
+      "status": "budget_exhausted",
+      "turns": 60,
+      "prompt_tokens": 523514,
+      "completion_tokens": 6539,
+      "agent_seconds": 265.57,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "quickbooks003-base-1-of-1__client_default"
+        ],
+        "db_path": "quickbooks.duckdb",
+        "restored_for_grading": [
+          "quickbooks003-base-1-of-1__client_default"
+        ]
+      }
+    },
+    {
+      "task_id": "quickbooks004",
+      "resolved": false,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_int_quickbooks__bill_double_entry_equality": "failed",
+        "AUTO_int_quickbooks__bill_double_entry_existence": "passed",
+        "AUTO_int_quickbooks__bill_join_equality": "failed",
+        "AUTO_int_quickbooks__bill_join_existence": "passed",
+        "AUTO_int_quickbooks__bill_payment_double_entry_equality": "failed",
+        "AUTO_int_quickbooks__bill_payment_double_entry_existence": "passed",
+        "AUTO_int_quickbooks__bill_transactions_equality": "failed",
+        "AUTO_int_quickbooks__bill_transactions_existence": "passed",
+        "AUTO_int_quickbooks__credit_memo_double_entry_equality": "failed",
+        "AUTO_int_quickbooks__credit_memo_double_entry_existence": "passed",
+        "AUTO_int_quickbooks__credit_memo_transactions_equality": "failed",
+        "AUTO_int_quickbooks__credit_memo_transactions_existence": "passed",
+        "AUTO_int_quickbooks__deposit_transactions_equality": "failed",
+        "AUTO_int_quickbooks__deposit_transactions_existence": "passed",
+        "AUTO_int_quickbooks__expenses_union_equality": "failed",
+        "AUTO_int_quickbooks__expenses_union_existence": "passed",
+        "AUTO_int_quickbooks__invoice_double_entry_equality": "failed",
+        "AUTO_int_quickbooks__invoice_double_entry_existence": "passed",
+        "AUTO_int_quickbooks__invoice_join_equality": "failed",
+        "AUTO_int_quickbooks__invoice_join_existence": "passed",
+        "AUTO_int_quickbooks__invoice_transactions_equality": "failed",
+        "AUTO_int_quickbooks__invoice_transactions_existence": "passed",
+        "AUTO_int_quickbooks__journal_entry_double_entry_equality": "failed",
+        "AUTO_int_quickbooks__journal_entry_double_entry_existence": "passed",
+        "AUTO_int_quickbooks__journal_entry_transactions_equality": "failed",
+        "AUTO_int_quickbooks__journal_entry_transactions_existence": "passed",
+        "AUTO_int_quickbooks__payment_double_entry_equality": "failed",
+        "AUTO_int_quickbooks__payment_double_entry_existence": "passed",
+        "AUTO_int_quickbooks__purchase_double_entry_equality": "failed",
+        "AUTO_int_quickbooks__purchase_double_entry_existence": "passed",
+        "AUTO_int_quickbooks__purchase_transactions_equality": "failed",
+        "AUTO_int_quickbooks__purchase_transactions_existence": "passed",
+        "AUTO_int_quickbooks__refund_receipt_double_entry_equality": "failed",
+        "AUTO_int_quickbooks__refund_receipt_double_entry_existence": "passed",
+        "AUTO_int_quickbooks__refund_receipt_transactions_equality": "failed",
+        "AUTO_int_quickbooks__refund_receipt_transactions_existence": "passed",
+        "AUTO_int_quickbooks__sales_receipt_double_entry_equality": "failed",
+        "AUTO_int_quickbooks__sales_receipt_double_entry_existence": "passed",
+        "AUTO_int_quickbooks__sales_receipt_transactions_equality": "failed",
+        "AUTO_int_quickbooks__sales_receipt_transactions_existence": "passed",
+        "AUTO_int_quickbooks__sales_union_equality": "failed",
+        "AUTO_int_quickbooks__sales_union_existence": "passed",
+        "AUTO_int_quickbooks__vendor_credit_double_entry_equality": "failed",
+        "AUTO_int_quickbooks__vendor_credit_double_entry_existence": "passed",
+        "AUTO_quickbooks__ap_ar_enhanced_equality": "failed",
+        "AUTO_quickbooks__ap_ar_enhanced_existence": "passed",
+        "check_if_models_use_xr_var": "failed",
+        "check_if_project_has_xr_var": "passed"
+      },
+      "input_tokens": 607709,
+      "output_tokens": 3234,
+      "seconds": 384.4,
+      "returncode": 0,
+      "stderr_tail": "Starting run for plugin set: none\nFailed to write/format agent.log: [Errno 13] Permission denied: '/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__quickbooks004__none/quickbooks004/quickbooks004.base.1-of-1/sessions/agent.log'. Using raw pane output.\n\u001b]9;ADE run complete: 0/1 tasks passed\u0007\u001b]777;notify;ADE-bench;ADE run complete: 0/1 tasks passed\u0007\u0007",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_local_agent/ade_local_agent__quickbooks004__none",
+      "status": "budget_exhausted",
+      "turns": 60,
+      "prompt_tokens": 607709,
+      "completion_tokens": 3234,
+      "agent_seconds": 331.42,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "quickbooks004-base-1-of-1__client_default"
+        ],
+        "db_path": "quickbooks.duckdb",
+        "restored_for_grading": [
+          "quickbooks004-base-1-of-1__client_default"
+        ]
+      }
+    }
+  ]
+}

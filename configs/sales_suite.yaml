@@ -1,0 +1,9 @@
+# Sales suite runs on the GPU box: budgets per task. The wall-time budget (15 min) is the
+# design limit; the turn cap was raised from 35 to 60 once the latency fix (presence_penalty)
+# made a turn take about 6 s instead of about 30 s, so the turn cap no longer binds first.
+agent:
+  budgets:
+    max_turns: 60
+    max_tokens: 1000000
+    max_wall_seconds: 900
+    max_tool_calls: 150

@@ -1,0 +1,41 @@
+id: B24_decimal_overflow_adjustment
+kind: breakage
+category: type_change
+difficulty: hard
+title: Conversion error after a finance adjustment was loaded
+trigger: ci_failure
+mutation:
+  - op: sql
+    sql: >-
+      insert into bronze.online_retail_lines values
+      ('A999999', 'B', 'Adjust bad debt', 1, timestamp '2011-12-09 12:00:00', -1234567890.12,
+       null, 'United Kingdom', 'synthetic', 999999, '2011-12-adjustment',
+       'online_retail_2011-12_adjustment.parquet', timestamp '2012-01-02 06:00:00')
+reference_fix:
+  - op: replace
+    path: models/staging/stg_bronze__online_retail_lines.sql
+    old: "cast(price as decimal(12, 3))               as unit_price,"
+    new: "cast(price as decimal(15, 3))               as unit_price,"
+  - op: replace
+    path: models/marts/core/_core__models.yml
+    old: "      - name: unit_price\n        data_type: decimal(12,3)\n"
+    new: "      - name: unit_price\n        data_type: decimal(15,3)\n"
+grading:
+  commands: [["build", "--select", "+fct_order_lines", "--full-refresh", "--indirect-selection", "cautious"], ["build"]]
+hidden:
+  assertions:
+    - name: adjustment_loaded
+      sql: select count(*) from gold.fct_order_lines where invoice_id = 'A999999'
+      expect: {value: 1}
+    - name: revenue_after_fix
+      sql: select sum(line_revenue) from gold.fct_order_lines
+      expect: {from: reference}
+    - name: money_stays_decimal
+      sql: >-
+        select data_type like 'DECIMAL%' from information_schema.columns
+        where table_schema = 'gold' and table_name = 'fct_order_lines' and column_name = 'unit_price'
+      expect: {value: true}
+affected_tables: [silver.int_order_lines__deduplicated, gold.fct_order_lines]
+notes: >-
+  A legitimate bad-debt write-off exceeds decimal(12,3). Widen the type in staging and in the
+  fact's contract; dropping or capping the row loses money. Deployment includes a full refresh.

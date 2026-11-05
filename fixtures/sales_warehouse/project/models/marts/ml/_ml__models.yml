@@ -1,0 +1,152 @@
+version: 2
+
+models:
+  - name: customer_features
+    description: >
+      Point-in-time RFM + behavioural features per (customer, monthly cutoff), computed
+      only from facts strictly before the cutoff. Exported to parquet and registered in
+      Feast (feature_timestamp = event timestamp).
+    config:
+      contract:
+        enforced: true
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [customer_id, cutoff_date]
+    columns:
+      - name: customer_id
+        data_type: varchar
+        constraints: [{ type: not_null }]
+      - name: cutoff_date
+        data_type: date
+        constraints: [{ type: not_null }]
+      - name: feature_timestamp
+        description: Event timestamp for Feast (00:00 on the cutoff date).
+        data_type: timestamp
+        constraints: [{ type: not_null }]
+      - name: first_order_at
+        data_type: timestamp
+      - name: last_order_at
+        description: Audit column - must be strictly before feature_timestamp.
+        data_type: timestamp
+      - name: recency_days
+        description: Days since the last order (>= 1 by construction).
+        data_type: integer
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+      - name: tenure_days
+        data_type: integer
+      - name: frequency_orders
+        data_type: integer
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+      - name: orders_last_30d
+        data_type: integer
+      - name: orders_last_90d
+        data_type: integer
+      - name: orders_prev_90d
+        data_type: integer
+      - name: orders_last_365d
+        data_type: integer
+      - name: monetary_gross
+        data_type: double
+      - name: monetary_net
+        data_type: double
+      - name: revenue_last_90d
+        data_type: double
+      - name: revenue_last_365d
+        data_type: double
+      - name: avg_order_value
+        data_type: double
+      - name: avg_units_per_order
+        data_type: double
+      - name: avg_days_between_orders
+        description: NULL for single-order customers (the model imputes).
+        data_type: double
+      - name: n_cancellations
+        data_type: integer
+      - name: cancellation_rate
+        data_type: double
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+      - name: n_distinct_products
+        data_type: integer
+      - name: active_months_last_365d
+        data_type: integer
+      - name: is_domestic
+        data_type: integer
+      - name: orders_same_window_last_year
+        description: >
+          Orders in [cutoff - 365d, cutoff - 275d), i.e. last year's equivalent of the label
+          window (seasonal buyers). NULL when that window predates the data (left-censored).
+        data_type: integer
+      - name: cutoff_month_of_year
+        description: Month of the cutoff - lets the model learn the seasonal churn base rate.
+        data_type: integer
+      - name: recency_to_cadence_ratio
+        description: recency_days / avg_days_between_orders (NULL for one-order customers).
+        data_type: double
+      - name: rfm_recency_score
+        data_type: integer
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3, 4, 5]
+                quote: false
+      - name: rfm_frequency_score
+        data_type: integer
+      - name: rfm_monetary_score
+        data_type: integer
+
+  - name: customer_churn_labels
+    description: >
+      Churn labels per (customer, cutoff) for customers active in the prior 365 days;
+      is_churned = no merchandise purchase within 90 days after the cutoff.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [customer_id, cutoff_date]
+    columns:
+      - name: is_churned
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+                quote: false
+
+unit_tests:
+  - name: customer_features_only_see_the_past
+    description: >
+      Orders at or after the cutoff (inv 3 exactly at 00:00, inv 4 later) and non-merchandise
+      lines (postage) must not leak into features; the cancellation before the cutoff counts.
+    model: customer_features
+    given:
+      - input: ref('int_feature_cutoffs')
+        rows:
+          - {cutoff_date: "2010-03-01", label_window_end: "2010-05-30", has_complete_label_window: true}
+      - input: ref('dim_product')
+        rows:
+          - {product_key: "p_mug", is_merchandise: true}
+          - {product_key: "p_post", is_merchandise: false}
+      - input: ref('dim_country')
+        rows:
+          - {country_key: "k_uk", country_name: "United Kingdom"}
+      - input: ref('fct_order_lines')
+        rows:
+          - {customer_id: "X", invoice_id: "1", invoice_ts: "2010-01-10 10:00:00", line_type: "sale", quantity: 10, line_revenue: 100, product_key: "p_mug", country_key: "k_uk", is_quantity_outlier: false}
+          - {customer_id: "X", invoice_id: "2", invoice_ts: "2010-02-20 12:00:00", line_type: "sale", quantity: 5, line_revenue: 50, product_key: "p_mug", country_key: "k_uk", is_quantity_outlier: false}
+          - {customer_id: "X", invoice_id: "2", invoice_ts: "2010-02-20 12:00:00", line_type: "sale", quantity: 1, line_revenue: 18, product_key: "p_post", country_key: "k_uk", is_quantity_outlier: false}
+          - {customer_id: "X", invoice_id: "C5", invoice_ts: "2010-02-25 09:00:00", line_type: "cancellation", quantity: -2, line_revenue: -20, product_key: "p_mug", country_key: "k_uk", is_quantity_outlier: false}
+          - {customer_id: "X", invoice_id: "3", invoice_ts: "2010-03-01 00:00:00", line_type: "sale", quantity: 7, line_revenue: 999, product_key: "p_mug", country_key: "k_uk", is_quantity_outlier: false}
+          - {customer_id: "X", invoice_id: "4", invoice_ts: "2010-03-05 15:00:00", line_type: "sale", quantity: 7, line_revenue: 999, product_key: "p_mug", country_key: "k_uk", is_quantity_outlier: false}
+    expect:
+      rows:
+        - {customer_id: "X", cutoff_date: "2010-03-01", recency_days: 9, tenure_days: 50, frequency_orders: 2, monetary_gross: 150.0, monetary_net: 130.0, n_cancellations: 1, avg_days_between_orders: 41.0, n_distinct_products: 1, is_domestic: 1, orders_same_window_last_year: null, cutoff_month_of_year: 3}

@@ -1,0 +1,85 @@
+version: 2
+
+models:
+  - name: int_order_lines__deduplicated
+    description: >
+      Silver order lines: exact duplicates removed (earliest ingested copy wins), one
+      timestamp per invoice, and each stock code classified as merchandise or a
+      non-product line (postage, fee, discount, adjustment, gift voucher, test).
+    columns:
+      - name: order_line_id
+        description: Content hash of the business columns; the natural key of a line.
+        data_tests:
+          - unique
+          - not_null
+      - name: invoice_ts
+        data_tests:
+          - not_null
+      - name: product_category
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [merchandise, postage, manual_adjustment, discount, samples, fee,
+                         bad_debt, gift_voucher, test]
+      - name: copies_in_bronze
+        description: How many identical copies of this line were landed (1 = no duplicate).
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+
+  - name: int_customer_invoices
+    description: One row per (customer, invoice); net merchandise spend per invoice.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [customer_id, invoice_id]
+
+  - name: int_customer_state
+    description: >
+      Current (country, loyalty_tier) per customer and the business time the state began
+      (gaps-and-islands). Feeds the snap_customer_state SCD2 snapshot.
+    columns:
+      - name: customer_id
+        data_tests:
+          - unique
+          - not_null
+      - name: loyalty_tier
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [bronze, silver, gold, platinum]
+      - name: state_effective_at
+        data_tests:
+          - not_null
+
+  - name: int_feature_cutoffs
+    description: Monthly as-of dates; labels only where the 90-day window is fully observed.
+    columns:
+      - name: cutoff_date
+        data_tests:
+          - unique
+          - not_null
+
+unit_tests:
+  - name: customer_state_starts_at_first_invoice_of_latest_island
+    description: >
+      A: bronze -> silver (2010-02-01) -> country change (2010-04-01): state begins at the
+      country change. B: silver -> bronze after a cancellation -> silver again: returning
+      to an earlier value is a *new* island, so the state begins at 2010-02-10.
+    model: int_customer_state
+    given:
+      - input: ref('int_customer_invoices')
+        rows:
+          - {customer_id: "A", invoice_id: "1", invoice_ts: "2010-01-01 10:00:00", is_cancellation: false, country_name: "United Kingdom", net_merchandise_amount: 600, n_lines: 3}
+          - {customer_id: "A", invoice_id: "2", invoice_ts: "2010-02-01 10:00:00", is_cancellation: false, country_name: "United Kingdom", net_merchandise_amount: 500, n_lines: 2}
+          - {customer_id: "A", invoice_id: "3", invoice_ts: "2010-03-01 10:00:00", is_cancellation: false, country_name: "United Kingdom", net_merchandise_amount: 200, n_lines: 1}
+          - {customer_id: "A", invoice_id: "4", invoice_ts: "2010-04-01 10:00:00", is_cancellation: false, country_name: "France", net_merchandise_amount: 100, n_lines: 1}
+          - {customer_id: "B", invoice_id: "5", invoice_ts: "2010-01-05 09:00:00", is_cancellation: false, country_name: "Germany", net_merchandise_amount: 1200, n_lines: 4}
+          - {customer_id: "B", invoice_id: "C6", invoice_ts: "2010-01-20 09:00:00", is_cancellation: true, country_name: "Germany", net_merchandise_amount: -500, n_lines: 1}
+          - {customer_id: "B", invoice_id: "7", invoice_ts: "2010-02-10 09:00:00", is_cancellation: false, country_name: "Germany", net_merchandise_amount: 400, n_lines: 2}
+    expect:
+      rows:
+        - {customer_id: "A", country_name: "France", loyalty_tier: "silver", state_effective_at: "2010-04-01 10:00:00", first_invoice_at: "2010-01-01 10:00:00"}
+        - {customer_id: "B", country_name: "Germany", loyalty_tier: "silver", state_effective_at: "2010-02-10 09:00:00", first_invoice_at: "2010-01-05 09:00:00"}

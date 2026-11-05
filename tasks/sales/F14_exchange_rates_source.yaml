@@ -1,0 +1,101 @@
+id: F14_exchange_rates_source
+kind: feature
+category: new_source
+difficulty: hard
+title: EUR revenue reporting from a new rates source
+trigger: ticket
+ticket: |
+  Finance needs EUR reporting. The loader now lands daily rates in bronze.exchange_rates
+  (columns rate_date, currency, gbp_rate = units of the currency per 1 GBP, _ingested_at).
+
+  1. Declare it as a dbt source: source `bronze`, table `exchange_rates`, with not_null
+     tests on rate_date and gbp_rate.
+  2. Add a staging view `stg_bronze__exchange_rates` (models/staging, silver schema) with
+     rate_date and gbp_rate for currency 'EUR' only.
+  3. Add a model `mart_revenue_monthly_eur` in models/marts/analytics (gold): one row per
+     month of mart_revenue_monthly with revenue_month, net_merchandise_revenue (GBP, from
+     mart_revenue_monthly), avg_gbp_eur_rate = the average daily EUR rate in that month
+     rounded to 4 decimals, and net_merchandise_revenue_eur =
+     round(net_merchandise_revenue * avg_gbp_eur_rate, 2).
+mutation:
+  - op: sql
+    sql: >-
+      create table bronze.exchange_rates as
+      select cast(d as date) as rate_date, c.currency,
+             round(c.base + 0.05 * sin(epoch(d) / 2592000.0), 4) as gbp_rate,
+             timestamp '2012-01-02 06:00:00' as _ingested_at
+      from range(timestamp '2009-12-01', timestamp '2012-01-01', interval 1 day) as t(d)
+      cross join (values ('EUR', 1.10), ('USD', 1.55)) as c(currency, base)
+reference_fix:
+  - op: append
+    path: models/staging/_bronze__sources.yml
+    content: |2
+            - name: exchange_rates
+              description: Daily exchange rates (units of currency per 1 GBP) landed by the loader.
+              columns:
+                - name: rate_date
+                  data_tests:
+                    - not_null
+                - name: gbp_rate
+                  data_tests:
+                    - not_null
+  - op: write
+    path: models/staging/stg_bronze__exchange_rates.sql
+    content: |
+      -- Silver / staging: daily GBP->EUR rates.
+
+      select
+          cast(rate_date as date)   as rate_date,
+          cast(gbp_rate as double)  as gbp_rate
+      from {{ source('bronze', 'exchange_rates') }}
+      where currency = 'EUR'
+  - op: write
+    path: models/marts/analytics/mart_revenue_monthly_eur.sql
+    content: |
+      -- Gold: monthly net merchandise revenue in GBP and EUR.
+
+      with rates as (
+
+          select
+              cast({{ dbt.date_trunc('month', 'rate_date') }} as date) as rate_month,
+              round(avg(gbp_rate), 4)                                  as avg_gbp_eur_rate
+          from {{ ref('stg_bronze__exchange_rates') }}
+          group by 1
+
+      )
+
+      select
+          revenue.revenue_month,
+          revenue.net_merchandise_revenue,
+          rates.avg_gbp_eur_rate,
+          round(revenue.net_merchandise_revenue * rates.avg_gbp_eur_rate, 2)
+              as net_merchandise_revenue_eur
+      from {{ ref('mart_revenue_monthly') }} as revenue
+      left join rates
+          on cast(revenue.revenue_month as date) = rates.rate_month
+hidden:
+  assertions:
+    - name: matches_spec
+      sql: |
+        with rates as (
+            select cast(date_trunc('month', rate_date) as date) as m, round(avg(gbp_rate), 4) as r
+            from bronze.exchange_rates where currency = 'EUR' group by 1
+        )
+        select count(*) from gold.mart_revenue_monthly as rev
+        left join rates on cast(rev.revenue_month as date) = rates.m
+        left join gold.mart_revenue_monthly_eur as eur
+            on cast(eur.revenue_month as date) = cast(rev.revenue_month as date)
+        where eur.revenue_month is null
+           or abs(cast(eur.avg_gbp_eur_rate as double) - rates.r) > 0.00005
+           or abs(cast(eur.net_merchandise_revenue_eur as double)
+                  - round(cast(rev.net_merchandise_revenue as double) * rates.r, 2)) > 0.011
+      expect: {value: 0}
+  manifest:
+    - model: stg_bronze__exchange_rates
+    - model: mart_revenue_monthly_eur
+  tests_present:
+    - test_name: not_null
+      column: gbp_rate
+      target_contains: source.sales_analytics.bronze.exchange_rates
+affected_tables: [gold.mart_revenue_monthly_eur]
+notes: Source + staging + mart; the USD rows check that the staging filter is applied.

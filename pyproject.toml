@@ -1,0 +1,78 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dbt-background-agent"
+version = "0.1.0"
+description = "A sandboxed background agent that fixes and extends dbt projects through reviewed pull requests, with its own model-agnostic harness."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Hardik Soni" }]
+# Exact pins live in requirements*.txt so the laptop venv, CI and the sandbox image install
+# the same set. The harness itself only needs the three packages below; dbt runs inside the
+# sandbox (Docker image), or in the same venv for LocalSandbox tests.
+dependencies = [
+    "httpx>=0.27,<1",
+    "pydantic>=2.7,<3",
+    "pyyaml>=6,<7",
+]
+
+[project.optional-dependencies]
+dbt = [
+    "dbt-core>=1.10,<1.13",
+    "dbt-duckdb>=1.10,<1.12",
+    "duckdb>=1.3,<2",
+    "sqlfluff>=3,<5",
+    "sqlfluff-templater-dbt>=3,<5",
+]
+fixtures = ["pandas>=2.2,<3", "pyarrow>=17", "numpy>=1.26,<3"]
+dev = ["pytest>=8,<10", "ruff>=0.6"]
+
+[project.scripts]
+dbt-agent = "dbt_agent.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+dbt_agent = ["sandbox/toolbox.py", "harness/prompts/*.md"]
+
+# --------------------------------------------------------------------------- ruff
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = ["runs", "data", "reports", "fixtures/**/target", "fixtures/**/dbt_packages", "bench_data"]
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "B", "UP", "SIM", "N", "RUF", "PTH", "C4"]
+ignore = [
+    "RUF001", # ambiguous unicode in strings (we print '×' and '→' in reports)
+    "RUF002",
+    "RUF003",
+]
+
+[tool.ruff.lint.per-file-ignores]
+# copied verbatim from the sales project (provenance header); keep them byte-for-byte
+"src/dbt_agent/fixtures/sales_source/*.py" = ["ALL"]
+"tests/**" = ["B011"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["dbt_agent", "tests"]
+
+[tool.ruff.format]
+quote-style = "double"
+exclude = ["src/dbt_agent/fixtures/sales_source/*.py"]
+
+# --------------------------------------------------------------------------- pytest
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers -m 'not docker and not llm and not slow'"
+markers = [
+    "dbt: runs real dbt against a small DuckDB project (no network, no Docker)",
+    "slow: builds the sales fixture or grades suite tasks (minutes)",
+    "docker: needs a Docker daemon on Linux (DockerSandbox tests)",
+    "llm: needs a live OpenAI-compatible endpoint",
+]
+filterwarnings = ["ignore::DeprecationWarning"]

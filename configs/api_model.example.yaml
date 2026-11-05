@@ -1,0 +1,13 @@
+# Example: the same harness on a hosted OpenAI-compatible API. Only config changes.
+# Put the key in an environment variable and name it here; never write the key itself.
+llm:
+  base_url: https://api.example.com/v1
+  model: provider-model-name
+  api_key_env: PROVIDER_API_KEY
+  temperature: 0.2
+  max_tokens: 4096
+  context_window: 200000
+  max_concurrency: 4
+  # EUR per million tokens, used for the cost line in PR.md and the reports
+  price_input_per_mtok: 0.0
+  price_output_per_mtok: 0.0

@@ -1,0 +1,245 @@
+version: 2
+
+models:
+  # ------------------------------------------------------------------ facts
+  - name: fct_order_lines
+    description: >
+      Transaction fact at invoice-line grain (incremental, unique_key = order_line_id).
+      Includes sales, cancellations (negative quantities), stock write-offs and non-product
+      lines so revenue reconciles to silver to the penny; filter with line_type and
+      dim_product.is_merchandise.
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: order_line_id
+        data_type: varchar
+        constraints:
+          - type: not_null
+          - type: primary_key
+        data_tests:
+          - unique
+      - name: invoice_id
+        description: Degenerate dimension (the invoice number).
+        data_type: varchar
+        constraints:
+          - type: not_null
+      - name: date_key
+        data_type: integer
+        constraints:
+          - type: not_null
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_key
+      - name: customer_sk
+        description: SCD2 version of the customer valid at invoice_ts; '-1' = guest checkout.
+        data_type: varchar
+        constraints:
+          - type: not_null
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_customer')
+                field: customer_sk
+      - name: customer_id
+        description: Natural key, kept for convenience (NULL for guest checkouts).
+        data_type: varchar
+      - name: product_key
+        data_type: varchar
+        constraints:
+          - type: not_null
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_product')
+                field: product_key
+      - name: country_key
+        data_type: varchar
+        constraints:
+          - type: not_null
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_country')
+                field: country_key
+      - name: invoice_ts
+        data_type: timestamp
+        constraints:
+          - type: not_null
+      - name: line_type
+        data_type: varchar
+        constraints:
+          - type: not_null
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [sale, cancellation, bad_debt_adjustment, stock_write_off]
+      - name: quantity
+        data_type: integer
+        constraints:
+          - type: not_null
+      - name: unit_price
+        data_type: decimal(12,3)
+        constraints:
+          - type: not_null
+      - name: line_revenue
+        data_type: decimal(18,3)
+        constraints:
+          - type: not_null
+      - name: is_quantity_outlier
+        data_type: boolean
+        constraints:
+          - type: not_null
+      - name: _batch_id
+        data_type: varchar
+        constraints:
+          - type: not_null
+      - name: _ingested_at
+        description: Bronze load timestamp - the incremental watermark.
+        data_type: timestamp
+        constraints:
+          - type: not_null
+
+  - name: fct_orders
+    description: Order (invoice) grain aggregate of fct_order_lines.
+    columns:
+      - name: invoice_id
+        data_tests:
+          - unique
+          - not_null
+      - name: customer_sk
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customer')
+                field: customer_sk
+      - name: invoice_type
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [sale, cancellation, bad_debt_adjustment, stock_write_off]
+
+  # ------------------------------------------------------------------ dimensions
+  - name: dim_customer
+    description: >
+      Customer dimension, SCD Type 2 on (country_name, loyalty_tier); one row per version.
+      Built from snap_customer_state; includes an unknown member ('-1').
+    config:
+      contract:
+        enforced: true
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [customer_id, valid_from]
+    columns:
+      - name: customer_sk
+        data_type: varchar
+        constraints:
+          - type: not_null
+          - type: primary_key
+        data_tests:
+          - unique
+      - name: customer_id
+        data_type: varchar
+        constraints:
+          - type: not_null
+      - name: country_name
+        data_type: varchar
+      - name: loyalty_tier
+        data_type: varchar
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [bronze, silver, gold, platinum, unknown]
+      - name: version_number
+        data_type: integer
+      - name: valid_from
+        description: Inclusive start of validity (business time); version 1 is back-dated to 1900-01-01.
+        data_type: timestamp
+        constraints:
+          - type: not_null
+      - name: valid_to
+        description: Exclusive end of validity; 9999-12-31 for the current version.
+        data_type: timestamp
+        constraints:
+          - type: not_null
+      - name: is_current
+        data_type: boolean
+        constraints:
+          - type: not_null
+      - name: first_invoice_at
+        data_type: timestamp
+
+  - name: dim_product
+    description: Product dimension (SCD Type 1), one row per stock code.
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: product_key
+        data_type: varchar
+        constraints:
+          - type: not_null
+          - type: primary_key
+        data_tests:
+          - unique
+      - name: stock_code
+        data_type: varchar
+        constraints:
+          - type: not_null
+        data_tests:
+          - unique
+      - name: product_description
+        data_type: varchar
+        constraints:
+          - type: not_null
+      - name: product_category
+        data_type: varchar
+        constraints:
+          - type: not_null
+      - name: is_merchandise
+        data_type: boolean
+        constraints:
+          - type: not_null
+      - name: avg_sale_price
+        data_type: decimal(12,3)
+      - name: first_seen_at
+        data_type: timestamp
+      - name: last_seen_at
+        data_type: timestamp
+
+  - name: dim_country
+    description: Country dimension (reference seed + observed countries).
+    columns:
+      - name: country_key
+        data_tests:
+          - unique
+          - not_null
+      - name: country_name
+        data_tests:
+          - unique
+          - not_null
+      - name: region
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["UK & Ireland", "Western Europe", "Southern Europe", "Nordics",
+                         "Central & Eastern Europe", "Europe (unspecified)", "Americas",
+                         "Asia Pacific", "Middle East", "Africa", "Unknown"]
+              config:
+                severity: warn   # 'Unmapped' = a new country to add to the seed
+
+  - name: dim_date
+    description: Calendar dimension, one row per day 2009-01-01..2012-12-31.
+    columns:
+      - name: date_key
+        data_tests:
+          - unique
+          - not_null
+      - name: date_day
+        data_tests:
+          - unique
+          - not_null

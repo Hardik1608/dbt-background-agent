@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: mart_revenue_monthly
+    description: Monthly revenue KPIs (gross, cancellations, net, AOV) with MoM / YoY growth.
+    columns:
+      - name: revenue_month
+        data_tests:
+          - unique
+          - not_null
+      - name: is_partial_month
+        description: True when the data ends before the month does (Dec 2011 in the real data).
+
+  - name: mart_cohort_retention
+    description: Acquisition-cohort retention matrix in long format.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [cohort_month, months_since_first_purchase]
+    columns:
+      - name: retention_rate
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 1

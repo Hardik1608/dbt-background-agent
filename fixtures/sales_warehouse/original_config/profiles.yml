@@ -1,0 +1,46 @@
+# dbt looks for profiles.yml in the project directory first, so running dbt from
+# warehouse/ (or with --profiles-dir warehouse) needs no ~/.dbt setup.
+#
+#   dev / ci   : DuckDB  - executed locally and in GitHub Actions
+#   snowflake  : documented, NOT executed in this repo (needs dbt-snowflake + an account)
+#   bigquery   : documented, NOT executed in this repo (needs dbt-bigquery + a GCP project)
+#
+# The models use dbt cross-database macros and adapter.dispatch for the few dialect
+# differences (see macros/cross_db/), but only the DuckDB target is tested.
+
+sales_analytics:
+  target: "{{ env_var('DBT_TARGET', 'dev') }}"
+  outputs:
+    dev:
+      type: duckdb
+      path: "{{ env_var('DUCKDB_PATH', '../data/warehouse/sales_real.duckdb') }}"
+      threads: 4
+
+    ci:
+      type: duckdb
+      path: "{{ env_var('DUCKDB_PATH', '../data/warehouse/sales_synthetic.duckdb') }}"
+      threads: 4
+
+    snowflake:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT', 'not-configured') }}"
+      user: "{{ env_var('SNOWFLAKE_USER', 'not-configured') }}"
+      authenticator: snowflake_jwt
+      private_key_path: "{{ env_var('SNOWFLAKE_PRIVATE_KEY_PATH', 'not-configured') }}"
+      role: "{{ env_var('SNOWFLAKE_ROLE', 'TRANSFORMER') }}"
+      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE', 'TRANSFORMING') }}"
+      database: "{{ env_var('SNOWFLAKE_DATABASE', 'SALES_ANALYTICS') }}"
+      schema: "{{ env_var('SNOWFLAKE_SCHEMA', 'DBT') }}"
+      threads: 8
+      client_session_keep_alive: false
+
+    bigquery:
+      type: bigquery
+      method: service-account
+      keyfile: "{{ env_var('BIGQUERY_KEYFILE', 'not-configured') }}"
+      project: "{{ env_var('BIGQUERY_PROJECT', 'not-configured') }}"
+      dataset: "{{ env_var('BIGQUERY_DATASET', 'sales_analytics') }}"
+      location: "{{ env_var('BIGQUERY_LOCATION', 'EU') }}"
+      threads: 8
+      job_execution_timeout_seconds: 600
+      priority: interactive

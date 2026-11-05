@@ -1,0 +1,34 @@
+id: B13_redelivered_batch_dedup_regression
+kind: breakage
+category: duplicate_keys
+difficulty: medium
+title: Uniqueness test fails on silver order lines
+trigger: ci_failure
+mutation:
+  - op: replace
+    path: models/intermediate/int_order_lines__deduplicated.sql
+    old: "            partition by line_hash\n"
+    new: "            partition by line_hash, _batch_id\n"
+  - op: sql
+    sql: >-
+      insert into bronze.online_retail_lines
+      select invoice, stock_code, description, quantity, invoice_date, price, customer_id,
+             country, _source_sheet, _source_row_number, '2011-11-redelivery',
+             'online_retail_2011-11_redelivery.parquet', timestamp '2012-01-02 06:00:00'
+      from bronze.online_retail_lines where _batch_id = '2011-11'
+reference_fix:
+  - op: replace
+    path: models/intermediate/int_order_lines__deduplicated.sql
+    old: "            partition by line_hash, _batch_id\n"
+    new: "            partition by line_hash\n"
+hidden:
+  assertions:
+    - name: lines_preserved
+      sql: select count(*) from gold.fct_order_lines
+      expect: {from: base}
+    - name: revenue_preserved
+      sql: select sum(line_revenue) from gold.fct_order_lines
+      expect: {from: base}
+notes: >-
+  The extract tool re-delivered November; a recent refactor made dedup per batch, so the
+  re-delivered copies survive. Filtering the batch by name is a hack the collateral check sees.

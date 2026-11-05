@@ -1,0 +1,46 @@
+id: B16_watermark_on_business_time
+kind: breakage
+category: late_data
+difficulty: hard
+title: Reconciliation test fails after a late delivery
+trigger: ci_failure
+mutation:
+  - op: replace
+    path: models/marts/core/fct_order_lines.sql
+    old: "    where _ingested_at > (\n        select coalesce(max(_ingested_at), {{ scd_start_of_time() }}) from {{ this }}\n    )"
+    new: "    where invoice_ts > (\n        select coalesce(max(invoice_ts), {{ scd_start_of_time() }}) from {{ this }}\n    )"
+  - op: sql
+    sql: >-
+      insert into bronze.online_retail_lines
+      select cast(cast(invoice as bigint) + 900000 as varchar), stock_code, description,
+             quantity, invoice_date, price, customer_id, country, _source_sheet,
+             _source_row_number + 900000, '2010-06-late', 'online_retail_2010-06_late.parquet',
+             timestamp '2012-01-02 06:00:00'
+      from bronze.online_retail_lines
+      where _batch_id = '2010-06' and customer_id is null
+        and invoice in (
+          select distinct invoice from bronze.online_retail_lines
+          where _batch_id = '2010-06' and customer_id is null
+            and try_cast(invoice as bigint) is not null
+          order by invoice limit 40)
+reference_fix:
+  - op: replace
+    path: models/marts/core/fct_order_lines.sql
+    old: "    where invoice_ts > (\n        select coalesce(max(invoice_ts), {{ scd_start_of_time() }}) from {{ this }}\n    )"
+    new: "    where _ingested_at > (\n        select coalesce(max(_ingested_at), {{ scd_start_of_time() }}) from {{ this }}\n    )"
+hidden:
+  assertions:
+    - name: late_lines_loaded
+      sql: select count(*) from gold.fct_order_lines where _batch_id = '2010-06-late'
+      expect: {from: reference}
+    - name: lines_after_fix
+      sql: select count(*) from gold.fct_order_lines
+      expect: {from: reference}
+  manifest:
+    - model: fct_order_lines
+      materialized: incremental
+notes: >-
+  A late file of June 2010 guest web orders arrives; an "optimisation" moved the incremental
+  watermark from load time to business time, so late rows are skipped. Graded with a plain
+  incremental build. (Guest orders only: late orders of known customers would also back-date
+  SCD2 history, which needs a full refresh - out of scope here.)

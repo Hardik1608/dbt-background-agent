@@ -1,0 +1,66 @@
+diff --git a/models/marts/core/_core__models.yml b/models/marts/core/_core__models.yml
+index 4ee20ac..b4f5b4f 100644
+--- a/models/marts/core/_core__models.yml
++++ b/models/marts/core/_core__models.yml
+@@ -174,7 +174,10 @@ models:
+         data_type: timestamp
+ 
+   - name: dim_product
+-    description: Product dimension (SCD Type 1), one row per stock code.
++    description: >
++      Product dimension (SCD Type 1), one row per stock code.
++      Includes n_distinct_customers: the number of distinct known customers
++      (customer_id not null) with at least one sale line of the product; 0 when there are none.
+     config:
+       contract:
+         enforced: true
+@@ -210,6 +213,11 @@ models:
+         data_type: timestamp
+       - name: last_seen_at
+         data_type: timestamp
++      - name: n_distinct_customers
++        description: The number of distinct known customers (customer_id not null) with at least one sale line of the product; 0 when there are none.
++        data_type: integer
++        constraints:
++          - type: not_null
+ 
+   - name: dim_country
+     description: Country dimension (reference seed + observed countries).
+diff --git a/models/marts/core/dim_product.sql b/models/marts/core/dim_product.sql
+index 73aca13..39cae3a 100644
+--- a/models/marts/core/dim_product.sql
++++ b/models/marts/core/dim_product.sql
+@@ -65,6 +65,20 @@ product_stats as (
+     from lines
+     group by stock_code
+ 
++),
++
++product_customer_counts as (
++
++    -- Count distinct customers with at least one sale line per product
++    select
++        stock_code,
++        cast(count(distinct customer_id) as integer) as n_distinct_customers
++    from lines
++    where line_type = 'sale'
++        and unit_price > 0
++        and customer_id is not null
++    group by stock_code
++
+ )
+ 
+ select
+@@ -79,8 +93,11 @@ select
+     product_stats.product_category = 'merchandise'                  as is_merchandise,
+     product_stats.avg_sale_price,
+     product_stats.first_seen_at,
+-    product_stats.last_seen_at
++    product_stats.last_seen_at,
++    coalesce(pc.n_distinct_customers, 0)                           as n_distinct_customers
+ from product_stats
++left join product_customer_counts pc
++    on product_stats.stock_code = pc.stock_code
+ left join canonical_description
+     on product_stats.stock_code = canonical_description.stock_code
+ left join fallback_description

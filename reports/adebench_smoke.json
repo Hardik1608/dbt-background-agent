@@ -1,0 +1,72 @@
+{
+  "summary": {
+    "tasks": 1,
+    "graded": 1,
+    "resolved": 1,
+    "resolve_rate": 1.0,
+    "resolved_tasks": [
+      "airbnb001"
+    ],
+    "status_counts": {
+      "budget_exhausted": 1
+    },
+    "escape_attempts": 0,
+    "egress_attempts": 1,
+    "network_isolated_trials": 1,
+    "mean_tokens_per_resolved": 527067
+  },
+  "runs": [
+    {
+      "task_id": "airbnb001",
+      "resolved": true,
+      "failure_mode": "unset",
+      "parser_results": {
+        "dbt_compile": "passed",
+        "AUTO_daily_agg_reviews_equality": "passed",
+        "AUTO_daily_agg_reviews_existence": "passed",
+        "AUTO_dim_listings_hosts_equality": "passed",
+        "AUTO_dim_listings_hosts_existence": "passed",
+        "AUTO_mom_agg_reviews_equality": "passed",
+        "AUTO_mom_agg_reviews_existence": "passed",
+        "AUTO_monthly_agg_reviews_equality": "passed",
+        "AUTO_monthly_agg_reviews_existence": "passed",
+        "AUTO_wow_agg_reviews_equality": "passed",
+        "AUTO_wow_agg_reviews_existence": "passed"
+      },
+      "input_tokens": 520824,
+      "output_tokens": 6243,
+      "seconds": 0.0,
+      "returncode": null,
+      "stderr_tail": "",
+      "ade_run_dir": "/home/hardik/Hardik/Extras/dbt-background-agent/bench_data/adebench/runs/ade_smoke/ade_smoke__airbnb001__none",
+      "status": "budget_exhausted",
+      "turns": 60,
+      "prompt_tokens": 520824,
+      "completion_tokens": 6243,
+      "agent_seconds": 394.64,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 1,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 1
+        }
+      },
+      "isolation": {
+        "agent_wall_budget_s": 810.0,
+        "during_agent": {
+          "networks": [],
+          "memory_bytes": 1610612736
+        },
+        "disconnected": [
+          "airbnb001-base-1-of-1__client_default"
+        ],
+        "db_path": "airbnb.duckdb",
+        "restored_for_grading": [
+          "airbnb001-base-1-of-1__client_default"
+        ]
+      }
+    }
+  ]
+}

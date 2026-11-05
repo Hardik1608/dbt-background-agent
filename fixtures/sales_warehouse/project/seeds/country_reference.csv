@@ -1,0 +1,44 @@
+country_name,iso_alpha2,region,is_domestic_market
+United Kingdom,GB,UK & Ireland,true
+EIRE,IE,UK & Ireland,false
+Channel Islands,,UK & Ireland,false
+Germany,DE,Western Europe,false
+France,FR,Western Europe,false
+Netherlands,NL,Western Europe,false
+Belgium,BE,Western Europe,false
+Switzerland,CH,Western Europe,false
+Austria,AT,Western Europe,false
+Spain,ES,Southern Europe,false
+Portugal,PT,Southern Europe,false
+Italy,IT,Southern Europe,false
+Greece,GR,Southern Europe,false
+Cyprus,CY,Southern Europe,false
+Malta,MT,Southern Europe,false
+Norway,NO,Nordics,false
+Sweden,SE,Nordics,false
+Finland,FI,Nordics,false
+Denmark,DK,Nordics,false
+Iceland,IS,Nordics,false
+Poland,PL,Central & Eastern Europe,false
+Czech Republic,CZ,Central & Eastern Europe,false
+Lithuania,LT,Central & Eastern Europe,false
+European Community,,Europe (unspecified),false
+USA,US,Americas,false
+Canada,CA,Americas,false
+Brazil,BR,Americas,false
+Bermuda,BM,Americas,false
+West Indies,,Americas,false
+Australia,AU,Asia Pacific,false
+Japan,JP,Asia Pacific,false
+Hong Kong,HK,Asia Pacific,false
+Singapore,SG,Asia Pacific,false
+Korea,KR,Asia Pacific,false
+Thailand,TH,Asia Pacific,false
+United Arab Emirates,AE,Middle East,false
+Israel,IL,Middle East,false
+Bahrain,BH,Middle East,false
+Saudi Arabia,SA,Middle East,false
+Lebanon,LB,Middle East,false
+RSA,ZA,Africa,false
+Nigeria,NG,Africa,false
+Unspecified,,Unknown,false

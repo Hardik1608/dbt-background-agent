@@ -1,0 +1,14 @@
+version: 2
+models:
+  - name: stg_orders
+    columns:
+      - name: id
+        data_tests: [unique, not_null]
+  - name: fct_customer
+    columns:
+      - name: customer
+        data_tests: [unique, not_null]
+  - name: fct_events
+    columns:
+      - name: id
+        data_tests: [unique, not_null]

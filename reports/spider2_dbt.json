@@ -1,0 +1,2955 @@
+{
+  "summary": {
+    "benchmark": "Spider 2.0-DBT",
+    "tasks_total": 68,
+    "runs": 68,
+    "official": {
+      "official_passed": 9,
+      "official_evaluated": 68,
+      "official_ratio": 0.1324,
+      "passed_instances": [
+        "f1003",
+        "lever001",
+        "maturity001",
+        "playbook001",
+        "quickbooks002",
+        "quickbooks003",
+        "retail001",
+        "salesforce001",
+        "tickit002"
+      ],
+      "per_instance": {
+        "activity001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "activity.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 28.73it/s]\n"
+        },
+        "airbnb001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "airbnb.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 29.65it/s]\n"
+        },
+        "airbnb002": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [],
+          "had_result": true,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 397.72it/s]\n"
+        },
+        "airport001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "airport.duckdb"
+          ],
+          "had_result": true,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 29.58it/s]\n"
+        },
+        "analytics_engineering001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "analytics_engineering.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 19.60it/s]\n"
+        },
+        "app_reporting001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "app_reporting.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 19.48it/s]\n"
+        },
+        "app_reporting002": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "app_reporting.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 13.53it/s]\n"
+        },
+        "apple_store001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "apple_store.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 30.88it/s]\n"
+        },
+        "asana001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "asana.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 36.97it/s]\n"
+        },
+        "asset001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "asset.duckdb"
+          ],
+          "had_result": true,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00,  4.90it/s]\n100%|██████████| 1/1 [00:00<00:00,  4.90it/s]\n"
+        },
+        "atp_tour001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "atp_tour.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00,  3.54it/s]\n100%|██████████| 1/1 [00:00<00:00,  3.54it/s]\n"
+        },
+        "biketheft001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [],
+          "had_result": true,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 387.97it/s]\n"
+        },
+        "chinook001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "chinook.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 75.22it/s]\n"
+        },
+        "divvy001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "divvy.duckdb"
+          ],
+          "had_result": true,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [01:15<00:00, 75.47s/it]\n100%|██████████| 1/1 [01:15<00:00, 75.47s/it]\n"
+        },
+        "f1001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "f1.duckdb"
+          ],
+          "had_result": true,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 11.65it/s]\n"
+        },
+        "f1002": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "f1.duckdb"
+          ],
+          "had_result": true,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 15.57it/s]\n"
+        },
+        "f1003": {
+          "passed": true,
+          "id_printed": true,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "f1.duckdb"
+          ],
+          "had_result": true,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00,  6.21it/s]\n100%|██████████| 1/1 [00:00<00:00,  6.20it/s]\n"
+        },
+        "flicks001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "flicks.duckdb"
+          ],
+          "had_result": true,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00,  1.35it/s]\n100%|██████████| 1/1 [00:00<00:00,  1.35it/s]\n"
+        },
+        "gitcoin001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 372.13it/s]\n"
+        },
+        "google_ads001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 377.63it/s]\n"
+        },
+        "google_play001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "google_play.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 24.28it/s]\n"
+        },
+        "google_play002": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "google_play.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 41.74it/s]\n"
+        },
+        "greenhouse001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "greenhouse.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 25.96it/s]\n"
+        },
+        "hive001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "hive.duckdb"
+          ],
+          "had_result": true,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 25.72it/s]\n"
+        },
+        "hubspot001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "hubspot.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 19.26it/s]\n"
+        },
+        "intercom001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "intercom.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 28.68it/s]\n"
+        },
+        "inzight001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "inzight.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 81.44it/s]\n"
+        },
+        "jira001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "jira.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 53.18it/s]\n"
+        },
+        "lever001": {
+          "passed": true,
+          "id_printed": true,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "lever.duckdb"
+          ],
+          "had_result": true,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 39.66it/s]\n"
+        },
+        "marketo001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "marketo.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 52.49it/s]\n"
+        },
+        "maturity001": {
+          "passed": true,
+          "id_printed": true,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "maturity.duckdb"
+          ],
+          "had_result": true,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 29.95it/s]\n"
+        },
+        "movie_recomm001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "movie_recomm.duckdb"
+          ],
+          "had_result": true,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:02<00:00,  2.73s/it]\n100%|██████████| 1/1 [00:02<00:00,  2.73s/it]\n"
+        },
+        "mrr001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "mrr.duckdb"
+          ],
+          "had_result": true,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 16.47it/s]\n"
+        },
+        "mrr002": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "mrr.duckdb"
+          ],
+          "had_result": true,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 15.27it/s]\n"
+        },
+        "nba001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "nba.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 36.93it/s]\n"
+        },
+        "netflix001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "netflix.duckdb"
+          ],
+          "had_result": true,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 51.86it/s]\n"
+        },
+        "pendo001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "pendo.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 19.32it/s]\n"
+        },
+        "playbook001": {
+          "passed": true,
+          "id_printed": true,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "playbook.duckdb"
+          ],
+          "had_result": true,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 50.76it/s]\n"
+        },
+        "playbook002": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "playbook.duckdb"
+          ],
+          "had_result": true,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 28.94it/s]\n"
+        },
+        "provider001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "provider.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 11.58it/s]\n"
+        },
+        "qualtrics001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "qualtrics.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 55.35it/s]\n"
+        },
+        "quickbooks001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "quickbooks.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 22.28it/s]\n"
+        },
+        "quickbooks002": {
+          "passed": true,
+          "id_printed": true,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "quickbooks.duckdb"
+          ],
+          "had_result": true,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 18.44it/s]\n"
+        },
+        "quickbooks003": {
+          "passed": true,
+          "id_printed": true,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "quickbooks.duckdb"
+          ],
+          "had_result": true,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00,  4.93it/s]\n100%|██████████| 1/1 [00:00<00:00,  4.92it/s]\n"
+        },
+        "recharge001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "recharge.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 51.17it/s]\n"
+        },
+        "recharge002": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "recharge.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 48.53it/s]\n"
+        },
+        "reddit001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "reddit.duckdb"
+          ],
+          "had_result": true,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:03<00:00,  3.39s/it]\n100%|██████████| 1/1 [00:03<00:00,  3.39s/it]\n"
+        },
+        "retail001": {
+          "passed": true,
+          "id_printed": true,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "retail.duckdb"
+          ],
+          "had_result": true,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 63.34it/s]\n"
+        },
+        "salesforce001": {
+          "passed": true,
+          "id_printed": true,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "salesforce.duckdb"
+          ],
+          "had_result": true,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 24.99it/s]\n"
+        },
+        "sap001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "sap.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00,  6.08it/s]\n100%|██████████| 1/1 [00:00<00:00,  6.08it/s]\n"
+        },
+        "scd001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "scd.duckdb"
+          ],
+          "had_result": true,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 20.35it/s]\n"
+        },
+        "shopify001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "shopify.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 17.96it/s]\n"
+        },
+        "shopify002": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "shopify.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 32.29it/s]\n"
+        },
+        "shopify_holistic_reporting001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "shopify_holistic_reporting.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 28.44it/s]\n"
+        },
+        "social_media001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "social_media.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 376.88it/s]\n"
+        },
+        "superstore001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "superstore.duckdb"
+          ],
+          "had_result": true,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:02<00:00,  2.02s/it]\n100%|██████████| 1/1 [00:02<00:00,  2.02s/it]\n"
+        },
+        "synthea001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "synthea.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 31.99it/s]\n"
+        },
+        "tickit001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "tickit.duckdb"
+          ],
+          "had_result": true,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:40<00:00, 40.22s/it]\n100%|██████████| 1/1 [00:40<00:00, 40.22s/it]\n"
+        },
+        "tickit002": {
+          "passed": true,
+          "id_printed": true,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "tickit.duckdb"
+          ],
+          "had_result": true,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:24<00:00, 24.30s/it]\n100%|██████████| 1/1 [00:24<00:00, 24.30s/it]\n"
+        },
+        "tpch001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "tpch.duckdb"
+          ],
+          "had_result": true,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:02<00:00,  2.50s/it]\n100%|██████████| 1/1 [00:02<00:00,  2.50s/it]\n"
+        },
+        "tpch002": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "tpch.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 51.33it/s]\n"
+        },
+        "twilio001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "twilio.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 38.48it/s]\n"
+        },
+        "workday001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "workday.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 35.52it/s]\n"
+        },
+        "workday002": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "workday.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 35.14it/s]\n"
+        },
+        "xero001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "xero.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 67.11it/s]\n"
+        },
+        "xero_new001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "xero_new.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 393.02it/s]\n"
+        },
+        "xero_new002": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "xero_new.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 395.91it/s]\n"
+        },
+        "zuora001": {
+          "passed": false,
+          "id_printed": false,
+          "evaluated": 1,
+          "returncode": 0,
+          "gold_databases": [
+            "zuora.duckdb"
+          ],
+          "had_result": false,
+          "stderr_tail": "\n  0%|          | 0/1 [00:00<?, ?it/s]\n100%|██████████| 1/1 [00:00<00:00, 16.77it/s]\n"
+        }
+      },
+      "eval_errors": []
+    },
+    "score_over_all_68": 0.1324,
+    "status_counts": {
+      "budget_exhausted": 46,
+      "loop_detected": 12,
+      "completed": 9,
+      "llm_error": 1
+    },
+    "tokens_total": 48682563,
+    "mean_tokens_per_resolved": 698061,
+    "mean_agent_seconds_per_resolved": 412.1,
+    "escape_attempts": 0,
+    "egress_attempts": 44,
+    "runs_with_all_gold_tables": 25,
+    "public_data_issues": {
+      "no_gold_database": [
+        "airbnb002",
+        "biketheft001",
+        "google_ads001",
+        "gitcoin001"
+      ],
+      "gold_name_not_in_archive": [
+        "xero_new001",
+        "social_media001",
+        "xero_new002"
+      ]
+    },
+    "evaluated_at": "2026-10-15T07:58:08.356647Z",
+    "model": "local-agent (Qwen3.5-9B int4)"
+  },
+  "runs": [
+    {
+      "instance_id": "activity001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 87,
+      "prompt_tokens": 796293,
+      "completion_tokens": 11546,
+      "agent_seconds": 462.62,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "patch_files": [
+        "models/aggregate_after/dataset__aggregate_after_1.sql",
+        "models/aggregate_all_ever/dataset__aggregate_all_ever_1.sql"
+      ],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "dataset__aggregate_after_1",
+          "dataset__aggregate_all_ever_1"
+        ],
+        "copied": false
+      },
+      "total_seconds": 465.0
+    },
+    {
+      "instance_id": "airbnb001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 80,
+      "prompt_tokens": 800752,
+      "completion_tokens": 19084,
+      "agent_seconds": 755.0,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "patch_files": [
+        "models/agg/monthly_agg_reviews.sql",
+        "models/fact/fct_reviews.sql"
+      ],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "dim_listings_hosts",
+          "mom_agg_reviews"
+        ],
+        "copied": false
+      },
+      "total_seconds": 758.7
+    },
+    {
+      "instance_id": "airbnb002",
+      "trial": 0,
+      "status": "loop_detected",
+      "turns": 76,
+      "tool_calls": 76,
+      "prompt_tokens": 760313,
+      "completion_tokens": 8234,
+      "agent_seconds": 515.04,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "patch_files": [
+        "models/agg/wow_agg_reviews.sql",
+        "models/source/src_hosts.sql",
+        "models/source/src_reviews.sql"
+      ],
+      "collected": {
+        "tables_found": [
+          "src_hosts",
+          "wow_agg_reviews"
+        ],
+        "tables_missing": [],
+        "copied": true
+      },
+      "total_seconds": 518.6
+    },
+    {
+      "instance_id": "airport001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 84,
+      "prompt_tokens": 790364,
+      "completion_tokens": 15522,
+      "agent_seconds": 661.42,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 3,
+        "by_kind": {
+          "egress_reference": 3
+        }
+      },
+      "patch_files": [
+        "models/base/base_arrivals__malaysia.sql",
+        "models/core/fct_airports__malaysia_distances_km.sql",
+        "models/core/fct_arrivals__malaysia_summary.sql"
+      ],
+      "collected": {
+        "tables_found": [
+          "fct_arrivals__malaysia_summary",
+          "fct_airports__malaysia_distances_km"
+        ],
+        "tables_missing": [],
+        "copied": true
+      },
+      "total_seconds": 664.6
+    },
+    {
+      "instance_id": "analytics_engineering001",
+      "trial": 0,
+      "status": "loop_detected",
+      "turns": 40,
+      "tool_calls": 40,
+      "prompt_tokens": 328203,
+      "completion_tokens": 3593,
+      "agent_seconds": 101.06,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "patch_files": [
+        "models/warehouse/fact_purchase_order.sql"
+      ],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "fact_purchase_order",
+          "obt_customer_reporting"
+        ],
+        "copied": false
+      },
+      "total_seconds": 104.1
+    },
+    {
+      "instance_id": "app_reporting001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 80,
+      "prompt_tokens": 741355,
+      "completion_tokens": 5693,
+      "agent_seconds": 311.95,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "patch_files": [],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "app_reporting__app_version_report",
+          "app_reporting__os_version_report"
+        ],
+        "copied": false
+      },
+      "total_seconds": 314.2
+    },
+    {
+      "instance_id": "app_reporting002",
+      "trial": 0,
+      "status": "loop_detected",
+      "turns": 59,
+      "tool_calls": 59,
+      "prompt_tokens": 540927,
+      "completion_tokens": 5233,
+      "agent_seconds": 284.33,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "patch_files": [],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "int_apple_store__overview",
+          "int_google_play__overview",
+          "app_reporting__overview_report"
+        ],
+        "copied": false
+      },
+      "total_seconds": 286.7
+    },
+    {
+      "instance_id": "apple_store001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 80,
+      "prompt_tokens": 783080,
+      "completion_tokens": 7186,
+      "agent_seconds": 433.88,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 1,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 1
+        }
+      },
+      "patch_files": [
+        "models/apple_store__source_type_report.sql",
+        "models/apple_store__territory_report.sql",
+        "models/intermediate/territory_report/int_apple_store__app_store_territory.sql",
+        "models/intermediate/territory_report/int_apple_store__downloads_territory.sql",
+        "models/intermediate/territory_report/int_apple_store__usage_territory.sql"
+      ],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "apple_store__source_type_report",
+          "apple_store__territory_report"
+        ],
+        "copied": false
+      },
+      "total_seconds": 436.1
+    },
+    {
+      "instance_id": "asana001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 80,
+      "prompt_tokens": 809155,
+      "completion_tokens": 8263,
+      "agent_seconds": 551.93,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 1,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 1
+        }
+      },
+      "patch_files": [
+        "models/asana__project.sql",
+        "models/asana__team.sql",
+        "models/asana__user.sql",
+        "packages.yml"
+      ],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "asana__team",
+          "asana__user"
+        ],
+        "copied": false
+      },
+      "total_seconds": 554.1
+    },
+    {
+      "instance_id": "asset001",
+      "trial": 0,
+      "status": "completed",
+      "turns": 15,
+      "tool_calls": 27,
+      "prompt_tokens": 97086,
+      "completion_tokens": 1804,
+      "agent_seconds": 62.26,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "patch_files": [
+        "models/bar_quotes.sql",
+        "models/book_value.sql"
+      ],
+      "collected": {
+        "tables_found": [
+          "bar_quotes",
+          "book_value"
+        ],
+        "tables_missing": [],
+        "copied": true
+      },
+      "total_seconds": 65.4
+    },
+    {
+      "instance_id": "atp_tour001",
+      "trial": 0,
+      "status": "llm_error",
+      "turns": 35,
+      "tool_calls": 41,
+      "prompt_tokens": 252587,
+      "completion_tokens": 2096,
+      "agent_seconds": 114.45,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "patch_files": [],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "dim_player",
+          "dim_tournament",
+          "rpt_match_summary"
+        ],
+        "copied": false
+      },
+      "total_seconds": 118.4
+    },
+    {
+      "instance_id": "biketheft001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 84,
+      "prompt_tokens": 836820,
+      "completion_tokens": 13117,
+      "agent_seconds": 703.47,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "patch_files": [
+        "biketheft.duckdb.tmp/duckdb_temp_storage_DEFAULT-0.tmp",
+        "biketheft.duckdb.tmp/duckdb_temp_storage_S128K-0.tmp",
+        "biketheft.duckdb.tmp/duckdb_temp_storage_S160K-0.tmp",
+        "biketheft.duckdb.tmp/duckdb_temp_storage_S96K-0.tmp",
+        "models/core/fact_theft_reports.sql",
+        "models/core/schema.yml",
+        "models/staging/stg_theft_reports_archived.sql",
+        "models/staging/stg_theft_reports_daily.sql"
+      ],
+      "collected": {
+        "tables_found": [
+          "fact_theft_reports"
+        ],
+        "tables_missing": [],
+        "copied": true
+      },
+      "total_seconds": 783.2
+    },
+    {
+      "instance_id": "chinook001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 88,
+      "prompt_tokens": 808323,
+      "completion_tokens": 7936,
+      "agent_seconds": 467.84,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 2,
+        "policy_blocks": 5,
+        "info": 1,
+        "by_kind": {
+          "blocked_command": 2,
+          "egress_reference": 1,
+          "protected_path_blocked": 5
+        }
+      },
+      "patch_files": [
+        "dbt_project.yml",
+        "models/intermediate/dim_customer.sql",
+        "models/intermediate/fct_invoice.sql",
+        "models/obt/obt_invoice.sql",
+        "models/staging/stg_playlist.sql",
+        "packages.yml"
+      ],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "dim_customer",
+          "fct_invoice",
+          "obt_invoice"
+        ],
+        "copied": false
+      },
+      "total_seconds": 470.1
+    },
+    {
+      "instance_id": "divvy001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 80,
+      "prompt_tokens": 739555,
+      "completion_tokens": 10120,
+      "agent_seconds": 494.38,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "patch_files": [
+        "models/core/facts_divvy.sql",
+        "models/schema.yml",
+        "models/staging/schema.yml",
+        "models/staging/stg_divvy_data.sql"
+      ],
+      "collected": {
+        "tables_found": [
+          "stg_divvy_data",
+          "facts_divvy"
+        ],
+        "tables_missing": [],
+        "copied": true
+      },
+      "total_seconds": 497.9
+    },
+    {
+      "instance_id": "f1001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 80,
+      "prompt_tokens": 793061,
+      "completion_tokens": 6470,
+      "agent_seconds": 353.01,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "patch_files": [
+        "models/core/f1_dataset.yml",
+        "models/staging/f1_dataset/stg_f1_dataset__circuits.sql",
+        "models/staging/f1_dataset/stg_f1_dataset__constructor_results.sql",
+        "models/staging/f1_dataset/stg_f1_dataset__constructor_standings.sql",
+        "models/staging/f1_dataset/stg_f1_dataset__constructors.sql",
+        "models/staging/f1_dataset/stg_f1_dataset__driver_standings.sql",
+        "models/staging/f1_dataset/stg_f1_dataset__lap_times.sql",
+        "models/staging/f1_dataset/stg_f1_dataset__pit_stops.sql",
+        "models/staging/f1_dataset/stg_f1_dataset__qualifying.sql",
+        "models/staging/f1_dataset/stg_f1_dataset__results.sql",
+        "models/staging/f1_dataset/stg_f1_dataset__seasons.sql",
+        "models/staging/f1_dataset/stg_f1_dataset__status.sql",
+        "models/stats/finishes_by_driver.sql"
+      ],
+      "collected": {
+        "tables_found": [
+          "finishes_by_driver"
+        ],
+        "tables_missing": [
+          "most_fastest_laps",
+          "most_podiums",
+          "most_pole_positions"
+        ],
+        "copied": true
+      },
+      "total_seconds": 356.3
+    },
+    {
+      "instance_id": "f1002",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 80,
+      "prompt_tokens": 760743,
+      "completion_tokens": 6199,
+      "agent_seconds": 313.59,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "patch_files": [
+        "models/staging/f1_dataset/stg_f1_dataset__circuits.sql",
+        "models/staging/f1_dataset/stg_f1_dataset__constructor_results.sql",
+        "models/staging/f1_dataset/stg_f1_dataset__constructor_standings.sql",
+        "models/staging/f1_dataset/stg_f1_dataset__constructors.sql",
+        "models/staging/f1_dataset/stg_f1_dataset__driver_standings.sql",
+        "models/staging/f1_dataset/stg_f1_dataset__drivers.sql",
+        "models/staging/f1_dataset/stg_f1_dataset__lap_times.sql",
+        "models/staging/f1_dataset/stg_f1_dataset__pit_stops.sql",
+        "models/staging/f1_dataset/stg_f1_dataset__position_descriptions.sql",
+        "models/staging/f1_dataset/stg_f1_dataset__qualifying.sql",
+        "models/staging/f1_dataset/stg_f1_dataset__results.sql",
+        "models/staging/f1_dataset/stg_f1_dataset__seasons.sql",
+        "models/staging/f1_dataset/stg_f1_dataset__status.sql"
+      ],
+      "collected": {
+        "tables_found": [
+          "construtor_drivers_championships"
+        ],
+        "tables_missing": [
+          "finishes_by_constructor",
+          "driver_championships"
+        ],
+        "copied": true
+      },
+      "total_seconds": 316.8
+    },
+    {
+      "instance_id": "f1003",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 88,
+      "prompt_tokens": 801753,
+      "completion_tokens": 6565,
+      "agent_seconds": 390.55,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 1,
+        "policy_blocks": 1,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 1,
+          "file_access_blocked": 1
+        }
+      },
+      "patch_files": [
+        "models/staging/f1_dataset/constructors.sql",
+        "models/staging/f1_dataset/drivers.sql",
+        "models/staging/f1_dataset/status.sql",
+        "packages.yml"
+      ],
+      "collected": {
+        "tables_found": [
+          "stg_f1_dataset__drivers",
+          "driver_podiums_by_season",
+          "driver_fastest_laps_by_season",
+          "constructor_retirements_by_season"
+        ],
+        "tables_missing": [],
+        "copied": true
+      },
+      "total_seconds": 392.9
+    },
+    {
+      "instance_id": "flicks001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 80,
+      "prompt_tokens": 722403,
+      "completion_tokens": 6572,
+      "agent_seconds": 338.61,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 1,
+        "policy_blocks": 1,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 1,
+          "file_access_blocked": 1
+        }
+      },
+      "patch_files": [
+        "models/report/actor_rating_by_total_movie.sql",
+        "models/report/movie_actor_by_year.sql",
+        "models/report/report.yml"
+      ],
+      "collected": {
+        "tables_found": [
+          "actor_rating_by_total_movie",
+          "movie_actor_by_year"
+        ],
+        "tables_missing": [],
+        "copied": true
+      },
+      "total_seconds": 340.8
+    },
+    {
+      "instance_id": "gitcoin001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 80,
+      "prompt_tokens": 757285,
+      "completion_tokens": 7345,
+      "agent_seconds": 315.22,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 1,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 1
+        }
+      },
+      "patch_files": [
+        "macros/is_address_lowercase.sql",
+        "macros/test_is_address_lowercase.sql",
+        "seeds/raw_allo_applications.json"
+      ],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "allo_projects",
+          "allo_applications"
+        ],
+        "copied": false
+      },
+      "total_seconds": 318.2
+    },
+    {
+      "instance_id": "google_ads001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 80,
+      "prompt_tokens": 784594,
+      "completion_tokens": 6172,
+      "agent_seconds": 409.48,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 1,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 1
+        }
+      },
+      "patch_files": [
+        "models/google_ads__campaign_report.sql",
+        "models/google_ads__keyword_report.sql"
+      ],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "google_ads__campaign_report",
+          "google_ads__keyword_report"
+        ],
+        "copied": false
+      },
+      "total_seconds": 411.6
+    },
+    {
+      "instance_id": "google_play001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 80,
+      "prompt_tokens": 822309,
+      "completion_tokens": 11217,
+      "agent_seconds": 603.3,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 2,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 2
+        }
+      },
+      "patch_files": [
+        "models/google_play__country_report.sql",
+        "models/google_play__device_report.sql"
+      ],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "google_play__country_report",
+          "google_play__device_report"
+        ],
+        "copied": false
+      },
+      "total_seconds": 605.5
+    },
+    {
+      "instance_id": "google_play002",
+      "trial": 0,
+      "status": "loop_detected",
+      "turns": 59,
+      "tool_calls": 59,
+      "prompt_tokens": 578726,
+      "completion_tokens": 4954,
+      "agent_seconds": 341.79,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 1,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 1
+        }
+      },
+      "patch_files": [
+        "models/google_play__overview_report.sql",
+        "models/intermediate/int_google_play__store_performance.sql"
+      ],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "google_play__overview_report"
+        ],
+        "copied": false
+      },
+      "total_seconds": 343.9
+    },
+    {
+      "instance_id": "greenhouse001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 80,
+      "prompt_tokens": 838987,
+      "completion_tokens": 5612,
+      "agent_seconds": 503.52,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "patch_files": [],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "greenhouse__application_enhanced",
+          "greenhouse__job_enhanced"
+        ],
+        "copied": false
+      },
+      "total_seconds": 505.8
+    },
+    {
+      "instance_id": "hive001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 83,
+      "prompt_tokens": 796287,
+      "completion_tokens": 8970,
+      "agent_seconds": 477.47,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "patch_files": [
+        "models/marts/covid_cases.sql",
+        "models/raw/covid/raw_covid.yml",
+        "models/staging/stg_covid__cases.sql"
+      ],
+      "collected": {
+        "tables_found": [
+          "stg_covid__cases",
+          "covid_cases"
+        ],
+        "tables_missing": [],
+        "copied": true
+      },
+      "total_seconds": 480.3
+    },
+    {
+      "instance_id": "hubspot001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 80,
+      "prompt_tokens": 802041,
+      "completion_tokens": 10333,
+      "agent_seconds": 597.22,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 2,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 2
+        }
+      },
+      "patch_files": [
+        "models/marketing/hubspot__contact_lists.sql",
+        "models/marketing/hubspot__contacts.sql",
+        "models/marketing/hubspot__email_campaigns.sql"
+      ],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "hubspot__contacts",
+          "hubspot__email_campaigns"
+        ],
+        "copied": false
+      },
+      "total_seconds": 599.5
+    },
+    {
+      "instance_id": "intercom001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 80,
+      "prompt_tokens": 757406,
+      "completion_tokens": 5473,
+      "agent_seconds": 448.42,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 1,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 1
+        }
+      },
+      "patch_files": [
+        "models/intercom__admin_metrics.sql",
+        "packages.yml"
+      ],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "intercom__company_metrics",
+          "intercom__admin_metrics"
+        ],
+        "copied": false
+      },
+      "total_seconds": 450.6
+    },
+    {
+      "instance_id": "inzight001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 80,
+      "prompt_tokens": 789630,
+      "completion_tokens": 7625,
+      "agent_seconds": 448.14,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 1,
+        "policy_blocks": 1,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 1,
+          "protected_path_blocked": 1
+        }
+      },
+      "patch_files": [
+        "models/intermediate/dim_dates.sql",
+        "models/marts/mrt_capacity_tariff.sql"
+      ],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "mrt_capacity_tariff"
+        ],
+        "copied": false
+      },
+      "total_seconds": 450.2
+    },
+    {
+      "instance_id": "jira001",
+      "trial": 0,
+      "status": "loop_detected",
+      "turns": 77,
+      "tool_calls": 77,
+      "prompt_tokens": 792607,
+      "completion_tokens": 6108,
+      "agent_seconds": 517.92,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 1,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 1
+        }
+      },
+      "patch_files": [
+        "models/jira__project_enhanced.sql",
+        "models/stg/stg_jira__component.sql",
+        "models/stg/stg_jira__epic.sql",
+        "models/stg/stg_jira__issue.sql",
+        "models/stg/stg_jira__project.sql",
+        "models/stg/stg_jira__user.sql"
+      ],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "jira__project_enhanced"
+        ],
+        "copied": false
+      },
+      "total_seconds": 520.0
+    },
+    {
+      "instance_id": "lever001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 80,
+      "prompt_tokens": 807094,
+      "completion_tokens": 6066,
+      "agent_seconds": 560.67,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 1,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 1
+        }
+      },
+      "patch_files": [
+        "packages.yml"
+      ],
+      "collected": {
+        "tables_found": [
+          "lever__posting_enhanced"
+        ],
+        "tables_missing": [],
+        "copied": true
+      },
+      "total_seconds": 562.8
+    },
+    {
+      "instance_id": "marketo001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 80,
+      "prompt_tokens": 773865,
+      "completion_tokens": 8097,
+      "agent_seconds": 466.7,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 1,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 1
+        }
+      },
+      "patch_files": [
+        "models/intermediate/marketo__email_stats__by_email_template.sql",
+        "models/marketo__email_templates.sql"
+      ],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "marketo__email_templates"
+        ],
+        "copied": false
+      },
+      "total_seconds": 468.9
+    },
+    {
+      "instance_id": "maturity001",
+      "trial": 0,
+      "status": "completed",
+      "turns": 46,
+      "tool_calls": 58,
+      "prompt_tokens": 422544,
+      "completion_tokens": 4691,
+      "agent_seconds": 189.61,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "patch_files": [
+        "models/marts/dim_doctors.sql",
+        "models/marts/dim_patients.sql"
+      ],
+      "collected": {
+        "tables_found": [
+          "dim_doctors",
+          "dim_patients"
+        ],
+        "tables_missing": [],
+        "copied": true
+      },
+      "total_seconds": 192.7
+    },
+    {
+      "instance_id": "movie_recomm001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 79,
+      "tool_calls": 79,
+      "prompt_tokens": 722630,
+      "completion_tokens": 8696,
+      "agent_seconds": 1504.21,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "patch_files": [
+        "models/movie_recommedation/acted_by.sql",
+        "models/movie_recommedation/directed_by.sql",
+        "models/movie_recommedation/genres.sql",
+        "models/movie_recommedation/movies.sql",
+        "models/movie_recommedation/people.sql",
+        "models/movie_recommedation/user_watched_movies.sql",
+        "models/movie_recommedation/with_genre.sql"
+      ],
+      "collected": {
+        "tables_found": [
+          "user_watched_movies"
+        ],
+        "tables_missing": [],
+        "copied": true
+      },
+      "total_seconds": 1507.2
+    },
+    {
+      "instance_id": "mrr001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 88,
+      "prompt_tokens": 841525,
+      "completion_tokens": 13675,
+      "agent_seconds": 644.37,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 2,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 2
+        }
+      },
+      "patch_files": [
+        "macros.dbt_utils.sql",
+        "macros/dbt_utils/expression_is_true.sql",
+        "models/mrr.sql",
+        "models/mrr.yml"
+      ],
+      "collected": {
+        "tables_found": [
+          "mrr"
+        ],
+        "tables_missing": [],
+        "copied": true
+      },
+      "total_seconds": 647.3
+    },
+    {
+      "instance_id": "mrr002",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 85,
+      "prompt_tokens": 779343,
+      "completion_tokens": 9414,
+      "agent_seconds": 488.38,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 1,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 1
+        }
+      },
+      "patch_files": [
+        "macros/dbt_utils.sql",
+        "models/mrr.sql"
+      ],
+      "collected": {
+        "tables_found": [
+          "mrr"
+        ],
+        "tables_missing": [],
+        "copied": true
+      },
+      "total_seconds": 491.3
+    },
+    {
+      "instance_id": "nba001",
+      "trial": 0,
+      "status": "loop_detected",
+      "turns": 72,
+      "tool_calls": 72,
+      "prompt_tokens": 698376,
+      "completion_tokens": 13250,
+      "agent_seconds": 513.8,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "patch_files": [
+        "models/nba/analysis/playoff_summary.sql",
+        "models/nba/analysis/reg_season_summary.sql",
+        "models/nba/analysis/season_summary.sql",
+        "models/nba/prep/nba_elo_rollforward.sql"
+      ],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "reg_season_summary",
+          "season_summary"
+        ],
+        "copied": false
+      },
+      "total_seconds": 517.6
+    },
+    {
+      "instance_id": "netflix001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 83,
+      "prompt_tokens": 799523,
+      "completion_tokens": 9509,
+      "agent_seconds": 493.46,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 1,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 1
+        }
+      },
+      "patch_files": [
+        "models/dim/dim_netflix_original_categories.sql",
+        "models/mart/int_netflix_original_programs.sql",
+        "models/staging/stg_google_sheets__original_categories.sql",
+        "models/staging/stg_google_sheets__originals_unioned.sql",
+        "packages.yml"
+      ],
+      "collected": {
+        "tables_found": [
+          "stg_google_sheets__originals_unioned"
+        ],
+        "tables_missing": [],
+        "copied": true
+      },
+      "total_seconds": 495.4
+    },
+    {
+      "instance_id": "pendo001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 80,
+      "prompt_tokens": 741128,
+      "completion_tokens": 7228,
+      "agent_seconds": 446.8,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 2,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 2
+        }
+      },
+      "patch_files": [
+        "dbt_project.yml",
+        "models/intermediate/daily_metrics/int_pendo__guide_daily_metrics.sql"
+      ],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "pendo__guide_daily_metrics",
+          "pendo__page_daily_metrics"
+        ],
+        "copied": false
+      },
+      "total_seconds": 449.0
+    },
+    {
+      "instance_id": "playbook001",
+      "trial": 0,
+      "status": "completed",
+      "turns": 43,
+      "tool_calls": 51,
+      "prompt_tokens": 414353,
+      "completion_tokens": 6845,
+      "agent_seconds": 237.23,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "patch_files": [
+        "models/cpa_and_roas.sql"
+      ],
+      "collected": {
+        "tables_found": [
+          "attribution_touches"
+        ],
+        "tables_missing": [],
+        "copied": true
+      },
+      "total_seconds": 240.1
+    },
+    {
+      "instance_id": "playbook002",
+      "trial": 0,
+      "status": "completed",
+      "turns": 57,
+      "tool_calls": 66,
+      "prompt_tokens": 535887,
+      "completion_tokens": 7643,
+      "agent_seconds": 327.67,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "patch_files": [
+        "models/attribution_touches.sql",
+        "models/cpa_and_roas.sql"
+      ],
+      "collected": {
+        "tables_found": [
+          "attribution_touches",
+          "cpa_and_roas"
+        ],
+        "tables_missing": [],
+        "copied": true
+      },
+      "total_seconds": 330.5
+    },
+    {
+      "instance_id": "provider001",
+      "trial": 0,
+      "status": "loop_detected",
+      "turns": 18,
+      "tool_calls": 18,
+      "prompt_tokens": 123966,
+      "completion_tokens": 659,
+      "agent_seconds": 23.69,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "patch_files": [],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "specialty_mapping",
+          "provider"
+        ],
+        "copied": false
+      },
+      "total_seconds": 26.6
+    },
+    {
+      "instance_id": "qualtrics001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 80,
+      "prompt_tokens": 726566,
+      "completion_tokens": 3862,
+      "agent_seconds": 300.09,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "patch_files": [],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "qualtrics__directory"
+        ],
+        "copied": false
+      },
+      "total_seconds": 302.2
+    },
+    {
+      "instance_id": "quickbooks001",
+      "trial": 0,
+      "status": "loop_detected",
+      "turns": 73,
+      "tool_calls": 73,
+      "prompt_tokens": 725906,
+      "completion_tokens": 9410,
+      "agent_seconds": 562.35,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 1,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 1
+        }
+      },
+      "patch_files": [
+        "models/double_entry_transactions/quickbooks__general_ledger.sql",
+        "packages.yml"
+      ],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "quickbooks__general_ledger"
+        ],
+        "copied": false
+      },
+      "total_seconds": 564.5
+    },
+    {
+      "instance_id": "quickbooks002",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 80,
+      "prompt_tokens": 765431,
+      "completion_tokens": 5875,
+      "agent_seconds": 411.82,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 1,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 1
+        }
+      },
+      "patch_files": [
+        "models/quickbooks/quickbooks__ap_ar_enhanced.sql",
+        "packages.yml"
+      ],
+      "collected": {
+        "tables_found": [
+          "quickbooks__ap_ar_enhanced"
+        ],
+        "tables_missing": [],
+        "copied": true
+      },
+      "total_seconds": 414.0
+    },
+    {
+      "instance_id": "quickbooks003",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 80,
+      "prompt_tokens": 789463,
+      "completion_tokens": 11408,
+      "agent_seconds": 605.25,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 1,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 1
+        }
+      },
+      "patch_files": [
+        "models/intermediate/int_quickbooks__general_ledger_by_period.sql",
+        "models/quickbooks__balance_sheet.sql",
+        "packages.yml"
+      ],
+      "collected": {
+        "tables_found": [
+          "quickbooks__balance_sheet",
+          "quickbooks__general_ledger_by_period"
+        ],
+        "tables_missing": [],
+        "copied": true
+      },
+      "total_seconds": 607.7
+    },
+    {
+      "instance_id": "recharge001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 80,
+      "prompt_tokens": 758525,
+      "completion_tokens": 5869,
+      "agent_seconds": 446.4,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 1,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 1
+        }
+      },
+      "patch_files": [
+        "models/standardized_models/recharge__charge_line_item_history.sql",
+        "packages.yml"
+      ],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "recharge__charge_line_item_history"
+        ],
+        "copied": false
+      },
+      "total_seconds": 448.5
+    },
+    {
+      "instance_id": "recharge002",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 80,
+      "prompt_tokens": 806840,
+      "completion_tokens": 14530,
+      "agent_seconds": 631.27,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "patch_files": [
+        "models/recharge__customer_daily_rollup.sql"
+      ],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "recharge__customer_daily_rollup"
+        ],
+        "copied": false
+      },
+      "total_seconds": 633.4
+    },
+    {
+      "instance_id": "reddit001",
+      "trial": 0,
+      "status": "completed",
+      "turns": 40,
+      "tool_calls": 46,
+      "prompt_tokens": 328444,
+      "completion_tokens": 4968,
+      "agent_seconds": 145.67,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "patch_files": [
+        "models/prod_comments_ghosts.sql",
+        "models/prod_posts_ghosts.sql"
+      ],
+      "collected": {
+        "tables_found": [
+          "prod_posts_ghosts",
+          "prod_comments_ghosts"
+        ],
+        "tables_missing": [],
+        "copied": true
+      },
+      "total_seconds": 149.1
+    },
+    {
+      "instance_id": "retail001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 85,
+      "prompt_tokens": 781218,
+      "completion_tokens": 8849,
+      "agent_seconds": 439.82,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 1,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 1
+        }
+      },
+      "patch_files": [
+        "macros/accepted_range.sql",
+        "macros/generate_surrogate_key.sql",
+        "macros/macros.yml",
+        "models/report/report_customer_invoices.sql",
+        "models/transform/dim_customer.sql",
+        "models/transform/dim_product.sql",
+        "models/transform/fct_invoices.sql",
+        "packages.yml"
+      ],
+      "collected": {
+        "tables_found": [
+          "report_customer_invoices"
+        ],
+        "tables_missing": [],
+        "copied": true
+      },
+      "total_seconds": 441.9
+    },
+    {
+      "instance_id": "salesforce001",
+      "trial": 0,
+      "status": "loop_detected",
+      "turns": 73,
+      "tool_calls": 73,
+      "prompt_tokens": 783427,
+      "completion_tokens": 6675,
+      "agent_seconds": 559.9,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 1,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 1
+        }
+      },
+      "patch_files": [
+        "models/salesforce/salesforce__daily_activity.sql"
+      ],
+      "collected": {
+        "tables_found": [
+          "salesforce__daily_activity"
+        ],
+        "tables_missing": [],
+        "copied": true
+      },
+      "total_seconds": 562.2
+    },
+    {
+      "instance_id": "sap001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 80,
+      "prompt_tokens": 774758,
+      "completion_tokens": 5157,
+      "agent_seconds": 245.65,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "patch_files": [],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "sap__0fi_gl_10",
+          "sap__0fi_gl_14"
+        ],
+        "copied": false
+      },
+      "total_seconds": 247.9
+    },
+    {
+      "instance_id": "scd001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 80,
+      "prompt_tokens": 789524,
+      "completion_tokens": 10043,
+      "agent_seconds": 468.93,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 2,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 2
+        }
+      },
+      "patch_files": [
+        "macros/build_key_from_row_natural_id.sql",
+        "macros/build_row_natural_id_from_columns.sql",
+        "models/fct_jafflegaggle.sql",
+        "models/rpt_corporate_accounts.sql",
+        "models/staging/stg_users.sql",
+        "packages.yml"
+      ],
+      "collected": {
+        "tables_found": [
+          "fct_jafflegaggle"
+        ],
+        "tables_missing": [
+          "rpt_corporate_accounts"
+        ],
+        "copied": true
+      },
+      "total_seconds": 471.1
+    },
+    {
+      "instance_id": "shopify001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 80,
+      "prompt_tokens": 815874,
+      "completion_tokens": 5882,
+      "agent_seconds": 487.47,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "patch_files": [],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "shopify__products",
+          "shopify__daily_shop"
+        ],
+        "copied": false
+      },
+      "total_seconds": 489.7
+    },
+    {
+      "instance_id": "shopify002",
+      "trial": 0,
+      "status": "loop_detected",
+      "turns": 77,
+      "tool_calls": 77,
+      "prompt_tokens": 767861,
+      "completion_tokens": 4352,
+      "agent_seconds": 405.37,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "patch_files": [],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "shopify__discounts"
+        ],
+        "copied": false
+      },
+      "total_seconds": 407.5
+    },
+    {
+      "instance_id": "shopify_holistic_reporting001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 80,
+      "prompt_tokens": 781106,
+      "completion_tokens": 3726,
+      "agent_seconds": 400.73,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 1,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 1
+        }
+      },
+      "patch_files": [],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "shopify_holistic_reporting__daily_customer_metrics"
+        ],
+        "copied": false
+      },
+      "total_seconds": 402.8
+    },
+    {
+      "instance_id": "social_media001",
+      "trial": 0,
+      "status": "loop_detected",
+      "turns": 52,
+      "tool_calls": 59,
+      "prompt_tokens": 451384,
+      "completion_tokens": 3066,
+      "agent_seconds": 174.04,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "patch_files": [],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "social_media_reporting__instagram_posts_reporting",
+          "social_media_reporting__twitter_posts_reporting",
+          "social_media_reporting__rollup_report"
+        ],
+        "copied": false
+      },
+      "total_seconds": 176.5
+    },
+    {
+      "instance_id": "superstore001",
+      "trial": 0,
+      "status": "completed",
+      "turns": 79,
+      "tool_calls": 88,
+      "prompt_tokens": 786644,
+      "completion_tokens": 10601,
+      "agent_seconds": 528.07,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "patch_files": [
+        "models/marts/core/dim_regional_managers.sql",
+        "models/marts/core/fct_orders.sql",
+        "models/marts/core/fct_sales.sql",
+        "models/marts/core/schema.yml"
+      ],
+      "collected": {
+        "tables_found": [
+          "dim_regional_managers",
+          "fct_sales"
+        ],
+        "tables_missing": [],
+        "copied": true
+      },
+      "total_seconds": 531.1
+    },
+    {
+      "instance_id": "synthea001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 80,
+      "prompt_tokens": 829289,
+      "completion_tokens": 10044,
+      "agent_seconds": 612.0,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 4,
+        "policy_blocks": 1,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 4,
+          "protected_path_blocked": 1
+        }
+      },
+      "patch_files": [
+        "models/intermediate/int__cost_condition.sql",
+        "models/intermediate/int__cost_drug_exposure_1.sql",
+        "models/intermediate/int__cost_drug_exposure_2.sql",
+        "models/intermediate/int__cost_procedure.sql",
+        "models/macros/macros.sql",
+        "models/omop/cost.sql",
+        "models/staging/synthea/stg_synthea__conditions.sql",
+        "models/staging/synthea/stg_synthea__patients.sql",
+        "packages.yml"
+      ],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "cost"
+        ],
+        "copied": false
+      },
+      "total_seconds": 615.4
+    },
+    {
+      "instance_id": "tickit001",
+      "trial": 0,
+      "status": "completed",
+      "turns": 68,
+      "tool_calls": 86,
+      "prompt_tokens": 696175,
+      "completion_tokens": 9865,
+      "agent_seconds": 499.94,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "patch_files": [
+        "models/intermediate/users/int_sellers_extracted_from_users.sql",
+        "models/marts/sales/fct_sales.sql"
+      ],
+      "collected": {
+        "tables_found": [
+          "fct_sales"
+        ],
+        "tables_missing": [],
+        "copied": true
+      },
+      "total_seconds": 503.2
+    },
+    {
+      "instance_id": "tickit002",
+      "trial": 0,
+      "status": "completed",
+      "turns": 71,
+      "tool_calls": 71,
+      "prompt_tokens": 653996,
+      "completion_tokens": 6294,
+      "agent_seconds": 313.66,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "patch_files": [
+        "models/marts/marketing/_marketing__models.yml",
+        "models/marts/marketing/dim_events.sql",
+        "models/marts/sales/_sales__models.yml",
+        "models/marts/sales/fct_listings.sql",
+        "models/staging/tickit/stg_tickit__dates.sql"
+      ],
+      "collected": {
+        "tables_found": [
+          "dim_events",
+          "fct_listings"
+        ],
+        "tables_missing": [],
+        "copied": true
+      },
+      "total_seconds": 316.5
+    },
+    {
+      "instance_id": "tpch001",
+      "trial": 0,
+      "status": "completed",
+      "turns": 59,
+      "tool_calls": 63,
+      "prompt_tokens": 552014,
+      "completion_tokens": 7505,
+      "agent_seconds": 316.83,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "patch_files": [
+        "models/FINANCE/client_purchase_status.sql",
+        "models/FINANCE/lost_revenue.sql"
+      ],
+      "collected": {
+        "tables_found": [
+          "client_purchase_status"
+        ],
+        "tables_missing": [],
+        "copied": true
+      },
+      "total_seconds": 320.1
+    },
+    {
+      "instance_id": "tpch002",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 80,
+      "prompt_tokens": 704010,
+      "completion_tokens": 17898,
+      "agent_seconds": 593.7,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 1,
+        "info": 0,
+        "by_kind": {
+          "write_attempt_blocked": 1
+        }
+      },
+      "patch_files": [
+        "models/TPCH_SF1/generate_data.sql",
+        "models/TPCH_SF1/schema.sql"
+      ],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "EUR_LOWCOST_BRASS_SUPPLIERS",
+          "UK_Lowcost_Brass_Suppliers"
+        ],
+        "copied": false
+      },
+      "total_seconds": 596.6
+    },
+    {
+      "instance_id": "twilio001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 80,
+      "prompt_tokens": 772145,
+      "completion_tokens": 5777,
+      "agent_seconds": 458.8,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 1,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 1
+        }
+      },
+      "patch_files": [
+        "models/twilio__account_overview.sql",
+        "models/twilio__number_overview.sql"
+      ],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "twilio__account_overview",
+          "twilio__number_overview"
+        ],
+        "copied": false
+      },
+      "total_seconds": 461.0
+    },
+    {
+      "instance_id": "workday001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 80,
+      "prompt_tokens": 796237,
+      "completion_tokens": 6482,
+      "agent_seconds": 455.31,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 1,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 1
+        }
+      },
+      "patch_files": [
+        "models/workday__organization_overview.sql",
+        "packages.yml"
+      ],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "workday__organization_overview"
+        ],
+        "copied": false
+      },
+      "total_seconds": 457.4
+    },
+    {
+      "instance_id": "workday002",
+      "trial": 0,
+      "status": "loop_detected",
+      "turns": 79,
+      "tool_calls": 79,
+      "prompt_tokens": 770031,
+      "completion_tokens": 6719,
+      "agent_seconds": 460.44,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 1,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 1
+        }
+      },
+      "patch_files": [
+        "models/workday__job_overview.sql"
+      ],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "workday__job_overview"
+        ],
+        "copied": false
+      },
+      "total_seconds": 462.5
+    },
+    {
+      "instance_id": "xero001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 80,
+      "prompt_tokens": 798948,
+      "completion_tokens": 8361,
+      "agent_seconds": 500.01,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 1,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 1
+        }
+      },
+      "patch_files": [
+        "models/xero__balance_sheet_report.sql",
+        "packages.yml"
+      ],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "xero__balance_sheet_report"
+        ],
+        "copied": false
+      },
+      "total_seconds": 502.1
+    },
+    {
+      "instance_id": "xero_new001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 80,
+      "prompt_tokens": 788221,
+      "completion_tokens": 9830,
+      "agent_seconds": 503.18,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 1,
+        "policy_blocks": 1,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 1,
+          "file_access_blocked": 1
+        }
+      },
+      "patch_files": [
+        "models/xero__balance_sheet_report.sql",
+        "models/xero__general_ledger.sql",
+        "models/xero__profit_and_loss_report.sql",
+        "packages.yml"
+      ],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "xero__general_ledger",
+          "xero__balance_sheet_report",
+          "xero__profit_and_loss_report"
+        ],
+        "copied": false
+      },
+      "total_seconds": 505.4
+    },
+    {
+      "instance_id": "xero_new002",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 80,
+      "prompt_tokens": 789522,
+      "completion_tokens": 9057,
+      "agent_seconds": 500.48,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 2,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {
+          "blocked_command": 2
+        }
+      },
+      "patch_files": [
+        "models/stg_xero__account.sql",
+        "models/stg_xero__bank_transaction.sql",
+        "models/stg_xero__contact.sql",
+        "models/stg_xero__credit_note.sql",
+        "models/stg_xero__invoice.sql",
+        "models/stg_xero__invoice_line_item.sql",
+        "models/stg_xero__journal.sql",
+        "models/stg_xero__journal_line.sql",
+        "models/stg_xero__organization.sql",
+        "models/xero__balance_sheet_report.sql"
+      ],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "xero__balance_sheet_report"
+        ],
+        "copied": false
+      },
+      "total_seconds": 502.5
+    },
+    {
+      "instance_id": "zuora001",
+      "trial": 0,
+      "status": "budget_exhausted",
+      "turns": 80,
+      "tool_calls": 80,
+      "prompt_tokens": 824149,
+      "completion_tokens": 5056,
+      "agent_seconds": 518.61,
+      "security": {
+        "escape_attempts": 0,
+        "egress_attempts": 0,
+        "policy_blocks": 0,
+        "info": 0,
+        "by_kind": {}
+      },
+      "patch_files": [],
+      "collected": {
+        "tables_found": [],
+        "tables_missing": [
+          "zuora__account_daily_overview",
+          "zuora__account_overview"
+        ],
+        "copied": false
+      },
+      "total_seconds": 520.7
+    }
+  ]
+}

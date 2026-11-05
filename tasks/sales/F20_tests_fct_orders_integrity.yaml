@@ -1,0 +1,38 @@
+id: F20_tests_fct_orders_integrity
+kind: feature
+category: new_test
+difficulty: medium
+title: Integrity tests for the order fact
+trigger: ticket
+ticket: |
+  Harden gold.fct_orders with tests in its YAML entry:
+  - a relationships test from fct_orders.country_key to dim_country.country_key;
+  - a test that n_lines is at least 1 (for example dbt_utils.accepted_range with
+    min_value 1).
+  Both must pass on the current data.
+reference_fix:
+  - op: replace
+    path: models/marts/core/_core__models.yml
+    old: "                values: [sale, cancellation, bad_debt_adjustment, stock_write_off]\n\n  # ------------------------------------------------------------------ dimensions\n"
+    new: "                values: [sale, cancellation, bad_debt_adjustment, stock_write_off]\n      - name: country_key\n        data_tests:\n          - relationships:\n              arguments:\n                to: ref('dim_country')\n                field: country_key\n      - name: n_lines\n        data_tests:\n          - dbt_utils.accepted_range:\n              arguments:\n                min_value: 1\n\n  # ------------------------------------------------------------------ dimensions\n"
+hidden:
+  mutation_tests:
+    - name: orphan_country_is_caught
+      sql:
+        - >-
+          insert into gold.fct_orders by name
+          select * replace ('X000002' as invoice_id, 'no-such-country' as country_key)
+          from gold.fct_orders limit 1
+      command: ["test", "--select", "fct_orders"]
+      revert_sql:
+        - delete from gold.fct_orders where invoice_id = 'X000002'
+    - name: empty_order_is_caught
+      sql:
+        - >-
+          insert into gold.fct_orders by name
+          select * replace ('X000003' as invoice_id, 0 as n_lines)
+          from gold.fct_orders limit 1
+      command: ["test", "--select", "fct_orders"]
+      revert_sql:
+        - delete from gold.fct_orders where invoice_id = 'X000003'
+notes: Graded by mutation testing (two independent injected defects).

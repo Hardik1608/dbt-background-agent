@@ -1,0 +1,22 @@
+# Shared local model server on the GPU box (see _shared/LOCAL_LLM.md):
+# vLLM 0.31, Qwen3.5-9B int4 (AutoRound), served as "local-agent", 32k context, qwen3_coder
+# tool parser, thinking off by default. The API key is read from $LOCAL_LLM_API_KEY.
+llm:
+  base_url: http://192.168.1.66:8100/v1
+  model: local-agent
+  api_key_env: LOCAL_LLM_API_KEY
+  temperature: 0.7
+  top_p: 0.8
+  # presence_penalty: _shared/LOCAL_LLM.md suggests 1.0-1.5 against repetition; without it
+  # the model sometimes reasoned in circles until max_tokens (about 80 s per reply)
+  extra_body: {top_k: 20, presence_penalty: 1.0}
+  max_tokens: 2048
+  context_window: 32768
+  max_concurrency: 4
+  timeout_s: 300
+  price_input_per_mtok: 0.0
+  price_output_per_mtok: 0.0
+sandbox:
+  kind: docker
+  image: dbt-agent-sandbox:0.1
+  memory: 2g

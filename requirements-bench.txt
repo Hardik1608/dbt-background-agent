@@ -1,0 +1,4 @@
+# Benchmark setup and the official Spider2-DBT evaluation; not needed by the agent itself.
+gdown==6.4.1
+tqdm==4.70.1
+google-cloud-bigquery==3.45.2

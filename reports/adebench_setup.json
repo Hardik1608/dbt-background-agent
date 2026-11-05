@@ -1,0 +1,26 @@
+{
+  "repo_commit": "c305600ebf17e7e7c4550bd401b6ddb530beb7c8",
+  "tasks_ready": 60,
+  "databases": {
+    "airbnb": 110374912,
+    "analytics_engineering": 6303744,
+    "asana": 3682304,
+    "f1": 9711616,
+    "helixops_saas": 3420160,
+    "intercom": 4730880,
+    "quickbooks": 49819648
+  },
+  "env": {
+    "SETUP_TIMEOUT_SEC": "600",
+    "DEFAULT_AGENT_TIMEOUT_SEC": "900",
+    "DEFAULT_TEST_TIMEOUT_SEC": "300",
+    "CLEANUP_TIMEOUT_SEC": "180",
+    "USE_DYNAMIC_LOGGING": "FALSE"
+  },
+  "compose_resource_caps": {
+    "memory": "1536m",
+    "cpus": "2",
+    "changed_now": true
+  },
+  "set_up_at": "2026-10-14T17:34:27.513700Z"
+}

@@ -1,0 +1,72 @@
+id: F11_rename_line_revenue
+kind: feature
+category: migration
+difficulty: hard
+title: Rename line_revenue to line_amount in the order-line fact
+trigger: ticket
+ticket: |
+  Naming convention change: in gold.fct_order_lines the column `line_revenue` must be called
+  `line_amount`. Rename it in the model, its contract/YAML, and in every model, test and unit
+  test that reads fct_order_lines.line_revenue, keeping all values and checks the same.
+  Silver models keep `line_revenue`. Downstream gold columns keep their names.
+  The deployment will run `dbt build --full-refresh --select fct_order_lines` once.
+reference_fix:
+  - op: replace
+    path: models/marts/core/fct_order_lines.sql
+    old: "    lines.line_revenue,\n"
+    new: "    lines.line_revenue                                  as line_amount,\n"
+  - op: replace
+    path: models/marts/core/_core__models.yml
+    old: "      - name: line_revenue\n"
+    new: "      - name: line_amount\n"
+  - op: replace
+    path: models/marts/core/fct_orders.sql
+    old: "    cast(sum(line_revenue) as decimal(18, 3))                       as invoice_revenue,\n"
+    new: "    cast(sum(line_amount) as decimal(18, 3))                        as invoice_revenue,\n"
+  - op: replace
+    path: models/marts/core/fct_orders.sql
+    old: "        case when is_merchandise then line_revenue else 0 end\n"
+    new: "        case when is_merchandise then line_amount else 0 end\n"
+  - op: replace
+    path: models/marts/analytics/mart_revenue_monthly.sql
+    old: "        fct.line_revenue,\n"
+    new: "        fct.line_amount as line_revenue,\n"
+  - op: replace
+    path: models/marts/ml/customer_features.sql
+    old: "        fct.line_revenue,\n"
+    new: "        fct.line_amount as line_revenue,\n"
+  - op: replace
+    path: models/marts/ml/_ml__models.yml
+    old: "line_revenue: "
+    new: "line_amount: "
+    count: 6
+  - op: replace
+    path: tests/assert_fact_reconciles_to_silver.sql
+    old: "        sum(line_revenue)   as gold_revenue\n"
+    new: "        sum(line_amount)    as gold_revenue\n"
+  - op: replace
+    path: tests/assert_monthly_mart_reconciles_to_fact.sql
+    old: "    select sum(line_revenue) as fact_total from {{ ref('fct_order_lines') }}\n"
+    new: "    select sum(line_amount) as fact_total from {{ ref('fct_order_lines') }}\n"
+grading:
+  commands: [["build", "--select", "fct_order_lines", "--full-refresh", "--indirect-selection", "cautious"], ["build"]]
+allowed_removed: ["assert_fact_reconciles_to_silver", "assert_monthly_mart_reconciles_to_fact"]
+hidden:
+  assertions:
+    - name: new_name_present
+      sql: >-
+        select count(*) from information_schema.columns where table_schema = 'gold'
+        and table_name = 'fct_order_lines' and column_name = 'line_amount'
+      expect: {value: 1}
+    - name: old_name_gone
+      sql: >-
+        select count(*) from information_schema.columns where table_schema = 'gold'
+        and table_name = 'fct_order_lines' and column_name = 'line_revenue'
+      expect: {value: 0}
+    - name: values_kept
+      sql: select sum(line_amount) from gold.fct_order_lines
+      expect: {from: reference}
+affected_tables: [gold.fct_order_lines]
+notes: >-
+  Multi-file migration. The two reconciliation tests must be edited (not weakened); the
+  checklist asks the agent to justify edited singular tests.

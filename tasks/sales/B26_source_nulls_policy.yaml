@@ -1,0 +1,51 @@
+id: B26_source_nulls_policy
+kind: breakage
+category: data_quality_policy
+difficulty: hard
+title: Source test fails on missing stock codes
+trigger: ci_failure
+ticket: |
+  Context: a POS glitch now sends some December lines without a stock code. Product decision:
+  - keep these lines (revenue must still reconcile) and label their stock code 'UNKNOWN';
+  - downgrade the source not_null test on stock_code to a warning (not an error) so the
+    pipeline keeps running while upstream fixes the glitch. Do not delete the test.
+mutation:
+  - op: sql
+    sql: >-
+      insert into bronze.online_retail_lines
+      select cast(cast(invoice as bigint) + 900000 as varchar), null, description, quantity,
+             invoice_date + interval 1 day, price, customer_id, country, _source_sheet,
+             _source_row_number + 900000, '2011-12-pos', 'online_retail_2011-12_pos.parquet',
+             timestamp '2012-01-02 06:00:00'
+      from bronze.online_retail_lines
+      where _batch_id = '2011-12'
+        and invoice in (
+          select distinct invoice from bronze.online_retail_lines
+          where _batch_id = '2011-12' and try_cast(invoice as bigint) is not null
+          order by invoice limit 3)
+reference_fix:
+  - op: replace
+    path: models/staging/stg_bronze__online_retail_lines.sql
+    old: "upper(trim(stock_code))                     as stock_code,"
+    new: "coalesce(upper(trim(stock_code)), 'UNKNOWN') as stock_code,"
+  - op: replace
+    path: models/staging/_bronze__sources.yml
+    old: "          - name: stock_code\n            data_tests:\n              - not_null\n"
+    new: "          - name: stock_code\n            data_tests:\n              - not_null:\n                  config:\n                    severity: warn\n"
+allowed_removed: ["not_null on source.sales_analytics.bronze.online_retail_lines"]
+hidden:
+  assertions:
+    - name: unknown_lines_kept
+      sql: >-
+        select count(*) from gold.fct_order_lines as f
+        join gold.dim_product as p on f.product_key = p.product_key where p.stock_code = 'UNKNOWN'
+      expect: {from: reference}
+    - name: revenue_after_fix
+      sql: select sum(line_revenue) from gold.fct_order_lines
+      expect: {from: reference}
+  tests_present:
+    - test_name: not_null
+      column: stock_code
+      target_contains: source.sales_analytics.bronze.online_retail_lines
+      severity: warn
+notes: The ticket explicitly authorises downgrading one test; deleting it is not allowed.

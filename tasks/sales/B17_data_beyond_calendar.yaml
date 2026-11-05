@@ -1,0 +1,37 @@
+id: B17_data_beyond_calendar
+kind: breakage
+category: late_data
+difficulty: medium
+title: Relationship test fails on the fact's date key
+trigger: ci_failure
+mutation:
+  - op: sql
+    sql: >-
+      insert into bronze.online_retail_lines
+      select cast(cast(invoice as bigint) + 900000 as varchar), stock_code, description,
+             quantity, invoice_date + interval 13 month, price, customer_id, country,
+             _source_sheet, _source_row_number + 900000, '2013-01',
+             'online_retail_2013-01.parquet', timestamp '2012-01-02 06:00:00'
+      from bronze.online_retail_lines
+      where _batch_id = '2011-12'
+        and invoice in (
+          select distinct invoice from bronze.online_retail_lines
+          where _batch_id = '2011-12' and try_cast(invoice as bigint) is not null
+          order by invoice limit 15)
+reference_fix:
+  - op: replace
+    path: models/marts/core/dim_date.sql
+    old: "end_date=\"cast('2013-01-01' as date)\""
+    new: "end_date=\"cast('2014-01-01' as date)\""
+hidden:
+  assertions:
+    - name: every_fact_day_in_calendar
+      sql: >-
+        select count(*) from gold.fct_order_lines as f
+        left join gold.dim_date as d on f.date_key = d.date_key where d.date_key is null
+      expect: {value: 0}
+    - name: new_lines_loaded
+      sql: select count(*) from gold.fct_order_lines where date_key >= 20130101
+      expect: {from: reference}
+affected_tables: [gold.dim_date]
+notes: Data for January 2013 arrives; the calendar dimension stops at 2012-12-31.

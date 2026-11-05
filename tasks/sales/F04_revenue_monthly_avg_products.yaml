@@ -1,0 +1,44 @@
+id: F04_revenue_monthly_avg_products
+kind: feature
+category: new_column
+difficulty: medium
+title: Average basket breadth in the monthly revenue mart
+trigger: ticket
+ticket: |
+  Add a column `avg_products_per_order` to gold.mart_revenue_monthly: the average of
+  gold.fct_orders.n_distinct_products over sale invoices (invoice_type = 'sale') whose
+  invoice_ts falls in the month, rounded to 2 decimals, as decimal(10, 2). Document the
+  column. All existing columns and tests stay as they are.
+reference_fix:
+  - op: replace
+    path: models/marts/analytics/mart_revenue_monthly.sql
+    old: "with_growth as (\n"
+    new: "order_sizes as (\n\n    select\n        cast({{ dbt.date_trunc('month', 'invoice_ts') }} as date)       as order_month,\n        cast(round(avg(n_distinct_products), 2) as decimal(10, 2))        as avg_products_per_order\n    from {{ ref('fct_orders') }}\n    where invoice_type = 'sale'\n    group by 1\n\n),\n\nwith_growth as (\n"
+  - op: replace
+    path: models/marts/analytics/mart_revenue_monthly.sql
+    old: "        > (select bounds.data_end_ts from bounds)                       as is_partial_month\nfrom with_growth\n"
+    new: "        > (select bounds.data_end_ts from bounds)                       as is_partial_month,\n    order_sizes.avg_products_per_order\nfrom with_growth\nleft join order_sizes\n    on with_growth.revenue_month = order_sizes.order_month\n"
+  - op: replace
+    path: models/marts/analytics/_analytics__models.yml
+    old: "      - name: is_partial_month\n"
+    new: "      - name: avg_products_per_order\n        description: Average number of distinct products per sale invoice in the month.\n      - name: is_partial_month\n"
+hidden:
+  assertions:
+    - name: matches_spec
+      sql: |
+        with expected as (
+            select cast(date_trunc('month', invoice_ts) as date) as m,
+                   cast(round(avg(n_distinct_products), 2) as decimal(10, 2)) as v
+            from gold.fct_orders where invoice_type = 'sale' group by 1
+        )
+        select count(*) from gold.mart_revenue_monthly as r
+        left join expected as e on cast(r.revenue_month as date) = e.m
+        where cast(r.avg_products_per_order as decimal(10, 2)) is distinct from e.v
+      expect: {value: 0}
+    - name: months_preserved
+      sql: select count(*) from gold.mart_revenue_monthly
+      expect: {from: base}
+  manifest:
+    - model: mart_revenue_monthly
+      columns: [avg_products_per_order]
+      documented_columns: [avg_products_per_order]

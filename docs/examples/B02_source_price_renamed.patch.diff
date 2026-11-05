@@ -1,0 +1,26 @@
+diff --git a/models/staging/_bronze__sources.yml b/models/staging/_bronze__sources.yml
+index 8f6c48f..503f934 100644
+--- a/models/staging/_bronze__sources.yml
++++ b/models/staging/_bronze__sources.yml
+@@ -32,7 +32,7 @@ sources:
+           - name: invoice_date
+             data_tests:
+               - not_null
+-          - name: price
++          - name: unit_price
+             data_tests:
+               - not_null
+           - name: customer_id
+diff --git a/models/staging/stg_bronze__online_retail_lines.sql b/models/staging/stg_bronze__online_retail_lines.sql
+index 9a19683..4ce06bc 100644
+--- a/models/staging/stg_bronze__online_retail_lines.sql
++++ b/models/staging/stg_bronze__online_retail_lines.sql
+@@ -19,7 +19,7 @@ standardised as (
+         cast(quantity as integer)                   as quantity,
+         cast(invoice_date as timestamp)             as line_ts,
+         -- money as DECIMAL, never float: prices have at most 3 decimals (e.g. 0.001)
+-        cast(price as decimal(12, 3))               as unit_price,
++        cast(unit_price as decimal(12, 3))        as unit_price,
+         nullif(trim(customer_id), '')               as customer_id,
+         trim(country)                               as country_name,
+         _source_sheet,
